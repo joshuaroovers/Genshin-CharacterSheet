@@ -1,0 +1,52 @@
+.root{
+    basic-container-width: 100;
+    /*
+    editting this is easier in VS
+    */
+}
+
+*{
+    -fx-font-family: 'HYWenHei-85W';
+    -fx-text-fill: #b29e7e;
+    /* -fx-background-color: #f9f5eb; */
+}
+
+.basic-container{
+    -fx-max-width: basic-container-width;
+}
+
+/*#region primary stats */
+.primary-stat-box{
+    -fx-padding:5;
+    -fx-border-color: BLACK;
+}
+.primary-stat-label{
+    /* -fx-text-fill: #9a7660; */
+    -fx-font-size: 10;
+    -fx-font-weight: Bold;
+    -fx-pref-width: basic-container-width;
+    -fx-alignment: center;
+    -fx-padding: 5 0 5 0;
+}
+.primary-stat-score{
+    /* -fx-text-fill: #9a7660; */
+    -fx-font-size: 25;
+    -fx-pref-width: basic-container-width;
+    -fx-alignment: center;
+    -fx-padding: 5;
+    -fx-border-color: BLACK;
+}
+
+.primary-stat-mod-box{
+    -fx-pref-width: basic-container-width;
+    -fx-padding: 5 0 0 30;
+}
+.primary-stat-mod{
+    -fx-text-fill: #9a7660;
+    -fx-alignment: center;
+}
+.primary-stat-mod-prefix{
+    -fx-text-fill: #9e948d;
+    -fx-alignment: center-right;
+}
+/*#endregion  */

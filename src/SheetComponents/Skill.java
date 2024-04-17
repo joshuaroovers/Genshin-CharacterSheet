@@ -10,4 +10,16 @@ public class Skill {
         this.stat = primaryStat;
         this.proficient = prof;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isProficient() {
+        return proficient;
+    }
+
+    public PrimaryStat getStat() {
+        return stat;
+    }
 }

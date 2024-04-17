@@ -1,4 +1,4 @@
-package Components;
+package FXComponents;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;

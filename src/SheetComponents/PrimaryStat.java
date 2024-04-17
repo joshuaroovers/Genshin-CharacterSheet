@@ -15,7 +15,7 @@ public class PrimaryStat {
     }
 
     public String getNameAbbreviation(){
-        return name.substring(0,2).toUpperCase();
+        return name.substring(0,3).toUpperCase();
     }
 
     public int getScore() {

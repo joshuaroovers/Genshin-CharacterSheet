@@ -1,14 +1,17 @@
+import FXComponents.SkillBox;
 import SheetComponents.PrimaryStat;
-import Components.PrimaryStatBox;
+import FXComponents.PrimaryStatBox;
+import SheetComponents.Skill;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.LinkedHashMap;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Main extends Application{
 
@@ -54,6 +57,32 @@ public class Main extends Application{
         for (CharacterSheet.stat key : character.getPrimaryStats().keySet()) {
             PrimaryStat stat = character.getPrimaryStat(key);
             firstRow.getChildren().add(new PrimaryStatBox(stat.getName(), stat.getScore(), stat.getModifierString()));
+        }
+
+        HBox skills = new HBox();
+        mainPane.getChildren().add(skills);
+
+        VBox skillsLeft = new VBox();
+        VBox skillsRight = new VBox();
+
+        skills.getChildren().addAll(skillsLeft,skillsRight);
+
+        String[] skillNames = character.getSkills().keySet().toArray(new String[character.getSkills().keySet().size()]);
+        for (int i = 0; i < skillNames.length; i++) {
+            Skill currentSkill = character.getSkill(skillNames[i]);
+            SkillBox newSkillBox = new SkillBox(
+                    currentSkill.getName(),
+                    currentSkill.isProficient(),
+                    currentSkill.getStat().getNameAbbreviation(),
+                    currentSkill.getStat().getModifier(),
+                    character.getProficiencyBonus()
+            );
+
+            if(i < skillNames.length/2){
+                skillsLeft.getChildren().add(newSkillBox);
+            }else{
+                skillsRight.getChildren().add(newSkillBox);
+            }
         }
 
         Scene scene = new Scene(mainPane, 1200, 800);

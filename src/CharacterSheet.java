@@ -29,6 +29,10 @@ public class CharacterSheet {
         }
     }
 
+    public int getProficiencyBonus() {
+        return proficiencyBonus;
+    }
+
     public LinkedHashMap<stat, PrimaryStat> getPrimaryStats() {
         return primaryStats;
     }
@@ -36,5 +40,10 @@ public class CharacterSheet {
         return primaryStats.get(key);
     }
 
-
+    public LinkedHashMap<String, Skill> getSkills() {
+        return skills;
+    }
+    public Skill getSkill(String key){
+        return skills.get(key);
+    }
 }

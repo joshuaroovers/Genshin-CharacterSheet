@@ -71,15 +71,18 @@
     -fx-padding: 5 10 0 10;
 }
 
+.skill-proficiency-tick-proficient{
+    -fx-background-color: purple;
+}
+
 .skill-proficiency-tick{
     -fx-padding: 5;
     -fx-max-height: 5;
     -fx-border-color: black;
     -fx-border-radius: 5;
+    -fx-background-radius: 6;
 }
-.skill-proficiency-tick-proficient{
-    background-color: purple;
-}
+
 .skill-modifier-box{ /*primary stat*/
     -fx-alignment: center;
     -fx-pref-width: 50;

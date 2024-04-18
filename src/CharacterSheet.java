@@ -3,6 +3,7 @@ import SheetComponents.PrimaryStat;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeSet;
 
 public class CharacterSheet {
@@ -18,14 +19,21 @@ public class CharacterSheet {
     public CharacterSheet(LinkedHashMap<String,stat> defaultSkillList) {
         this.primaryStats = new LinkedHashMap<>();
         for (stat value : stat.values()) {
-            primaryStats.put(value, new PrimaryStat(value.name(), 10));
+            int randScore = (int)(Math.random()*6)+ (int)(Math.random()*6)+ (int)(Math.random()*6)+ (int)(Math.random()*6);
+
+            primaryStats.put(value, new PrimaryStat(value.name(), randScore));
         }
 
         this.skills = new LinkedHashMap<>();
         for (String skillName : defaultSkillList.keySet()) {
 
+            boolean randProf = false;
+            if(Math.random()*5 > 4){
+                System.out.println("prof! "+skillName);
+                randProf = true;
+            }
             PrimaryStat primaryStat = primaryStats.get(defaultSkillList.get(skillName));
-            skills.put(skillName, new Skill(skillName, primaryStat,false));
+            skills.put(skillName, new Skill(skillName, primaryStat,randProf));
         }
     }
 

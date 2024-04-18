@@ -1,5 +1,8 @@
 .root{
     basic-container-width: 100;
+    skill-box-width: 340;
+
+    prof-box-font-size: 10;
     /*
     editting this is easier in VS
     */
@@ -50,3 +53,43 @@
     -fx-alignment: center-right;
 }
 /*#endregion  */
+
+/*#region skills */
+.skill-box-base{
+    -fx-border-color: black;
+    -fx-padding: 5 0 5 0;
+    -fx-font-scale: prof-box-font-size;
+    -fx-pref-width: skill-box-width;
+}
+.skill-prof-second{
+    /* -fx-background-color: yellow; */
+}
+.skill-prof-second2{
+    /* -fx-background-color: blue; */
+}
+.skill-proficiency-box{
+    -fx-padding: 5 10 0 10;
+}
+
+.skill-proficiency-tick{
+    -fx-padding: 5;
+    -fx-max-height: 5;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+}
+.skill-proficiency-tick-proficient{
+    background-color: purple;
+}
+.skill-modifier-box{ /*primary stat*/
+    -fx-alignment: center;
+    -fx-pref-width: 50;
+}
+.skill-name-box{
+    -fx-pref-width: 200;
+}
+
+.skill-bonus-box{
+    -fx-alignment: center-right;
+    -fx-pref-width: 50;
+}
+/*#endregion */

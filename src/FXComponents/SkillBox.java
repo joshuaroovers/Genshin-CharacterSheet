@@ -12,20 +12,24 @@ public class SkillBox extends VBox {
         mainBox.setStyle("-fx-padding: 5 0 5 0;");
 
         HBox secondBox = new HBox();
+        secondBox.getStyleClass().add("skill-box-base");
         mainBox.getChildren().add(secondBox);
 
         //#region prof
         HBox profBox = new HBox();
+        profBox.getStyleClass().addAll("skill-prof-second","skill-proficiency-box");
         secondBox.getChildren().add(profBox);
 
-        ToggleButton profTick = new ToggleButton();
+        HBox profTick = new HBox();
+        profTick.getStyleClass().add("skill-proficiency-tick");
         if(proficient)
-            profTick.setSelected(true);
+            profTick.getStyleClass().add("skill-proficiency-tick-proficient");
         profBox.getChildren().add(profTick);
         //#endregion prof
 
         //#region mod
         HBox modBox = new HBox();
+        modBox.getStyleClass().addAll("skill-prof-second","skill-modifier-box");
         secondBox.getChildren().add(modBox);
 
         Label modLabel = new Label(primaryStatAbrev);
@@ -34,6 +38,7 @@ public class SkillBox extends VBox {
 
         //#region name
         HBox nameBox = new HBox();
+        nameBox.getStyleClass().addAll("skill-prof-second2","skill-name-box");
         secondBox.getChildren().add(nameBox);
 
         Label nameLabel = new Label(skillName);
@@ -42,6 +47,7 @@ public class SkillBox extends VBox {
 
         //#region bonus
         HBox bonusBox = new HBox();
+        bonusBox.getStyleClass().addAll("skill-prof-second","skill-bonus-box");
         secondBox.getChildren().add(bonusBox);
 
         int finalBonus = bonus;

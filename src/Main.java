@@ -49,7 +49,7 @@ public class Main extends Application{
 
         CharacterSheet character = new CharacterSheet(defaultSkills);
 
-        VBox mainPane = new VBox();
+        VBox mainPane = new VBox(20);
 
         HBox firstRow = new HBox(20);
         mainPane.getChildren().add(firstRow);
@@ -59,7 +59,7 @@ public class Main extends Application{
             firstRow.getChildren().add(new PrimaryStatBox(stat.getName(), stat.getScore(), stat.getModifierString()));
         }
 
-        HBox skills = new HBox();
+        HBox skills = new HBox(20);
         mainPane.getChildren().add(skills);
 
         VBox skillsLeft = new VBox();
@@ -88,7 +88,7 @@ public class Main extends Application{
         Scene scene = new Scene(mainPane, 1200, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.1");
+        stage.setTitle("Genshin CharacterSheet V0.3");
         stage.setScene(scene);
         stage.show();
     }

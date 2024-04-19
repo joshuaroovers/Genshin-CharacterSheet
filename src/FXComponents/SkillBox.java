@@ -3,28 +3,33 @@ package FXComponents;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class SkillBox extends VBox {
 
     public SkillBox(String skillName, boolean proficient, String primaryStatAbrev, int bonus, int profBonus){
         VBox mainBox = this;
-        mainBox.setStyle("-fx-padding: 5 0 5 0;");
 
         HBox secondBox = new HBox();
         secondBox.getStyleClass().add("skill-box-base");
         mainBox.getChildren().add(secondBox);
 
         //#region prof
-        HBox profBox = new HBox();
-        profBox.getStyleClass().addAll("skill-prof-second","skill-proficiency-box");
+        StackPane profBox = new StackPane();
+        profBox.getStyleClass().addAll("skill-prof-second2","skill-proficiency-box");
         secondBox.getChildren().add(profBox);
 
         HBox profTick = new HBox();
-        profTick.getStyleClass().add("skill-proficiency-tick");
-        if(proficient)
-            profTick.getStyleClass().add("skill-proficiency-tick-proficient");
+        profTick.getStyleClass().addAll("skill-proficiency-tick","skill-proficiency-tick-empty");
         profBox.getChildren().add(profTick);
+
+        if(proficient){
+            HBox profTickFill = new HBox();
+            profTickFill.getStyleClass().addAll("skill-proficiency-tick","skill-proficiency-tick-fill");
+            profBox.getChildren().add(profTickFill);
+        }
+
         //#endregion prof
 
         //#region mod

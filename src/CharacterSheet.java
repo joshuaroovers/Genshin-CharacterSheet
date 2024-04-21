@@ -1,3 +1,4 @@
+import SheetComponents.SavingThrow;
 import SheetComponents.Skill;
 import SheetComponents.PrimaryStat;
 
@@ -14,15 +15,21 @@ public class CharacterSheet {
 
     private final int proficiencyBonus =  3;
 
+    private LinkedHashMap<stat, SavingThrow> savingThrows;
+
     private LinkedHashMap<String, Skill> skills;
 
     public CharacterSheet(LinkedHashMap<String,stat> defaultSkillList) {
         this.primaryStats = new LinkedHashMap<>();
+        this.savingThrows = new LinkedHashMap<>();
+
         for (stat value : stat.values()) {
             int randScore = (int)(Math.random()*6)+ (int)(Math.random()*6)+ (int)(Math.random()*6)+ (int)(Math.random()*6);
 
             primaryStats.put(value, new PrimaryStat(value.name(), randScore));
+            savingThrows.put(value, new SavingThrow(getPrimaryStat(value),(Math.random() < 0.5)));
         }
+
 
         this.skills = new LinkedHashMap<>();
         for (String skillName : defaultSkillList.keySet()) {
@@ -53,5 +60,12 @@ public class CharacterSheet {
     }
     public Skill getSkill(String key){
         return skills.get(key);
+    }
+
+    public LinkedHashMap<stat, SavingThrow> getSavingThrows() {
+        return savingThrows;
+    }
+    public SavingThrow getSavingThrow(stat stat){
+        return savingThrows.get(stat);
     }
 }

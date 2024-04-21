@@ -1,6 +1,8 @@
-import FXComponents.SkillBox;
+import SheetComponents.SavingThrow;
+import UIComponents.SavingThrowBox;
+import UIComponents.SkillBox;
 import SheetComponents.PrimaryStat;
-import FXComponents.PrimaryStatBox;
+import UIComponents.PrimaryStatBox;
 import SheetComponents.Skill;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -10,8 +12,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.LinkedHashMap;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Main extends Application{
 
@@ -56,11 +56,24 @@ public class Main extends Application{
 
         for (CharacterSheet.stat key : character.getPrimaryStats().keySet()) {
             PrimaryStat stat = character.getPrimaryStat(key);
-            firstRow.getChildren().add(new PrimaryStatBox(stat.getName(), stat.getScore(), stat.getModifierString()));
+            firstRow.getChildren().add(new PrimaryStatBox(stat));
         }
 
+        VBox leftPane = new VBox(20);
+        mainPane.getChildren().add(leftPane);
+
+        //#region saves
+        HBox savesBox = new HBox(20);
+        leftPane.getChildren().add(savesBox);
+        for (CharacterSheet.stat key : character.getPrimaryStats().keySet()) {
+            SavingThrow save = character.getSavingThrow(key);
+            savesBox.getChildren().add(new SavingThrowBox(save, character.getProficiencyBonus()));
+        }
+        //#endregion saves
+
+        //#region skills
         HBox skills = new HBox(20);
-        mainPane.getChildren().add(skills);
+        leftPane.getChildren().add(skills);
 
         VBox skillsLeft = new VBox();
         VBox skillsRight = new VBox();
@@ -71,10 +84,7 @@ public class Main extends Application{
         for (int i = 0; i < skillNames.length; i++) {
             Skill currentSkill = character.getSkill(skillNames[i]);
             SkillBox newSkillBox = new SkillBox(
-                    currentSkill.getName(),
-                    currentSkill.isProficient(),
-                    currentSkill.getStat().getNameAbbreviation(),
-                    currentSkill.getStat().getModifier(),
+                    currentSkill,
                     character.getProficiencyBonus()
             );
 
@@ -84,6 +94,7 @@ public class Main extends Application{
                 skillsRight.getChildren().add(newSkillBox);
             }
         }
+        //#endregion skills
 
         Scene scene = new Scene(mainPane, 1200, 800);
         scene.getStylesheets().add("styles.css");

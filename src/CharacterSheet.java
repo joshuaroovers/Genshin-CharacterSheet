@@ -1,3 +1,4 @@
+import SheetComponents.HitPoints;
 import SheetComponents.SavingThrow;
 import SheetComponents.Skill;
 import SheetComponents.PrimaryStat;
@@ -19,19 +20,26 @@ public class CharacterSheet {
 
     private LinkedHashMap<String, Skill> skills;
 
+    private HitPoints hitPoints;
+
     public CharacterSheet(LinkedHashMap<String,stat> defaultSkillList) {
         this.primaryStats = new LinkedHashMap<>();
         this.savingThrows = new LinkedHashMap<>();
+        this.skills = new LinkedHashMap<>();
 
         for (stat value : stat.values()) {
-            int randScore = (int)(Math.random()*6)+ (int)(Math.random()*6)+ (int)(Math.random()*6)+ (int)(Math.random()*6);
+            int randScore = (int)(Math.random()*5)+1 + (int)(Math.random()*5)+1 + (int)(Math.random()*5)+1 + (int)(Math.random()*5)+1;
 
             primaryStats.put(value, new PrimaryStat(value.name(), randScore));
-            savingThrows.put(value, new SavingThrow(getPrimaryStat(value),(Math.random() < 0.5)));
+
+            boolean saveProf = false;
+            if((Math.random() < 0.5)){
+                saveProf = true;
+                System.out.println("prof! "+value.name()+" saves");
+            }
+            savingThrows.put(value, new SavingThrow(getPrimaryStat(value),saveProf));
         }
 
-
-        this.skills = new LinkedHashMap<>();
         for (String skillName : defaultSkillList.keySet()) {
 
             boolean randProf = false;
@@ -42,6 +50,9 @@ public class CharacterSheet {
             PrimaryStat primaryStat = primaryStats.get(defaultSkillList.get(skillName));
             skills.put(skillName, new Skill(skillName, primaryStat,randProf));
         }
+
+        int maxHP = (int)(Math.random()*50) + getPrimaryStat(stat.CONSTITUTION).getModifier()*5;
+        this.hitPoints = new HitPoints(maxHP);
     }
 
     public int getProficiencyBonus() {
@@ -67,5 +78,9 @@ public class CharacterSheet {
     }
     public SavingThrow getSavingThrow(stat stat){
         return savingThrows.get(stat);
+    }
+
+    public HitPoints getHitPoints() {
+        return hitPoints;
     }
 }

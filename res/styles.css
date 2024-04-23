@@ -112,6 +112,7 @@
 .saves-box{
     -fx-padding:5;
     -fx-max-width: basic-container-width;
+    -fx-pref-width: basic-container-width;
     -fx-border-color: black;
 }
 .save-stat-box{ /*primary stat*/

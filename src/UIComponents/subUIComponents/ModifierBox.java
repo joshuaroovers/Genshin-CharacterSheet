@@ -8,6 +8,7 @@ public class ModifierBox extends HBox {
     public ModifierBox(int bonus, boolean proficient, int proficiencyBonus) {
         HBox modifierBox = this;
 
+        //#region modifier calculations
         int finalModifier = bonus;
         if(proficient){
             finalModifier += proficiencyBonus;
@@ -22,6 +23,7 @@ public class ModifierBox extends HBox {
 
         String prefix = modifierString.substring(0,1);
         String number = modifierString.substring(1);
+        //#endregion modifier calculations
 
         HBox subContainer = new HBox();
         subContainer.getStyleClass().add("modifier-box");

@@ -3,13 +3,13 @@ package SheetComponents;
 public class HitPoints {
     private int maxHP;
     private int currentHP;
-    private int temporaryHP;
+    private int shieldHP;
     private ElementalShield elementalShield;
 
     public HitPoints(int maxHP) {
         this.maxHP = maxHP;
         this.currentHP = maxHP;
-        this.temporaryHP = 0;
+        this.shieldHP = 0;
         elementalShield = null;
     }
 
@@ -36,13 +36,13 @@ public class HitPoints {
                 elementalShield.adjustHP(modifier);
             }
         }
-        else if(temporaryHP > 0 && modifier < 0){
-            if(temporaryHP + modifier < 0){
-                int remainder = modifier - temporaryHP;
-                temporaryHP = 0;
+        else if(shieldHP > 0 && modifier < 0){
+            if(shieldHP + modifier < 0){
+                int remainder = modifier - shieldHP;
+                shieldHP = 0;
                 adjustCurrentHP(remainder);
             }else{
-                temporaryHP += modifier;
+                shieldHP += modifier;
             }
         }
         else if(currentHP + modifier < 0){
@@ -59,11 +59,11 @@ public class HitPoints {
     public void adjustCurrentHP(int modifier){
         adjustCurrentHP(modifier, null);
     }
-    public int getTemporaryHP() {
-        return temporaryHP;
+    public int getShieldHP() {
+        return shieldHP;
     }
-    public void setTemporaryHP(int temporaryHP) {
-        this.temporaryHP = temporaryHP;
+    public void setShieldHP(int shieldHP) {
+        this.shieldHP = shieldHP;
     }
 
     public ElementalShield getElementalShield() {

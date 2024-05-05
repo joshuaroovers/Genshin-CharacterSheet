@@ -1,4 +1,5 @@
 import SheetComponents.SavingThrow;
+import UIComponents.HitPointsBox;
 import UIComponents.SavingThrowBox;
 import UIComponents.SkillBox;
 import SheetComponents.PrimaryStat;
@@ -58,6 +59,10 @@ public class Main extends Application{
             PrimaryStat stat = character.getPrimaryStat(key);
             firstRow.getChildren().add(new PrimaryStatBox(stat));
         }
+
+        HitPointsBox hitPointsBox = new HitPointsBox(character.getHitPoints());
+        firstRow.getChildren().add(hitPointsBox);
+
 
         VBox leftPane = new VBox(20);
         mainPane.getChildren().add(leftPane);

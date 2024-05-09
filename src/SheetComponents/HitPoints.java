@@ -29,8 +29,8 @@ public class HitPoints {
     public void adjustCurrentHP(int modifier, Element element){
         if(element != null && elementalShield != null && modifier < 0){
             if(elementalShield.getHP() + modifier < 0){
-                int remainder = modifier - elementalShield.getHP();
-                setElementalShield(null);
+                int remainder = modifier + elementalShield.getHP();
+                setElementalShieldElement(null);
                 adjustCurrentHP(remainder);
             }else{
                 elementalShield.adjustHP(modifier);
@@ -38,7 +38,8 @@ public class HitPoints {
         }
         else if(shieldHP > 0 && modifier < 0){
             if(shieldHP + modifier < 0){
-                int remainder = modifier - shieldHP;
+                System.out.println("shield depleted!");
+                int remainder = modifier + shieldHP;
                 shieldHP = 0;
                 adjustCurrentHP(remainder);
             }else{
@@ -69,7 +70,12 @@ public class HitPoints {
     public ElementalShield getElementalShield() {
         return elementalShield;
     }
-    public void setElementalShield(Element element) {
-        this.elementalShield = new ElementalShield(element);
+    public void setElementalShieldElement(Element element) {
+        if(element == null){
+            this.elementalShield = null;
+        }else{
+            this.elementalShield = new ElementalShield(element);
+        }
     }
+    public void setElementalShieldHP(int hp){this.elementalShield.setHP(hp);}
 }

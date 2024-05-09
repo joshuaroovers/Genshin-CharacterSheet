@@ -1,12 +1,6 @@
-import SheetComponents.HitPoints;
-import SheetComponents.SavingThrow;
-import SheetComponents.Skill;
-import SheetComponents.PrimaryStat;
+import SheetComponents.*;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.TreeSet;
 
 public class CharacterSheet {
 
@@ -53,6 +47,9 @@ public class CharacterSheet {
 
         int maxHP = (int)(Math.random()*50) + getPrimaryStat(stat.CONSTITUTION).getModifier()*5;
         this.hitPoints = new HitPoints(maxHP);
+        this.hitPoints.setShieldHP((int)(Math.random()*50));
+//        this.hitPoints.setElementalShieldElement(Element.DENDRO);
+//        this.hitPoints.setElementalShieldHP((int)(Math.random()*50));
     }
 
     public int getProficiencyBonus() {

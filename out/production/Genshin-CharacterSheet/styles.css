@@ -15,7 +15,8 @@
 }
 
 .basic-container{
-    -fx-max-width: basic-container-width;
+    -fx-pref-width: basic-container-width;
+    -fx-alignment: center;
 }
 .testing1{
     -fx-background-color: yellow;
@@ -87,7 +88,7 @@
 .skill-box-base{
     -fx-border-color: black;
     -fx-padding: 5 0 5 0;
-    -fx-font-scale: prof-box-font-size;
+    
     -fx-pref-width: skill-box-width;
 }
 
@@ -110,7 +111,7 @@
 
 /*#region savingthrows*/
 .saves-box{
-    -fx-padding:5;
+    -fx-padding: 5;
     -fx-max-width: basic-container-width;
     -fx-pref-width: basic-container-width;
     -fx-border-color: black;
@@ -119,4 +120,49 @@
     -fx-alignment: center;
     -fx-pref-width: 50;
 }
+/*#endregion */
+
+/*#region hp buttons */
+.hp-control-container{
+    -fx-max-width: 460;
+    -fx-pref-width: 460;
+    -fx-border-color: black;
+    -fx-padding: 0;
+}
+.hp-sub-container{
+    -fx-max-width: 165;
+}
+.hp-sub-container-hp{
+    -fx-max-width: 175;
+}
+.hp-button-container{
+    -fx-max-width: basic-container-width;
+    -fx-padding: 5 0 0 5;
+}
+.hp-button{
+    -fx-pref-width: basic-container-width;
+    -fx-alignment: center;
+}
+.hp-tracker-box{
+    -fx-max-width: 82.5;
+}
+.hp-tracker-label{
+    -fx-pref-width: 82.5;
+    -fx-alignment: center;
+    -fx-background-color: rgb(43, 0, 255);
+}
+.hp-tracker-hp{
+    -fx-font-size: 25;
+    -fx-padding: 10 0 10 0;
+}
+.hp-tracker-slash{
+    -fx-font-size: 25;
+    -fx-padding: 30 0 0 0;
+}
+.hp-tracker-descriptor{
+    -fx-pref-width: 999; /*fill parent container (.hp-sub-container)*/
+    -fx-alignment: center;
+    -fx-background-color: red;
+}
+
 /*#endregion */

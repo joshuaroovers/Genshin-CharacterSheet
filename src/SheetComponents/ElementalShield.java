@@ -4,7 +4,8 @@ public class ElementalShield {
     private int hp;
     private Element element;
 
-    public ElementalShield(Element elementalShieldType) {
+    public ElementalShield(int hp, Element elementalShieldType) {
+        this.hp = hp;
         this.element = elementalShieldType;
     }
 

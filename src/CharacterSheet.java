@@ -48,8 +48,7 @@ public class CharacterSheet {
         int maxHP = (int)(Math.random()*50) + getPrimaryStat(stat.CONSTITUTION).getModifier()*5;
         this.hitPoints = new HitPoints(maxHP);
         this.hitPoints.setShieldHP((int)(Math.random()*50));
-//        this.hitPoints.setElementalShieldElement(Element.DENDRO);
-//        this.hitPoints.setElementalShieldHP((int)(Math.random()*50));
+//        this.hitPoints.setElementalShield((int)(Math.random()*50), Element.DENDRO);
     }
 
     public int getProficiencyBonus() {

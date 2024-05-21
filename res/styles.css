@@ -18,10 +18,10 @@
     -fx-pref-width: basic-container-width;
     -fx-alignment: center;
 }
-.testing1{
+.test{
     -fx-background-color: yellow;
 }
-.testing2{
+.test2{
     -fx-background-color: blue;
 }
 .modifier-box{
@@ -34,6 +34,16 @@
 .modifier-prefix{
     -fx-text-fill: #9e948d;
     -fx-alignment: center;
+}
+.button{
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    -fx-padding: 0;
+}
+.element-image{
+    -fx-background-position: center;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
 }
 /*#region proficiency Tick  */
 .proficiency-tick{
@@ -122,7 +132,7 @@
 }
 /*#endregion */
 
-/*#region hp buttons */
+/*#region hp */
 .hp-control-container{
     -fx-max-width: 460;
     -fx-pref-width: 460;
@@ -148,11 +158,14 @@
 }
 .hp-tracker-label{
     -fx-pref-width: 82.5;
+    -fx-padding: 0;
     -fx-alignment: center;
+}
+.hp-tracker-hp-box{
+    -fx-padding: 10 0 10 0;
 }
 .hp-tracker-hp{
     -fx-font-size: 25;
-    -fx-padding: 10 0 10 0;
 }
 .hp-tracker-slash{
     -fx-font-size: 25;
@@ -162,5 +175,24 @@
     -fx-pref-width: 999; /*fill parent container (.hp-sub-container)*/
     -fx-alignment: center;
 }
+.hp-tracker-element{
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+}
 
 /*#endregion */
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.combo-box .arrow {
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow-button .arrow {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}

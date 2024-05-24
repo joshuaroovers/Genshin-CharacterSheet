@@ -2,26 +2,24 @@ package UIComponents;
 
 import SheetComponents.Element;
 import SheetComponents.HitPoints;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 
 public class HitPointsBox extends HBox {
+
 
 
     private TextField healDmgInputBox;
@@ -31,6 +29,7 @@ public class HitPointsBox extends HBox {
     private TextField shieldHPInput;
     private HBox elemShieldDisplayValue;
     private Label elemShieldDisplayHP;
+    private StackPane elemShieldDisplayTypeContainer;
     private Label elemShieldDisplayType;
     private ComboBox<Element> elemShieldTypeInput;
     private HBox elemShieldInputValue;
@@ -234,23 +233,30 @@ public class HitPointsBox extends HBox {
         elemShieldContainer.getStyleClass().add("hp-tracker-hp-box");
         elemShieldDisplayBox.getChildren().add(elemShieldContainer);
 
+        //#region display
         elemShieldDisplayValue = new HBox();
         elemShieldDisplayValue.getStyleClass().addAll("hp-tracker-label","hp-tracker-hp");
         elemShieldDisplayValue.managedProperty().bind(elemShieldDisplayValue.visibleProperty());
         elemShieldContainer.getChildren().add(elemShieldDisplayValue);
 
         elemShieldDisplayHP = new Label();
+
+        elemShieldDisplayTypeContainer = new StackPane();
+        elemShieldDisplayTypeContainer.getStyleClass().addAll("shield","hp-tracker-element");
+        elemShieldDisplayTypeContainer.managedProperty().bind(elemShieldDisplayTypeContainer.visibleProperty());
+        elemShieldDisplayTypeContainer.setVisible(false);
+
         elemShieldDisplayType = new Label();
+        elemShieldDisplayTypeContainer.getChildren().add(elemShieldDisplayType);
         elemShieldDisplayType.getStyleClass().addAll("hp-tracker-element","element-image");
-        elemShieldDisplayType.managedProperty().bind(elemShieldDisplayType.visibleProperty());
-        elemShieldDisplayType.setVisible(false);
-
-        elemShieldDisplayValue.getChildren().addAll(elemShieldDisplayHP, elemShieldDisplayType);
 
 
-        //#endregion elemental shield
+        elemShieldDisplayValue.getChildren().addAll(elemShieldDisplayHP, elemShieldDisplayTypeContainer);
 
-        //#region elemental shield input box whatever
+
+        //#endregion
+
+        //#region input
         elemShieldInputValue = new HBox();
         elemShieldInputValue.getStyleClass().addAll("hp-tracker-label");
         elemShieldInputValue.managedProperty().bind(elemShieldInputValue.visibleProperty());
@@ -260,12 +266,13 @@ public class HitPointsBox extends HBox {
 
         elemShieldHPInput = new TextField();
         elemShieldHPInput.getStyleClass().add("hp-tracker-hp");
+        elemShieldHPInput.setStyle("-fx-text-alignment: center; -fx-padding: 0;");
 
         elemShieldTypeInput = new ComboBox<Element>();
-        elemShieldTypeInput.setStyle("-fx-pref-width: 30; -fx-max-width: 30; -fx-pref-height: 50; -fx-padding: 0;");
-        for (Element value : Element.values()) {
-            elemShieldTypeInput.getItems().add(value);
-        }
+        elemShieldTypeInput.setStyle("-fx-min-width: 30; -fx-pref-width: 30; -fx-min-height: 30; -fx-pref-height: 30; -fx-padding: 0;");
+        elemShieldTypeInput.setVisibleRowCount(4);
+        elemShieldTypeInput.getItems().addAll(Element.PYRO, Element.HYDRO, Element.CRYO, Element.ELECTRO);
+
         //#region combobox nightmare things
         elemShieldTypeInput.setCellFactory(new Callback<ListView<Element>, ListCell<Element>>() {
             @Override
@@ -274,7 +281,7 @@ public class HitPointsBox extends HBox {
                     private final Pane image;
                     {
                         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                        setStyle("-fx-max-width: 40; -fx-pref-height: 40; -fx-padding: 2; -fx-alignment: center;");
+                        setStyle("-fx-padding: 0;");
                         image = new Pane();
                     }
 
@@ -285,12 +292,17 @@ public class HitPointsBox extends HBox {
                         if (item == null || empty) {
                             setGraphic(null);
                         } else {
+                            setMinWidth(30);
+                            setMinHeight(30);
+                            setPrefWidth(30);
+                            setPrefHeight(30);
+                            setMaxWidth(30);
+                            setMaxHeight(30);
+
                             image.setStyle(
-                                    "-fx-background-image: url("+ImageHelper.getElementURL(item,ImageVariant.FLAT)+");" +
-                                    "-fx-background-position: center;" +
-                                    "-fx-background-size: contain;" +
-                                    "-fx-background-repeat: no-repeat;"
+                                    "-fx-background-image: url("+ImageHelper.getElementURL(item,ImageVariant.FLAT)+");"
                             );
+                            image.getStyleClass().add("element-image");
                             Tooltip tooltip = new Tooltip(item.toString());
                             Tooltip.install(image, tooltip);
                             setGraphic(image);
@@ -300,10 +312,11 @@ public class HitPointsBox extends HBox {
             }
         });
         elemShieldTypeInput.setButtonCell(new ListCell<Element>() {
-            private final Pane image = new Pane();
+            private final StackPane shield = new StackPane();
             {
                 setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                setStyle("-fx-max-width: 40; -fx-pref-height: 40; -fx-padding: 0; -fx-alignment: center;");
+                setStyle("-fx-min-width: 30; -fx-pref-width: 30; -fx-min-height: 30; -fx-pref-height: 30; -fx-padding: 0;");
+                shield.getStyleClass().add("shield");
             }
 
             @Override
@@ -312,23 +325,34 @@ public class HitPointsBox extends HBox {
                 if (empty || item == null) {
                     setGraphic(null);
                 } else {
-                    image.setStyle(
-                            "-fx-background-image: url("+ImageHelper.getElementURL(item,ImageVariant.FLAT)+");" +
-                            "-fx-background-position: center;" +
-                            "-fx-background-size: contain;" +
-                            "-fx-background-repeat: no-repeat;"
+                    shield.getChildren().clear();
+                    for (Element o : Element.values()) {
+                        shield.getStyleClass().remove(o.toString());
+                    }
+                    shield.getStyleClass().addAll(item.toString());
+
+
+                    Pane element = new Pane();
+                    shield.getChildren().add(element);
+                    element.setStyle(
+                            "-fx-background-image: url("+ImageHelper.getElementURL(item,ImageVariant.FLAT)+");"
                     );
+                    element.getStyleClass().addAll("element-image");
+
+                    System.out.println(shield.getStyleClass());
+
+
                     Tooltip tooltip = new Tooltip(item.toString());
-                    Tooltip.install(image, tooltip);
-                    setGraphic(image);
+                    Tooltip.install(shield, tooltip);
+                    setGraphic(shield);
                 }
             }
         });
         //#endregion
 
         elemShieldInputValue.getChildren().addAll(elemShieldHPInput,elemShieldTypeInput);
+        //#endregion input
 
-        //#endregion elemental shield
 
         elemShieldDisplayValue.setOnMouseClicked(e -> {
             elemShieldDisplayValue.setVisible(false);
@@ -357,6 +381,7 @@ public class HitPointsBox extends HBox {
 
 
         updateElementalShield(hitPoints);
+        //#endregion elemental shield
 
         Label shieldsDescriptionLabel = new Label("Shields");
         shieldsDescriptionLabel.getStyleClass().add("hp-tracker-descriptor");
@@ -386,14 +411,21 @@ public class HitPointsBox extends HBox {
 
     private void updateElementalShield(HitPoints hitPoints){
         if(hitPoints.getElementalShield() != null){
+//            System.out.println(hitPoints.getElementalShield());
             elemShieldDisplayHP.setText(Integer.toString(hitPoints.getElementalShield().getHP()));
+            elemShieldDisplayTypeContainer.setVisible(true);
             elemShieldDisplayType.setStyle("-fx-background-image: url("+ImageHelper.getElementURL(hitPoints.getElementalShield().getElement(), ImageVariant.FLAT)+");");
+            for (Element value : Element.values()) {
+                elemShieldDisplayTypeContainer.getStyleClass().remove(value.toString());
+            }
+            elemShieldDisplayTypeContainer.getStyleClass().add(hitPoints.getElementalShield().getElement().toString());
+//            System.out.println(elemShieldDisplayTypeContainer.getStyleClass());
         }else{
             elemShieldDisplayHP.setText("+");
             elemShieldDisplayType.setStyle("-fx-background-image: none;");
             elemShieldHPInput.clear();
             elemShieldTypeInput.setValue(null);
-            elemShieldDisplayType.setVisible(false);
+            elemShieldDisplayTypeContainer.setVisible(false);
         }
     }
 }

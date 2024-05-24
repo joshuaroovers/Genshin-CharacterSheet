@@ -1,9 +1,6 @@
 import SheetComponents.SavingThrow;
-import UIComponents.HitPointsBox;
-import UIComponents.SavingThrowBox;
-import UIComponents.SkillBox;
+import UIComponents.*;
 import SheetComponents.PrimaryStat;
-import UIComponents.PrimaryStatBox;
 import SheetComponents.Skill;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -112,7 +109,7 @@ public class Main extends Application{
         Scene scene = new Scene(mainPane, 1200, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.9");
+        stage.setTitle("Genshin CharacterSheet V0.11");
         stage.setScene(scene);
         stage.show();
     }

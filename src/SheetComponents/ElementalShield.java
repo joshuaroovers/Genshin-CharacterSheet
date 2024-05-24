@@ -27,4 +27,11 @@ public class ElementalShield {
         this.element = elementalShieldType;
     }
 
+    @Override
+    public String toString() {
+        return "ElementalShield{" +
+                "hp=" + hp +
+                ", element=" + element +
+                '}';
+    }
 }

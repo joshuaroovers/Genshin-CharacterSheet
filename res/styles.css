@@ -20,14 +20,27 @@
 .basic-box-label{
     -fx-pref-width: basic-container-width;
     -fx-alignment: center;
-    -fx-padding: 10 0 10 0
+    -fx-padding: 7 0 7 0
 }
-.test{
-    -fx-background-color: yellow;
+.basic-box-label-top{
+    -fx-padding: 7 0 0 0
 }
-.test2{
+.basic-box-label-bottom{
+    -fx-padding: 0 0 7 0
+}
+.RED{
+    -fx-background-color: red;
+}
+.BLUE{
     -fx-background-color: blue;
 }
+.YELLOW{
+    -fx-background-color: yellow;
+}
+.GREEN{
+    -fx-background-color: rgb(0, 190, 0);
+}
+
 .modifier-box{
     -fx-alignment: center-left;
 }
@@ -175,12 +188,25 @@
 }
 /*#endregion */
 
+/*#region ArmorClass box */
+.armor-class-box{
+    -fx-max-width: basic-container-width;
+    -fx-pref-width: basic-container-width;
+    -fx-border-color: black;
+}
+.armor-class-score{
+    -fx-pref-width: basic-container-width;
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+/*#endregion */
+
 /*#region hp */
 .hp-control-container{
     -fx-max-width: 460;
     -fx-pref-width: 460;
     -fx-border-color: black;
-    -fx-padding: 0;
 }
 .hp-sub-container{
     -fx-max-width: 165;

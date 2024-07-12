@@ -60,11 +60,11 @@ public class Main extends Application{
             firstRow.getChildren().add(new PrimaryStatBox(stat));
         }
 
-
         firstRow.getChildren().add(new InspirationBox(character.getInspiration()));
+//
+        firstRow.getChildren().add(new ArmorClassBox(character.getArmorClass()));
 
-        HitPointsBox hitPointsBox = new HitPointsBox(character.getHitPoints());
-        firstRow.getChildren().add(hitPointsBox);
+        firstRow.getChildren().add(new HitPointsBox(character.getHitPoints()));
 
 
         VBox leftPane = new VBox(20);
@@ -132,10 +132,10 @@ public class Main extends Application{
         //#endregion
 
 
-        Scene scene = new Scene(mainPane, 1300, 800);
+        Scene scene = new Scene(mainPane, 12*100+11*20, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.12");
+        stage.setTitle("Genshin CharacterSheet V0.13");
         stage.setScene(scene);
         stage.show();
     }

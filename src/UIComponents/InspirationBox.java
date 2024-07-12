@@ -33,11 +33,11 @@ public class InspirationBox extends VBox {
         buttonGraphic = new HBox();
         stackPane.getChildren().add(buttonGraphic);
         buttonGraphic.setStyle("-fx-max-width: 40; -fx-max-height: 40;");
-        buttonGraphic.getStyleClass().addAll("test");
+        buttonGraphic.getStyleClass().addAll("YELLOW");
         buttonGraphic.setVisible(inspiration.getValue());
 //        buttonGraphic
 
-        SmallBasicBox baseBox = new SmallBasicBox(SmallBasicBox.labelPosition.BOTTOM, text,  buttonWrapper, SmallBasicBox.contentPosition.TOP);
+        SmallBasicBox baseBox = new SmallBasicBox(SmallBasicBox.labelPosition.BOTTOM, text,  buttonWrapper);
         mainBox.getChildren().add(baseBox);
     }
 

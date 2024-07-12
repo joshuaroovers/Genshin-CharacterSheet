@@ -86,4 +86,8 @@ public class CharacterSheet {
     public HitPoints getHitPoints() {
         return hitPoints;
     }
+
+    public int getArmorClass(){
+        return 10 + getPrimaryStat(stat.DEXTERITY).getModifier();
+    }
 }

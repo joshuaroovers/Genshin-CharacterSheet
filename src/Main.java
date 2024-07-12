@@ -1,3 +1,4 @@
+import SheetComponents.Element;
 import SheetComponents.SavingThrow;
 import UIComponents.*;
 import SheetComponents.PrimaryStat;
@@ -5,18 +6,12 @@ import SheetComponents.Skill;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
-import java.awt.*;
 import java.util.LinkedHashMap;
 
 public class Main extends Application{
@@ -65,6 +60,9 @@ public class Main extends Application{
             firstRow.getChildren().add(new PrimaryStatBox(stat));
         }
 
+
+        firstRow.getChildren().add(new InspirationBox(character.getInspiration()));
+
         HitPointsBox hitPointsBox = new HitPointsBox(character.getHitPoints());
         firstRow.getChildren().add(hitPointsBox);
 
@@ -106,10 +104,38 @@ public class Main extends Application{
         }
         //#endregion skills
 
-        Scene scene = new Scene(mainPane, 1200, 800);
+
+        //#region testing area
+//        StackPane test2 = new StackPane();
+//        leftPane.getChildren().add(test2);
+//        test2.getStyleClass().addAll("shield","ANEMO");
+//        test2.setStyle("-fx-max-width: 200;"+
+//                "-fx-pref-height: 200;"+
+//                "-fx-padding: 50;");
+//
+//        HBox test = new HBox();
+//        test.getStyleClass().add("element-image");
+////        System.out.println(ImageHelper.getElementURL(Element.ANEMO, ImageVariant.FLAT));
+//        test.setStyle("-fx-background-image: url("+ImageHelper.getElementURL(Element.ANEMO, ImageVariant.FLAT)+");"+
+//                "-fx-max-width: 200;"+
+//                "-fx-pref-height: 200;");
+//        test2.getChildren().add(test);
+
+
+//        ComboBox comboTest = new ComboBox();
+//        leftPane.getChildren().add(comboTest);
+//        comboTest.setStyle("-fx-pref-width: 0; -fx-min-width: 10; -fx-pref-height: 10; -fx-min-height: 0; -fx-padding: 0; -fx-background-color: red; -fx-font-size: 0;");
+//        comboTest.getItems().addAll("test1","test2","test3");
+
+
+
+        //#endregion
+
+
+        Scene scene = new Scene(mainPane, 1300, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.11");
+        stage.setTitle("Genshin CharacterSheet V0.12");
         stage.setScene(scene);
         stage.show();
     }

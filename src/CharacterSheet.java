@@ -9,6 +9,7 @@ public class CharacterSheet {
     private LinkedHashMap<stat, PrimaryStat> primaryStats;
 
     private final int proficiencyBonus =  3;
+    private Inspiration inspiration;
 
     private LinkedHashMap<stat, SavingThrow> savingThrows;
 
@@ -20,6 +21,8 @@ public class CharacterSheet {
         this.primaryStats = new LinkedHashMap<>();
         this.savingThrows = new LinkedHashMap<>();
         this.skills = new LinkedHashMap<>();
+
+        this.inspiration = new Inspiration(false);
 
         for (stat value : stat.values()) {
             int randScore = (int)(Math.random()*5)+1 + (int)(Math.random()*5)+1 + (int)(Math.random()*5)+1 + (int)(Math.random()*5)+1;
@@ -60,6 +63,10 @@ public class CharacterSheet {
     }
     public PrimaryStat getPrimaryStat(stat key){
         return primaryStats.get(key);
+    }
+
+    public Inspiration getInspiration(){
+        return inspiration;
     }
 
     public LinkedHashMap<String, Skill> getSkills() {

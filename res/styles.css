@@ -16,7 +16,11 @@
 
 .basic-container{
     -fx-pref-width: basic-container-width;
+}
+.basic-box-label{
+    -fx-pref-width: basic-container-width;
     -fx-alignment: center;
+    -fx-padding: 10 0 10 0
 }
 .test{
     -fx-background-color: yellow;
@@ -159,6 +163,15 @@
 .save-stat-box{ /*primary stat*/
     -fx-alignment: center;
     -fx-pref-width: 50;
+}
+/*#endregion */
+
+/*#region inspiration box */
+.inspiration-box{
+    -fx-pref-height: 70;
+    -fx-max-width: basic-container-width;
+    -fx-pref-width: basic-container-width;
+    -fx-border-color: black;
 }
 /*#endregion */
 

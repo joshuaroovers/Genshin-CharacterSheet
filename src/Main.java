@@ -50,16 +50,26 @@ public class Main extends Application{
 
         CharacterSheet character = new CharacterSheet(defaultSkills);
 
-        VBox mainPane = new VBox(boxSpacing);
+        BorderPane mainPane = new BorderPane();
+
+        HBox mainSheetWrapper = new HBox();
+        mainPane.setCenter(mainSheetWrapper);
+        mainSheetWrapper.setStyle("-fx-alignment: center; -fx-padding: "+boxSpacing+" 0 0 0;");
+
+        VBox mainSheetPane = new VBox(boxSpacing);
+        mainSheetWrapper.getChildren().add(mainSheetPane);
+        mainSheetPane.setStyle("-fx-pref-width: " + (12*100+11*20)+";");
 
 //        HBox firstRowWrapper = new HBox();
-//        mainPane.getChildren().add(firstRowWrapper);
+//        mainSheetPane.getChildren().add(firstRowWrapper);
 
         BorderPane firstRow = new BorderPane();
-        mainPane.getChildren().add(firstRow);
-        firstRow.setStyle("-fx-pref-width: " + (12*100+11*20));
+        mainPane.setTop(firstRow);
+        firstRow.setStyle("-fx-pref-width: " + 9999999);
+
         firstRow.setLeft(new NameCard(character.getVisionElement(), character.getName(), character.getSpecies().getName(), character.getWeapon().getBaseName()));
 
+        //#region settings button
         HBox tempWrapper = new HBox();
         tempWrapper.getStyleClass().add("settings-button-container");
 
@@ -68,9 +78,11 @@ public class Main extends Application{
         tempSettings.getStyleClass().add("settings-button");
         tempSettings.getStyleClass().add(character.getVisionElement().toString());
         firstRow.setRight(tempWrapper);
+        //#endregion
+
 
         HBox secondRow = new HBox(boxSpacing);
-        mainPane.getChildren().add(secondRow);
+        mainSheetPane.getChildren().add(secondRow);
 
         for (CharacterSheet.stat key : character.getPrimaryStats().keySet()) {
             PrimaryStat stat = character.getPrimaryStat(key);
@@ -85,7 +97,7 @@ public class Main extends Application{
 
 
         VBox leftPane = new VBox(boxSpacing);
-        mainPane.getChildren().add(leftPane);
+        mainSheetPane.getChildren().add(leftPane);
 
         //#region saves
         HBox savesBox = new HBox(boxSpacing);
@@ -152,7 +164,7 @@ public class Main extends Application{
         Scene scene = new Scene(mainPane, 12*100+11*boxSpacing, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.14");
+        stage.setTitle("Genshin CharacterSheet V0.14.a");
         stage.setScene(scene);
         stage.show();
     }

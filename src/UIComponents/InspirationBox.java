@@ -1,5 +1,6 @@
 package UIComponents;
 
+import SheetComponents.Element;
 import SheetComponents.Inspiration;
 import UIComponents.subUIComponents.SmallBasicBox;
 import javafx.scene.control.ToggleButton;
@@ -13,7 +14,7 @@ public class InspirationBox extends VBox {
     private final HBox button;
     private final HBox buttonGraphic;
 
-    public InspirationBox(Inspiration inspiration) {
+    public InspirationBox(Inspiration inspiration, Element themeColor) {
         VBox mainBox = this;
         mainBox.getStyleClass().add("basic-container");
 
@@ -33,7 +34,7 @@ public class InspirationBox extends VBox {
         buttonGraphic = new HBox();
         stackPane.getChildren().add(buttonGraphic);
         buttonGraphic.setStyle("-fx-max-width: 40; -fx-max-height: 40;");
-        buttonGraphic.getStyleClass().addAll("YELLOW");
+        buttonGraphic.getStyleClass().addAll(themeColor.toString());
         buttonGraphic.setVisible(inspiration.getValue());
 //        buttonGraphic
 

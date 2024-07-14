@@ -1,13 +1,12 @@
-import SheetComponents.Element;
 import SheetComponents.SavingThrow;
 import UIComponents.*;
 import SheetComponents.PrimaryStat;
 import SheetComponents.Skill;
+import UIComponents.util.ImageHelper;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -19,6 +18,7 @@ public class Main extends Application{
     public static void main(String[] args) {
         launch(args);
     }
+    private final int boxSpacing = 20;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -50,28 +50,45 @@ public class Main extends Application{
 
         CharacterSheet character = new CharacterSheet(defaultSkills);
 
-        VBox mainPane = new VBox(20);
+        VBox mainPane = new VBox(boxSpacing);
 
-        HBox firstRow = new HBox(20);
+//        HBox firstRowWrapper = new HBox();
+//        mainPane.getChildren().add(firstRowWrapper);
+
+        BorderPane firstRow = new BorderPane();
         mainPane.getChildren().add(firstRow);
+        firstRow.setStyle("-fx-pref-width: " + (12*100+11*20));
+        firstRow.setLeft(new NameCard(character.getVisionElement(), character.getName(), character.getSpecies().getName(), character.getWeapon().getBaseName()));
+
+        HBox tempWrapper = new HBox();
+        tempWrapper.getStyleClass().add("settings-button-container");
+
+        HBox tempSettings = new HBox();
+        tempWrapper.getChildren().add(tempSettings);
+        tempSettings.getStyleClass().add("settings-button");
+        tempSettings.getStyleClass().add(character.getVisionElement().toString());
+        firstRow.setRight(tempWrapper);
+
+        HBox secondRow = new HBox(boxSpacing);
+        mainPane.getChildren().add(secondRow);
 
         for (CharacterSheet.stat key : character.getPrimaryStats().keySet()) {
             PrimaryStat stat = character.getPrimaryStat(key);
-            firstRow.getChildren().add(new PrimaryStatBox(stat));
+            secondRow.getChildren().add(new PrimaryStatBox(stat));
         }
 
-        firstRow.getChildren().add(new InspirationBox(character.getInspiration()));
+        secondRow.getChildren().add(new InspirationBox(character.getInspiration(), character.getVisionElement()));
 //
-        firstRow.getChildren().add(new ArmorClassBox(character.getArmorClass()));
+        secondRow.getChildren().add(new ArmorClassBox(character.getArmorClass()));
 
-        firstRow.getChildren().add(new HitPointsBox(character.getHitPoints()));
+        secondRow.getChildren().add(new HitPointsBox(character.getHitPoints()));
 
 
-        VBox leftPane = new VBox(20);
+        VBox leftPane = new VBox(boxSpacing);
         mainPane.getChildren().add(leftPane);
 
         //#region saves
-        HBox savesBox = new HBox(20);
+        HBox savesBox = new HBox(boxSpacing);
         leftPane.getChildren().add(savesBox);
         for (CharacterSheet.stat key : character.getPrimaryStats().keySet()) {
             SavingThrow save = character.getSavingThrow(key);
@@ -80,7 +97,7 @@ public class Main extends Application{
         //#endregion saves
 
         //#region skills
-        HBox skills = new HBox(20);
+        HBox skills = new HBox(boxSpacing);
         leftPane.getChildren().add(skills);
 
         VBox skillsLeft = new VBox();
@@ -132,10 +149,10 @@ public class Main extends Application{
         //#endregion
 
 
-        Scene scene = new Scene(mainPane, 12*100+11*20, 800);
+        Scene scene = new Scene(mainPane, 12*100+11*boxSpacing, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.13");
+        stage.setTitle("Genshin CharacterSheet V0.14");
         stage.setScene(scene);
         stage.show();
     }

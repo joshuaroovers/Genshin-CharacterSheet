@@ -3,6 +3,11 @@
     skill-box-width: 340;
 
     prof-box-font-size: 10;
+
+    name-card-scale: 80;
+    name-card-inset: 20;
+    this-is-dumb: 60; 
+
     /*
     editting this is easier in VS
     */
@@ -70,25 +75,25 @@
 }
 /*#region element colors */
 .ANEMO{
-    -fx-border-color: #33D7A0;
+    -fx-background-color: #33D7A0;
 }
 .CRYO{
-    -fx-border-color: #7AF2F2;
+    -fx-background-color: #7AF2F2;
 }
 .DENDRO{
-    -fx-border-color: #9BE53D;
+    -fx-background-color: #9BE53D;
 }
 .ELECTRO{
-    -fx-border-color: #CC80FF;
+    -fx-background-color: #CC80FF;
 }
 .GEO{
-    -fx-border-color: #FFB00D;
+    -fx-background-color: #FFB00D;
 }
 .HYDRO{
-    -fx-border-color: #00C0FF;
+    -fx-background-color: #00C0FF;
 }
 .PYRO{
-    -fx-border-color: #FF6640;
+    -fx-background-color: #FF6640;
 }
 /*#endregion */
 
@@ -112,6 +117,46 @@
     -fx-shape: "M11.40707,152.82843C9.84497,151.26633,9.84497,148.73367,11.40707,147.17158L147.17157,11.40708C148.73367,9.84498,151.26633,9.84498,152.82842,11.40708L288.59292,147.17158C290.15502,148.73368,290.15502,151.26634,288.59292,152.82843L152.82842,288.59293C151.26632,290.15503,148.73366,290.15503,147.17157,288.59293L11.40707,152.82843ZM147.24997,264.85327C148.76877,266.37207,151.23122,266.37207,152.75002,264.85327L264.85326,152.75003C266.37206,151.23123,266.37206,148.76878,264.85326,147.24998L152.75002,35.14674C151.23122,33.62794,148.76877,33.62794,147.24997,35.14674L35.14673,147.24998C33.62793,148.76878,33.62793,151.23123,35.14673,152.75003L147.24997,264.85327Z";
 }
 /*#endregion  */
+
+/*#region character name card */
+.name-card{
+    -fx-border-color: black;
+
+}
+.name-card-element-image{
+    -fx-pref-width: name-card-scale; 
+    -fx-pref-height: name-card-scale;
+}
+.name-card-text-container{
+    -fx-pref-height: name-card-scale ; 
+    -fx-padding: 0 0 0 60; /*name-card-offset*/
+}
+.name-card-name-label{
+    -fx-alignment: center; 
+    -fx-pref-height: name-card-scale; 
+    -fx-font-size: 30;
+}
+.name-card-details-wrapper{
+    -fx-padding: 0 0 0 20; /*name-card-inset*/
+}
+.name-card-detail{
+    -fx-padding: 0 5 0 0;
+}
+/*#endregion */
+
+/*#region settings button */
+.settings-button-container{
+    -fx-pref-height: name-card-scale;
+    -fx-padding: 0 25 0 0; /*padding right height-buttonsize /2 = 80-30/2=25*/
+    -fx-alignment: center;
+
+}
+.settings-button{
+    -fx-pref-width: 30;
+    -fx-max-height: 30;
+    -fx-pref-height: 30;
+}
+/*#endregion */
 
 /*#region primary stats */
 .primary-stat-box{

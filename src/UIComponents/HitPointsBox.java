@@ -2,10 +2,10 @@ package UIComponents;
 
 import SheetComponents.Element;
 import SheetComponents.HitPoints;
-import javafx.application.Platform;
+import UIComponents.util.ImageHelper;
+import UIComponents.util.ImageVariant;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -298,7 +298,7 @@ public class HitPointsBox extends HBox {
                             Pane element = new Pane();
                             shield.getChildren().add(element);
                             element.setStyle(
-                                    "-fx-background-image: url("+ImageHelper.getElementURL(item,ImageVariant.FLAT)+");"
+                                    "-fx-background-image: url("+ ImageHelper.getElementURL(item, ImageVariant.FLAT)+");"
                             );
                             element.getStyleClass().addAll("element-image");
 

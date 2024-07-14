@@ -1,4 +1,4 @@
-package UIComponents;
+package UIComponents.util;
 
 import SheetComponents.Element;
 
@@ -11,8 +11,7 @@ public class ImageHelper {
     private static String pathElementWhite = elementImagePathBase+"/Flat_Color/Element_White_";
 
     public static String getElementURL(Element element, ImageVariant imageVariant){
-        String elementName = element.toString().substring(0,1).toUpperCase() + element.toString().substring(1).toLowerCase();
-        return getImageVariantPath(imageVariant)+elementName+".png";
+        return getImageVariantPath(imageVariant) + getElementName(element) +".png";
     }
 
     private static String getImageVariantPath(ImageVariant imageVariant){
@@ -37,4 +36,9 @@ public class ImageHelper {
 
         return path;
     }
+
+    public static String getElementName(Element element){
+        return element.toString().substring(0,1).toUpperCase() + element.toString().substring(1).toLowerCase();
+    }
+
 }

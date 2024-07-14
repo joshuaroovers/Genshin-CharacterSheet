@@ -1,8 +1,16 @@
 import SheetComponents.*;
+import SheetComponents.Species.*;
+import SheetComponents.Weapons.*;
 
 import java.util.LinkedHashMap;
 
 public class CharacterSheet {
+
+    private String name;
+
+    private Element visionElement;
+    private Weapon weapon;
+    private Species species;
 
     public enum stat {STRENGTH,DEXTERITY,CONSTITUTION,INTELLIGENCE,WISDOM,CHARISMA}
 
@@ -18,6 +26,16 @@ public class CharacterSheet {
     private HitPoints hitPoints;
 
     public CharacterSheet(LinkedHashMap<String,stat> defaultSkillList) {
+        String[] randomFirstName = {"Novor","Beetle","Kaveh","Lucaris","Marilisus","Ghislaine","Elkana","Seokolta"};
+        String[] randomLastName = {"Kamisato", "Shogun", "","","","","","","",""};
+        this.name = randomFirstName[(int)(Math.random()*randomFirstName.length)] +" "+ randomLastName[(int)(Math.random()*randomLastName.length)];
+        this.visionElement = Element.values()[(int)(Math.random()*Element.values().length)];
+
+            Weapon[] randomWeapon = {new Sword(), new Claymore(), new Polearm(), new Bow(), new Catalyst()};
+        this.weapon = randomWeapon[(int)(Math.random()*5)];
+            Species[] randomSpecies = {new Human(), new Anthro(), new Adeptus(), new Yokai(), new Fontainian(), new Khaenriahn() };
+        this.species = randomSpecies[(int)(Math.random()*6)];
+
         this.primaryStats = new LinkedHashMap<>();
         this.savingThrows = new LinkedHashMap<>();
         this.skills = new LinkedHashMap<>();
@@ -53,6 +71,17 @@ public class CharacterSheet {
         this.hitPoints.setShieldHP((int)(Math.random()*50));
 //        this.hitPoints.setElementalShield((int)(Math.random()*50), Element.DENDRO);
     }
+
+    public String getName(){
+        return name;
+    }
+    public Element getVisionElement() {
+        return visionElement;
+    }
+    public Weapon getWeapon() {
+        return weapon;
+    }
+    public Species getSpecies(){return species;}
 
     public int getProficiencyBonus() {
         return proficiencyBonus;

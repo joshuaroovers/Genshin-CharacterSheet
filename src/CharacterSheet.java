@@ -12,6 +12,8 @@ public class CharacterSheet {
     private Weapon weapon;
     private Species species;
 
+    private Stamina stamina;
+
     public enum stat {STRENGTH,DEXTERITY,CONSTITUTION,INTELLIGENCE,WISDOM,CHARISMA}
 
     private LinkedHashMap<stat, PrimaryStat> primaryStats;
@@ -35,6 +37,9 @@ public class CharacterSheet {
         this.weapon = randomWeapon[(int)(Math.random()*5)];
             Species[] randomSpecies = {new Human(), new Anthro(), new Adeptus(), new Yokai(), new Fontainian(), new Khaenriahn() };
         this.species = randomSpecies[(int)(Math.random()*6)];
+
+        this.stamina = new Stamina();
+        stamina.adjustCurrentStamina((int) -(Math.random()*100), 0);
 
         this.primaryStats = new LinkedHashMap<>();
         this.savingThrows = new LinkedHashMap<>();
@@ -82,6 +87,10 @@ public class CharacterSheet {
         return weapon;
     }
     public Species getSpecies(){return species;}
+
+    public Stamina getStamina() {
+        return stamina;
+    }
 
     public int getProficiencyBonus() {
         return proficiencyBonus;

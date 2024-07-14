@@ -12,7 +12,7 @@ public class ArmorClassBox extends VBox {
 
     public ArmorClassBox(int AC) {
         VBox mainBox = this;
-        mainBox.getStyleClass().add("armor-class-box");
+        mainBox.getStyleClass().addAll("basic-container","armor-class-box");
 
         HBox ACBox = new HBox();
         Label ACLabel = new Label(Integer.toString(AC));

@@ -90,14 +90,15 @@ public class Main extends Application{
         }
 
         secondRow.getChildren().add(new InspirationBox(character.getInspiration(), character.getVisionElement()));
-//
         secondRow.getChildren().add(new ArmorClassBox(character.getArmorClass()));
-
         secondRow.getChildren().add(new HitPointsBox(character.getHitPoints()));
 
 
+        HBox thirdRow = new HBox(boxSpacing);
+        mainSheetPane.getChildren().add(thirdRow);
+
         VBox leftPane = new VBox(boxSpacing);
-        mainSheetPane.getChildren().add(leftPane);
+        thirdRow.getChildren().add(leftPane);
 
         //#region saves
         HBox savesBox = new HBox(boxSpacing);
@@ -133,6 +134,15 @@ public class Main extends Application{
         }
         //#endregion skills
 
+        VBox rightPane = new VBox(boxSpacing);
+        thirdRow.getChildren().add(rightPane);
+
+        HBox thirdRowRight = new HBox(boxSpacing);
+        rightPane.getChildren().add(thirdRowRight);
+
+        thirdRowRight.getChildren().add(new StaminaBox(character.getStamina()));
+
+
 
         //#region testing area
 //        StackPane test2 = new StackPane();
@@ -164,7 +174,7 @@ public class Main extends Application{
         Scene scene = new Scene(mainPane, 12*100+11*boxSpacing, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.14.a");
+        stage.setTitle("Genshin CharacterSheet V0.15");
         stage.setScene(scene);
         stage.show();
     }

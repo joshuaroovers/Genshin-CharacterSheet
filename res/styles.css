@@ -1,15 +1,17 @@
 .root{
+    basic-inset: 20;
     basic-container-width: 100;
-    skill-box-width: 340;
+    double-container-width: 220; /*2*basic-container-width + 1*basic-inset*/
+    tripple-container-width: 340;  /* 3*basic-container-width + 2*basic-inset */
 
     prof-box-font-size: 10;
 
     name-card-scale: 80;
     name-card-inset: 20;
-    this-is-dumb: 60; 
 
     /*
     editting this is easier in VS
+    except I can't do calculations and the variables only work with some things
     */
 }
 
@@ -23,7 +25,6 @@
     -fx-pref-width: basic-container-width;
     -fx-pref-height: 110;
     -fx-max-height: 110;
-
 }
 .basic-box-label{
     -fx-pref-width: basic-container-width;
@@ -132,7 +133,7 @@
 }
 .name-card-text-container{
     -fx-pref-height: name-card-scale ; 
-    -fx-padding: 0 0 0 60; /*name-card-offset*/
+    -fx-padding: 0 0 0 60; /*name-card-scale - name-card-inset*/
 }
 .name-card-name-label{
     -fx-alignment: center; 
@@ -150,7 +151,7 @@
 /*#region settings button */
 .settings-button-container{
     -fx-pref-height: name-card-scale;
-    -fx-padding: 0 25 0 0; /*padding right height-buttonsize /2 = 80-30/2=25*/
+    -fx-padding: 0 25 0 0; /*padding right = (top_bar_height-buttonsize)/2 = (80-30)/2 = 25*/
     -fx-alignment: center;
 
 }
@@ -194,7 +195,7 @@
     -fx-border-color: black;
     -fx-padding: 5 0 5 0;
     
-    -fx-pref-width: skill-box-width;
+    -fx-pref-width: tripple-container-width;
 }
 
 .skill-proficiency-box{
@@ -245,6 +246,12 @@
     -fx-font-size: 30;
     -fx-font-weight: bold;
     -fx-alignment: center;
+}
+/*#endregion */
+
+/*#region Stamina box */
+.stamina-box{
+    -fx-pref-width: double-container-width;
 }
 /*#endregion */
 

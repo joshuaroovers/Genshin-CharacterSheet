@@ -1,41 +1,109 @@
 package UIComponents;
 
 import SheetComponents.Stamina;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 
-public class StaminaBox extends HBox {
+
+
+public class StaminaBox extends VBox {
+
+    private Stamina stamina;
+
+    private final int gaugeSize = 150;
+    private final int gaugeThickness = 30;
+    private final Label gaugeCounterLabel;
+    private final GraphicsContext graphicsContext;
+
+    private TextField recoverUseInputBox;
 
     public StaminaBox(Stamina stamina) {
-        HBox mainBox = this;
-        mainBox.getStyleClass().add("basic-container");
+        this.stamina = stamina;
+        VBox mainBox = this;
+        mainBox.getStyleClass().addAll("basic-container", "stamina-box");
         mainBox.setStyle("-fx-border-color: black");
 
-        HBox gaugeWrapper = new HBox();
-        mainBox.getChildren().add(gaugeWrapper);
+        Label staminaBoxLabel = new Label("Stamina");
+        mainBox.getChildren().add(staminaBoxLabel);
+//        staminaBoxLabel.getStyleClass().add("basic-box-label");
+
+        HBox controlWrapper = new HBox();
+        mainBox.getChildren().add(controlWrapper);
+
+        StackPane gaugeWrapper = new StackPane();
+        controlWrapper.getChildren().add(gaugeWrapper);
+//        gaugeWrapper.getStyleClass().add("GREEN");
         gaugeWrapper.setStyle("-fx-alignment: center; -fx-border-color: red;");
 
-        Canvas gaugeCanvas = new Canvas(75, 75);
-        gaugeCanvas.setStyle("-fx-border-color: blue;"); //doesn't work??????
+        Canvas gaugeCanvas = new Canvas(75, 75); //canvas is not style-able just style the gaugeWrapper
         gaugeWrapper.getChildren().add(gaugeCanvas);
 
-        drawPieChart(gaugeCanvas.getGraphicsContext2D(), stamina.getSpentPercentage(), 150, 30);
+        graphicsContext = gaugeCanvas.getGraphicsContext2D();
+
+        gaugeCounterLabel = new Label("X"); //why doesn't it cast the int to string??
+        gaugeWrapper.getChildren().add(gaugeCounterLabel);
+
+        updateGauge(0);
+
+        //#region recover/use buttons area
+        VBox recoverUseBox = new VBox();
+        recoverUseBox.getStyleClass().add("hp-button-container");
+        controlWrapper.getChildren().add(recoverUseBox);
+
+        //#region heal button
+        Button recoverButton = new Button("Recover");
+        recoverButton.getStyleClass().add("hp-button");
+        recoverUseBox.getChildren().add(recoverButton);
+
+        recoverButton.setOnAction(e ->{
+            if(!recoverUseInputBox.getText().isEmpty()){
+                updateGauge(Integer.parseInt(recoverUseInputBox.getText()));
+            }
+        });
+        //#endregion heal button
+
+        //recover/use input
+        recoverUseInputBox = new TextField();
+        recoverUseInputBox.getStyleClass().add("hp-button");
+        recoverUseBox.getChildren().add(recoverUseInputBox);
+
+        //#region use button
+        Button useButton = new Button("Use");
+        useButton.getStyleClass().add("hp-button");
+        recoverUseBox.getChildren().add(useButton);
+
+        useButton.setOnAction(e ->{
+            if(!recoverUseInputBox.getText().isEmpty()){
+                updateGauge(-Integer.parseInt(recoverUseInputBox.getText()));
+            }
+        });
+        //#endregion use button
+
+        //#endregion recover/use buttons area
 
     }
 
-    private void drawPieChart(GraphicsContext gc, double percentage, int size, int thickness) {
+    private void updateGauge(int modifier){
+        if(modifier != 0){
+            stamina.adjustCurrentStamina(modifier, 0);
+        }
+        gaugeCounterLabel.setText(""+stamina.getCurrentStamina());
+        drawGauge(stamina.getSpentPercentage());
+    }
+    private void drawGauge(double percentage) {
         System.out.println("used stamina: "+ percentage);
         double anglePercentage = 360.0/100.0*percentage;
         int startAngle = 270;
-        int radius = size/2; // leave some margin
-        int smallRadius = radius-thickness;
+        int radius = gaugeSize/2;
+        int smallRadius = radius-gaugeThickness;
         int x = 0;
         int y = 0;
 
@@ -44,14 +112,14 @@ public class StaminaBox extends HBox {
         double angle2 = 360-anglePercentage; // 270 degrees for the second slice (75% of the circle)
 
         // Draw the first slice
-        gc.setFill(Color.RED);
-        gc.fillArc(x, y, radius, radius, startAngle, angle1, ArcType.ROUND);
+        graphicsContext.setFill(Color.RED);
+        graphicsContext.fillArc(x, y, radius, radius, startAngle, angle1, ArcType.ROUND);
 
         // Draw the second slice
-        gc.setFill(Color.BLUE);
-        gc.fillArc(x, y, radius, radius, angle1, angle2, ArcType.ROUND);
+        graphicsContext.setFill(Color.BLUE);
+        graphicsContext.fillArc(x, y, radius, radius, angle1, angle2, ArcType.ROUND);
 
-        gc.setFill(Color.WHITE);
-        gc.fillArc(x+(thickness/2), y+(thickness/2), smallRadius, smallRadius, 0, 360, ArcType.ROUND);
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillArc(x+(gaugeThickness/2), y+(gaugeThickness/2), smallRadius, smallRadius, 0, 360, ArcType.ROUND);
     }
 }

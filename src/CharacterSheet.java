@@ -28,7 +28,7 @@ public class CharacterSheet {
     private HitPoints hitPoints;
 
     public CharacterSheet(LinkedHashMap<String,stat> defaultSkillList) {
-        String[] randomFirstName = {"Novor","Beetle","Kaveh","Lucaris","Marilisus","Ghislaine","Elkana","Seokolta"};
+        String[] randomFirstName = {"Novor","Beetle","Kaveh","Luca","Marls","Ghislaine","Elkana","Seok", "Ard", "Joshua", "Ethari", "Xeyllosh"};
         String[] randomLastName = {"Kamisato", "Shogun", "","","","","","","",""};
         this.name = randomFirstName[(int)(Math.random()*randomFirstName.length)] +" "+ randomLastName[(int)(Math.random()*randomLastName.length)];
         this.visionElement = Element.values()[(int)(Math.random()*Element.values().length)];
@@ -127,5 +127,9 @@ public class CharacterSheet {
 
     public int getArmorClass(){
         return 10 + getPrimaryStat(stat.DEXTERITY).getModifier();
+    }
+
+    public int getInitiativeBonus(){
+        return getPrimaryStat(stat.DEXTERITY).getModifier();
     }
 }

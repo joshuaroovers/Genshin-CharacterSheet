@@ -140,6 +140,7 @@ public class Main extends Application{
         HBox thirdRowRight = new HBox(boxSpacing);
         rightPane.getChildren().add(thirdRowRight);
 
+        thirdRowRight.getChildren().add(new InitiativeBox(character.getInitiativeBonus()));
         thirdRowRight.getChildren().add(new StaminaBox(character.getStamina()));
 
 
@@ -174,7 +175,7 @@ public class Main extends Application{
         Scene scene = new Scene(mainPane, 12*100+11*boxSpacing, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.17");
+        stage.setTitle("Genshin CharacterSheet V0.18");
         stage.setScene(scene);
         stage.show();
     }

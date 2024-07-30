@@ -291,6 +291,15 @@
 }
 /*#endregion */
 
+/*#region Initiative box */
+.initiative-modifier-box{
+    -fx-border-color: black;
+    -fx-alignment: center;
+    -fx-font-size: 30;
+    -fx-pref-height: 60;
+}
+/*#endregion */
+
 /*#region Stamina box */
 .stamina-box{
     -fx-pref-width: double-container-width;

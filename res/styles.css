@@ -84,11 +84,17 @@
 .ANEMO-border{
     -fx-border-color: #33D7A0;
 }
+.ANEMO-font{
+    -fx-text-fill: #33D7A0;
+}
 .CRYO{
     -fx-background-color: #7AF2F2;
 }
 .CRYO-border{
     -fx-border-color: #7AF2F2;
+}
+.CRYO-font{
+    -fx-text-fill: #7AF2F2;
 }
 .DENDRO{
     -fx-background-color: #9BE53D;
@@ -96,11 +102,17 @@
 .DENDRO-border{
     -fx-border-color: #9BE53D;
 }
+.DENDRO-font{
+    -fx-text-fill: #9BE53D;
+}
 .ELECTRO{
     -fx-background-color: #CC80FF;
 }
 .ELECTRO-border{
     -fx-border-color: #CC80FF;
+}
+.ELECTRO-font{
+    -fx-text-fill: #CC80FF;
 }
 .GEO{
     -fx-background-color: #FFB00D;
@@ -108,17 +120,26 @@
 .GEO-border{
     -fx-border-color: #FFB00D;
 }
+.GEO-font{
+    -fx-text-fill: #FFB00D;
+}
 .HYDRO{
     -fx-background-color: #00C0FF;
 }
 .HYDRO-border{
     -fx-border-color: #00C0FF;
 }
+.HYDRO-font{
+    -fx-text-fill: #00C0FF;
+}
 .PYRO{
     -fx-background-color: #FF6640;
 }
 .PYRO-border{
     -fx-border-color: #FF6640;
+}
+.PYRO-font{
+    -fx-text-fill: #FF6640;
 }
 /*#endregion */
 

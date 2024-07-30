@@ -20,9 +20,10 @@ import javafx.util.Callback;
 
 public class HitPointsBox extends HBox {
 
-
-
     private TextField healDmgInputBox;
+    private Button dmgButton;
+    private HBox altDmgContainer;
+    private Button altElemDmgButton;
     private Label currentHP;
     private TextField currentHPInput;
     private Label shieldHP;
@@ -64,9 +65,10 @@ public class HitPointsBox extends HBox {
         healDmgInputBox.getStyleClass().add("hp-button");
         healDmgBox.getChildren().add(healDmgInputBox);
         //#region dmg button
-        Button dmgButton = new Button("Damage");
+        dmgButton = new Button("Damage");
         dmgButton.getStyleClass().add("hp-button");
         healDmgBox.getChildren().add(dmgButton);
+        dmgButton.managedProperty().bind(dmgButton.visibleProperty());
 
         dmgButton.setOnAction(e ->{
             if(!healDmgInputBox.getText().isEmpty()){
@@ -76,7 +78,36 @@ public class HitPointsBox extends HBox {
             }
         });
         //#endregion dmg button
+        //#region alt dmg buttons
+        altDmgContainer = new HBox();
+        healDmgBox.getChildren().add(altDmgContainer);
+        altDmgContainer.managedProperty().bind(altDmgContainer.visibleProperty());
+        altDmgContainer.setVisible(false);
 
+        Button altDmgButton = new Button("Dmg");
+        altDmgButton.getStyleClass().add("hp-button");
+        altDmgContainer.getChildren().add(altDmgButton);
+
+        altDmgButton.setOnAction(e ->{
+            if(!healDmgInputBox.getText().isEmpty()){
+                hitPoints.adjustCurrentHP(-Integer.parseInt(healDmgInputBox.getText()),null);
+
+                updateHPPools(hitPoints);
+            }
+        });
+
+        altElemDmgButton = new Button("Dmg");
+        altElemDmgButton.getStyleClass().add("hp-button");
+        altDmgContainer.getChildren().add(altElemDmgButton);
+
+        altElemDmgButton.setOnAction(e ->{
+            if(!healDmgInputBox.getText().isEmpty()){
+                hitPoints.adjustCurrentHP(-Integer.parseInt(healDmgInputBox.getText()),hitPoints.getElementalShield().getElement());
+
+                updateHPPools(hitPoints);
+            }
+        });
+        //#endregion alt dmg buttons
         //#endregion heal/damage buttons area
 
         //#region current/max hp
@@ -381,6 +412,18 @@ public class HitPointsBox extends HBox {
             }
         });
 
+        elemShieldTypeInput.setOnKeyPressed(e -> {
+            if(e.getCode() == KeyCode.ENTER){
+                if(!elemShieldHPInput.getText().isEmpty() && elemShieldTypeInput.getValue() != null){
+                    hitPoints.setElementalShield(Integer.parseInt(elemShieldHPInput.getText()), elemShieldTypeInput.getValue());
+                    updateElementalShield(hitPoints);
+                }
+
+                elemShieldDisplayValue.setVisible(true);
+                elemShieldInputValue.setVisible(false);
+                elemShieldDisplayType.setVisible(true);
+            }
+        });
 
         updateElementalShield(hitPoints);
         //#endregion elemental shield
@@ -414,13 +457,17 @@ public class HitPointsBox extends HBox {
     private void updateElementalShield(HitPoints hitPoints){
         if(hitPoints.getElementalShield() != null){
 //            System.out.println(hitPoints.getElementalShield());
+            dmgButton.setVisible(false);
+            altDmgContainer.setVisible(true);
             elemShieldDisplayHP.setText(Integer.toString(hitPoints.getElementalShield().getHP()));
             elemShieldDisplayTypeContainer.setVisible(true);
             elemShieldDisplayType.setStyle("-fx-background-image: url("+ImageHelper.getElementURL(hitPoints.getElementalShield().getElement(), ImageVariant.FLAT)+");");
             for (Element value : Element.values()) {
                 elemShieldDisplayTypeContainer.getStyleClass().remove(value.toString()+"-border");
+                altElemDmgButton.getStyleClass().remove(value.toString()+"-font");
             }
             elemShieldDisplayTypeContainer.getStyleClass().add(hitPoints.getElementalShield().getElement().toString()+"-border");
+            altElemDmgButton.getStyleClass().add(hitPoints.getElementalShield().getElement().toString()+"-font");
 //            System.out.println(elemShieldDisplayTypeContainer.getStyleClass());
         }else{
             elemShieldDisplayHP.setText("+");
@@ -428,6 +475,8 @@ public class HitPointsBox extends HBox {
             elemShieldHPInput.clear();
             elemShieldTypeInput.setValue(null);
             elemShieldDisplayTypeContainer.setVisible(false);
+            altDmgContainer.setVisible(false);
+            dmgButton.setVisible(true);
         }
     }
 }

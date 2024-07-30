@@ -27,9 +27,9 @@
     -fx-max-height: 110;
 }
 .basic-box-label{
-    -fx-pref-width: basic-container-width;
+    -fx-pref-width: 9999;
     -fx-alignment: center;
-    -fx-padding: 7 0 7 0
+    /* -fx-padding: 7 0 7 0 */
 }
 .basic-box-label-top{
     -fx-padding: 7 0 0 0
@@ -81,23 +81,44 @@
 .ANEMO{
     -fx-background-color: #33D7A0;
 }
+.ANEMO-border{
+    -fx-border-color: #33D7A0;
+}
 .CRYO{
     -fx-background-color: #7AF2F2;
+}
+.CRYO-border{
+    -fx-border-color: #7AF2F2;
 }
 .DENDRO{
     -fx-background-color: #9BE53D;
 }
+.DENDRO-border{
+    -fx-border-color: #9BE53D;
+}
 .ELECTRO{
     -fx-background-color: #CC80FF;
+}
+.ELECTRO-border{
+    -fx-border-color: #CC80FF;
 }
 .GEO{
     -fx-background-color: #FFB00D;
 }
+.GEO-border{
+    -fx-border-color: #FFB00D;
+}
 .HYDRO{
     -fx-background-color: #00C0FF;
 }
+.HYDRO-border{
+    -fx-border-color: #00C0FF;
+}
 .PYRO{
     -fx-background-color: #FF6640;
+}
+.PYRO-border{
+    -fx-border-color: #FF6640;
 }
 /*#endregion */
 

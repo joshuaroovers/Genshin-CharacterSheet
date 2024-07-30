@@ -290,9 +290,9 @@ public class HitPointsBox extends HBox {
                         } else {
                             shield.getChildren().clear();
                             for (Element o : Element.values()) {
-                                shield.getStyleClass().remove(o.toString());
+                                shield.getStyleClass().remove(o.toString()+"-border");
                             }
-                            shield.getStyleClass().addAll(item.toString());
+                            shield.getStyleClass().add(item.toString()+"-border");
 
 
                             Pane element = new Pane();
@@ -418,9 +418,9 @@ public class HitPointsBox extends HBox {
             elemShieldDisplayTypeContainer.setVisible(true);
             elemShieldDisplayType.setStyle("-fx-background-image: url("+ImageHelper.getElementURL(hitPoints.getElementalShield().getElement(), ImageVariant.FLAT)+");");
             for (Element value : Element.values()) {
-                elemShieldDisplayTypeContainer.getStyleClass().remove(value.toString());
+                elemShieldDisplayTypeContainer.getStyleClass().remove(value.toString()+"-border");
             }
-            elemShieldDisplayTypeContainer.getStyleClass().add(hitPoints.getElementalShield().getElement().toString());
+            elemShieldDisplayTypeContainer.getStyleClass().add(hitPoints.getElementalShield().getElement().toString()+"-border");
 //            System.out.println(elemShieldDisplayTypeContainer.getStyleClass());
         }else{
             elemShieldDisplayHP.setText("+");

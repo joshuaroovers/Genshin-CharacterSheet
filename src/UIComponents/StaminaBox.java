@@ -1,6 +1,6 @@
 package UIComponents;
 
-import SheetComponents.Element;
+import SheetComponents.Elements.Element;
 import SheetComponents.Stamina;
 import UIComponents.util.ImageHelper;
 import javafx.geometry.Pos;
@@ -33,8 +33,8 @@ public class StaminaBox extends VBox {
 
     public StaminaBox(Stamina stamina, Element element) {
         this.stamina = stamina;
-        this.gaugeFullColor = ImageHelper.getElementColor(element);
-        this.gaugeEmptyColor = ImageHelper.getElementColor(element).desaturate().desaturate().darker();
+        this.gaugeFullColor = element.getColor();
+        this.gaugeEmptyColor = element.getColor().desaturate().desaturate().darker();
         VBox mainBox = this;
         mainBox.getStyleClass().addAll("basic-container", "stamina-box");
         mainBox.setStyle("-fx-border-color: black");

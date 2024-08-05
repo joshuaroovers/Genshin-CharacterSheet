@@ -1,5 +1,7 @@
 package SheetComponents;
 
+import SheetComponents.Elements.Element;
+
 public class HitPoints {
     private int maxHP;
     private int currentHP;

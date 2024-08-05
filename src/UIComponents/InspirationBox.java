@@ -1,9 +1,8 @@
 package UIComponents;
 
-import SheetComponents.Element;
+import SheetComponents.Elements.Element;
 import SheetComponents.Inspiration;
 import UIComponents.subUIComponents.SmallBasicBox;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -34,7 +33,7 @@ public class InspirationBox extends VBox {
         buttonGraphic = new HBox();
         stackPane.getChildren().add(buttonGraphic);
         buttonGraphic.setStyle("-fx-max-width: 40; -fx-max-height: 40;");
-        buttonGraphic.getStyleClass().addAll(themeColor.toString());
+        buttonGraphic.getStyleClass().addAll(themeColor.getName());
         buttonGraphic.setVisible(inspiration.getValue());
 //        buttonGraphic
 

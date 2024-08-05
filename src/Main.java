@@ -1,19 +1,29 @@
+import SheetComponents.ElementalReactions.*;
+import SheetComponents.Elements.Cryo;
+import SheetComponents.Elements.Element;
 import SheetComponents.SavingThrow;
 import UIComponents.*;
 import SheetComponents.PrimaryStat;
 import SheetComponents.Skill;
 import UIComponents.util.ImageHelper;
+import UIComponents.util.ImageVariant;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class Main extends Application{
+
+    private VBox testScrollPane;
 
     public static void main(String[] args) {
         launch(args);
@@ -76,7 +86,7 @@ public class Main extends Application{
         HBox tempSettings = new HBox();
         tempWrapper.getChildren().add(tempSettings);
         tempSettings.getStyleClass().add("settings-button");
-        tempSettings.getStyleClass().add(character.getVisionElement().toString());
+        tempSettings.getStyleClass().add(character.getVisionElement().getName());
         firstRow.setRight(tempWrapper);
         //#endregion
 
@@ -147,28 +157,48 @@ public class Main extends Application{
 
 
         //#region testing area
-//        StackPane test2 = new StackPane();
-//        leftPane.getChildren().add(test2);
-//        test2.getStyleClass().addAll("shield","ANEMO");
-//        test2.setStyle("-fx-max-width: 200;"+
-//                "-fx-pref-height: 200;"+
-//                "-fx-padding: 50;");
+
+//        ArrayList<Reaction> reactions = new ArrayList<>(Arrays.asList(
+//                new ReactionBloom(), new ReactionBurning(), new ReactionCatalyze(),
+//                new ReactionCrystallize(), new ReactionElectroCharged(), new ReactionFreeze(),
+//                new ReactionMelt(), new ReactionOverload(), new ReactionSuperConduct(),
+//                new ReactionSwirl(), new ReactionVaporize()));
 //
-//        HBox test = new HBox();
-//        test.getStyleClass().add("element-image");
-////        System.out.println(ImageHelper.getElementURL(Element.ANEMO, ImageVariant.FLAT));
-//        test.setStyle("-fx-background-image: url("+ImageHelper.getElementURL(Element.ANEMO, ImageVariant.FLAT)+");"+
-//                "-fx-max-width: 200;"+
-//                "-fx-pref-height: 200;");
-//        test2.getChildren().add(test);
-
-
-//        ComboBox comboTest = new ComboBox();
-//        leftPane.getChildren().add(comboTest);
-//        comboTest.setStyle("-fx-pref-width: 0; -fx-min-width: 10; -fx-pref-height: 10; -fx-min-height: 0; -fx-padding: 0; -fx-background-color: red; -fx-font-size: 0;");
-//        comboTest.getItems().addAll("test1","test2","test3");
-
-
+//        testScrollPane = new VBox();
+//        ScrollPane scrollPane = new ScrollPane(testScrollPane);
+//        leftPane.getChildren().add(scrollPane);
+//
+//        for (Reaction reactionTest : reactions) {
+//
+//            Label reactionTestLabel = new Label(reactionTest.getName());
+//            testScrollPane.getChildren().add(reactionTestLabel);
+//
+//            HBox testWrapper = new HBox();
+//            testScrollPane.getChildren().add(testWrapper);
+//
+//            HBox elementImage1 = new HBox();
+//            testWrapper.getChildren().add(elementImage1);
+//            elementImage1.setStyle("-fx-background-image: url(" + ImageHelper.getElementURL(reactionTest.getElement1(), ImageVariant.FLAT) + ")");
+//            elementImage1.getStyleClass().addAll("name-card-element-image", "element-image");
+//
+//
+//            HBox elementImage2 = new HBox();
+//            testWrapper.getChildren().add(elementImage2);
+//            String imageUrl = "";
+//            if (reactionTest.getClass() == ReactionSwirl.class || reactionTest.getClass() == ReactionCrystallize.class) {
+//                imageUrl = ImageHelper.getElementURL(reactionTest.getElement1(), ImageVariant.GILDED);
+//                if (reactionTest.getClass() == ReactionSwirl.class) {
+//                    System.out.println(((ReactionSwirl) reactionTest).getElements());
+//                } else if (reactionTest.getClass() == ReactionCrystallize.class) {
+//                    System.out.println(((ReactionCrystallize) reactionTest).getElements());
+//                }
+//            } else {
+//                imageUrl = ImageHelper.getElementURL(reactionTest.getElement2(), ImageVariant.FLAT);
+//            }
+//
+//            elementImage2.setStyle("-fx-background-image: url(" + imageUrl + ")");
+//            elementImage2.getStyleClass().addAll("name-card-element-image", "element-image");
+//        }
 
         //#endregion
 
@@ -176,7 +206,7 @@ public class Main extends Application{
         Scene scene = new Scene(mainPane, 12*100+11*boxSpacing, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.20");
+        stage.setTitle("Genshin CharacterSheet V0.21");
         stage.setScene(scene);
         stage.show();
     }

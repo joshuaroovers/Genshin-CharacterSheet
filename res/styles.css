@@ -78,67 +78,67 @@
     -fx-alignment: center;
 }
 /*#region element colors */
-.ANEMO{
+.Anemo{
     -fx-background-color: #33D7A0;
 }
-.ANEMO-border{
+.Anemo-border{
     -fx-border-color: #33D7A0;
 }
-.ANEMO-font{
+.Anemo-font{
     -fx-text-fill: #33D7A0;
 }
-.CRYO{
+.Cryo{
     -fx-background-color: #7AF2F2;
 }
-.CRYO-border{
+.Cryo-border{
     -fx-border-color: #7AF2F2;
 }
-.CRYO-font{
+.Cryo-font{
     -fx-text-fill: #7AF2F2;
 }
-.DENDRO{
+.Dendro{
     -fx-background-color: #9BE53D;
 }
-.DENDRO-border{
+.Dendro-border{
     -fx-border-color: #9BE53D;
 }
-.DENDRO-font{
+.Dendro-font{
     -fx-text-fill: #9BE53D;
 }
-.ELECTRO{
+.Electro{
     -fx-background-color: #CC80FF;
 }
-.ELECTRO-border{
+.Electro-border{
     -fx-border-color: #CC80FF;
 }
-.ELECTRO-font{
+.Electro-font{
     -fx-text-fill: #CC80FF;
 }
-.GEO{
+.Geo{
     -fx-background-color: #FFB00D;
 }
-.GEO-border{
+.Geo-border{
     -fx-border-color: #FFB00D;
 }
-.GEO-font{
+.Geo-font{
     -fx-text-fill: #FFB00D;
 }
-.HYDRO{
+.Hydro{
     -fx-background-color: #00C0FF;
 }
-.HYDRO-border{
+.Hydro-border{
     -fx-border-color: #00C0FF;
 }
-.HYDRO-font{
+.Hydro-font{
     -fx-text-fill: #00C0FF;
 }
-.PYRO{
+.Pyro{
     -fx-background-color: #FF6640;
 }
-.PYRO-border{
+.Pyro-border{
     -fx-border-color: #FF6640;
 }
-.PYRO-font{
+.Pyro-font{
     -fx-text-fill: #FF6640;
 }
 /*#endregion */

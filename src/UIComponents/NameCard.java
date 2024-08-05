@@ -1,6 +1,6 @@
 package UIComponents;
 
-import SheetComponents.Element;
+import SheetComponents.Elements.Element;
 import UIComponents.util.ImageHelper;
 import UIComponents.util.ImageVariant;
 import javafx.scene.control.Label;
@@ -50,7 +50,7 @@ public class NameCard extends HBox {
         detailsWrapper.getChildren().add(speciesBox);
         speciesBox.getStyleClass().add("name-card-detail");
 
-        Label elementNameBox = new Label(ImageHelper.getElementName(element));
+        Label elementNameBox = new Label(element.getName());
         detailsWrapper.getChildren().add(elementNameBox);
         elementNameBox.getStyleClass().add("name-card-detail");
 

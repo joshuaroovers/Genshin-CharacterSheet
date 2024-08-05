@@ -1,7 +1,10 @@
 import SheetComponents.*;
+import SheetComponents.Elements.*;
 import SheetComponents.Species.*;
 import SheetComponents.Weapons.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class CharacterSheet {
@@ -31,7 +34,10 @@ public class CharacterSheet {
         String[] randomFirstName = {"Novor","Beetle","Kaveh","Luca","Marls","Ghislaine","Elkana","Seok", "Ard", "Joshua", "Ethari", "Xeyllosh"};
         String[] randomLastName = {"Kamisato", "Shogun", "","","","","","","",""};
         this.name = randomFirstName[(int)(Math.random()*randomFirstName.length)] +" "+ randomLastName[(int)(Math.random()*randomLastName.length)];
-        this.visionElement = Element.values()[(int)(Math.random()*Element.values().length)];
+        ArrayList<Element> randomElement = new ArrayList<>(Arrays.asList(new Anemo(), new Cryo(), new Dendro(), new Electro(), new Geo(), new Hydro(), new Pyro()));
+        int number = (int)(Math.random()*8);
+        System.out.println(number);
+        this.visionElement = randomElement.get(number);
 
             Weapon[] randomWeapon = {new Sword(), new Claymore(), new Polearm(), new Bow(), new Catalyst()};
         this.weapon = randomWeapon[(int)(Math.random()*5)];
@@ -39,7 +45,7 @@ public class CharacterSheet {
         this.species = randomSpecies[(int)(Math.random()*6)];
 
         this.stamina = new Stamina();
-        stamina.adjustCurrentStamina((int) -(Math.random()*100), 0);
+        stamina.adjustCurrentStamina( -(int)(Math.random()*100), 0);
 
         this.primaryStats = new LinkedHashMap<>();
         this.savingThrows = new LinkedHashMap<>();

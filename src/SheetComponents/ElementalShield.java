@@ -1,5 +1,7 @@
 package SheetComponents;
 
+import SheetComponents.Elements.Element;
+
 public class ElementalShield {
     private int hp;
     private Element element;

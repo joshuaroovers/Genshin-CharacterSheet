@@ -1,6 +1,6 @@
 package UIComponents;
 
-import SheetComponents.Element;
+import SheetComponents.Elements.*;
 import SheetComponents.HitPoints;
 import UIComponents.util.ImageHelper;
 import UIComponents.util.ImageVariant;
@@ -72,7 +72,7 @@ public class HitPointsBox extends HBox {
 
         dmgButton.setOnAction(e ->{
             if(!healDmgInputBox.getText().isEmpty()){
-                hitPoints.adjustCurrentHP(-Integer.parseInt(healDmgInputBox.getText()),Element.DENDRO);
+                hitPoints.adjustCurrentHP(-Integer.parseInt(healDmgInputBox.getText()), null);
 
                 updateHPPools(hitPoints);
             }
@@ -302,7 +302,7 @@ public class HitPointsBox extends HBox {
         elemShieldTypeInput = new ComboBox<Element>();
         elemShieldTypeInput.setStyle("-fx-min-width: 30; -fx-pref-width: 30; -fx-min-height: 30; -fx-pref-height: 30; -fx-padding: 0;");
         elemShieldTypeInput.setVisibleRowCount(4);
-        elemShieldTypeInput.getItems().addAll(Element.PYRO, Element.HYDRO, Element.CRYO, Element.ELECTRO);
+        elemShieldTypeInput.getItems().addAll(new Pyro(), new Hydro(), new Cryo(), new Electro());
 
         //#region combobox nightmare things
          elemShieldTypeInput.setButtonCell(new ListCell<Element>() {
@@ -320,10 +320,12 @@ public class HitPointsBox extends HBox {
                             setGraphic(null);
                         } else {
                             shield.getChildren().clear();
-                            for (Element o : Element.values()) {
-                                shield.getStyleClass().remove(o.toString()+"-border");
+
+                            for (Element element : Element.getAll()) {
+                                shield.getStyleClass().remove(element.getName()+"-border");
                             }
-                            shield.getStyleClass().add(item.toString()+"-border");
+
+                            shield.getStyleClass().add(item.getName()+"-border");
 
 
                             Pane element = new Pane();
@@ -333,7 +335,7 @@ public class HitPointsBox extends HBox {
                             );
                             element.getStyleClass().addAll("element-image");
 
-                            System.out.println(shield.getStyleClass());
+                            System.out.println("update shieldtype style:" + shield.getStyleClass());
 
 
                             Tooltip tooltip = new Tooltip(item.toString());
@@ -371,7 +373,7 @@ public class HitPointsBox extends HBox {
                                     "-fx-background-image: url("+ImageHelper.getElementURL(item,ImageVariant.FLAT)+");"
                             );
                             image.getStyleClass().add("element-image");
-                            Tooltip tooltip = new Tooltip(item.toString());
+                            Tooltip tooltip = new Tooltip(item.getName());
                             Tooltip.install(image, tooltip);
                             setGraphic(image);
                         }
@@ -462,12 +464,13 @@ public class HitPointsBox extends HBox {
             elemShieldDisplayHP.setText(Integer.toString(hitPoints.getElementalShield().getHP()));
             elemShieldDisplayTypeContainer.setVisible(true);
             elemShieldDisplayType.setStyle("-fx-background-image: url("+ImageHelper.getElementURL(hitPoints.getElementalShield().getElement(), ImageVariant.FLAT)+");");
-            for (Element value : Element.values()) {
-                elemShieldDisplayTypeContainer.getStyleClass().remove(value.toString()+"-border");
-                altElemDmgButton.getStyleClass().remove(value.toString()+"-font");
+            for (Element element : Element.getAll()) {
+                elemShieldDisplayTypeContainer.getStyleClass().remove(element.getName()+"-border");
+                altElemDmgButton.getStyleClass().remove(element.getName()+"-font");
             }
-            elemShieldDisplayTypeContainer.getStyleClass().add(hitPoints.getElementalShield().getElement().toString()+"-border");
-            altElemDmgButton.getStyleClass().add(hitPoints.getElementalShield().getElement().toString()+"-font");
+
+            elemShieldDisplayTypeContainer.getStyleClass().add(hitPoints.getElementalShield().getElement().getName()+"-border");
+            altElemDmgButton.getStyleClass().add(hitPoints.getElementalShield().getElement().getName()+"-font");
 //            System.out.println(elemShieldDisplayTypeContainer.getStyleClass());
         }else{
             elemShieldDisplayHP.setText("+");

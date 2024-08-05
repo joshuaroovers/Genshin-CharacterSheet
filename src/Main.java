@@ -142,7 +142,7 @@ public class Main extends Application{
 
         thirdRowRight.getChildren().add(new MovementSpeedBox(character.getWalkingSpeed()));
         thirdRowRight.getChildren().add(new InitiativeBox(character.getInitiativeBonus()));
-        thirdRowRight.getChildren().add(new StaminaBox(character.getStamina()));
+        thirdRowRight.getChildren().add(new StaminaBox(character.getStamina(), character.getVisionElement()));
 
 
 
@@ -176,7 +176,7 @@ public class Main extends Application{
         Scene scene = new Scene(mainPane, 12*100+11*boxSpacing, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.19");
+        stage.setTitle("Genshin CharacterSheet V0.20");
         stage.setScene(scene);
         stage.show();
     }

@@ -1,6 +1,7 @@
 package UIComponents.util;
 
 import SheetComponents.Element;
+import javafx.scene.paint.Color;
 
 public class ImageHelper {
     private static String elementImagePathBase = "images/Element_Icons";
@@ -41,4 +42,32 @@ public class ImageHelper {
         return element.toString().substring(0,1).toUpperCase() + element.toString().substring(1).toLowerCase();
     }
 
+    public static Color getElementColor(Element element){
+        Color color = Color.GRAY;
+        switch (element){
+            case ANEMO:
+                color = Color.valueOf("#33D7A0");
+                break;
+            case CRYO:
+                color = Color.valueOf("#7AF2F2");
+                break;
+            case DENDRO:
+                color = Color.valueOf("#9BE53D");
+                break;
+            case ELECTRO:
+                color = Color.valueOf("#CC80FF");
+                break;
+            case GEO:
+                color = Color.valueOf("#FFB00D");
+                break;
+            case HYDRO:
+                color = Color.valueOf("#00C0FF");
+                break;
+            case PYRO:
+                color = Color.valueOf("#FF6640");
+                break;
+        }
+
+        return color;
+    }
 }

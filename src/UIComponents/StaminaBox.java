@@ -1,6 +1,9 @@
 package UIComponents;
 
+import SheetComponents.Element;
 import SheetComponents.Stamina;
+import UIComponents.util.ImageHelper;
+import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -18,32 +21,38 @@ public class StaminaBox extends VBox {
 
     private Stamina stamina;
 
-    private final int gaugeSize = 150;
+    private final int gaugeSize = 170;
     private final int gaugeThickness = 30;
     private final Label gaugeCounterLabel;
     private final GraphicsContext graphicsContext;
+    private Color gaugeBackgroundColor = Color.WHITE;
+    private Color gaugeEmptyColor;
+    private Color gaugeFullColor;
 
     private TextField recoverUseInputBox;
 
-    public StaminaBox(Stamina stamina) {
+    public StaminaBox(Stamina stamina, Element element) {
         this.stamina = stamina;
+        this.gaugeFullColor = ImageHelper.getElementColor(element);
+        this.gaugeEmptyColor = ImageHelper.getElementColor(element).desaturate().desaturate().darker();
         VBox mainBox = this;
         mainBox.getStyleClass().addAll("basic-container", "stamina-box");
         mainBox.setStyle("-fx-border-color: black");
 
         Label staminaBoxLabel = new Label("Stamina");
         mainBox.getChildren().add(staminaBoxLabel);
-//        staminaBoxLabel.getStyleClass().add("basic-box-label");
+        staminaBoxLabel.getStyleClass().add("basic-box-label");
 
-        HBox controlWrapper = new HBox();
+        HBox controlWrapper = new HBox(10);
+        controlWrapper.setAlignment(Pos.CENTER);
         mainBox.getChildren().add(controlWrapper);
 
         StackPane gaugeWrapper = new StackPane();
         controlWrapper.getChildren().add(gaugeWrapper);
-//        gaugeWrapper.getStyleClass().add("GREEN");
-        gaugeWrapper.setStyle("-fx-alignment: center; -fx-border-color: red;");
+////        gaugeWrapper.getStyleClass().add("GREEN");
+//        gaugeWrapper.setStyle("-fx-alignment: center; -fx-border-color: red;");
 
-        Canvas gaugeCanvas = new Canvas(75, 75); //canvas is not style-able just style the gaugeWrapper
+        Canvas gaugeCanvas = new Canvas(gaugeSize/2, gaugeSize/2); //canvas is not style-able just style the gaugeWrapper
         gaugeWrapper.getChildren().add(gaugeCanvas);
 
         graphicsContext = gaugeCanvas.getGraphicsContext2D();
@@ -112,14 +121,14 @@ public class StaminaBox extends VBox {
         double angle2 = 360-anglePercentage; // 270 degrees for the second slice (75% of the circle)
 
         // Draw the first slice
-        graphicsContext.setFill(Color.RED);
+        graphicsContext.setFill(gaugeEmptyColor);
         graphicsContext.fillArc(x, y, radius, radius, startAngle, angle1, ArcType.ROUND);
 
         // Draw the second slice
-        graphicsContext.setFill(Color.BLUE);
+        graphicsContext.setFill(gaugeFullColor);
         graphicsContext.fillArc(x, y, radius, radius, angle1, angle2, ArcType.ROUND);
 
-        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.setFill(gaugeBackgroundColor);
         graphicsContext.fillArc(x+(gaugeThickness/2), y+(gaugeThickness/2), smallRadius, smallRadius, 0, 360, ArcType.ROUND);
     }
 }

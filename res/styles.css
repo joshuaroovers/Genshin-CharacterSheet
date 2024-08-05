@@ -300,6 +300,14 @@
 }
 /*#endregion */
 
+/*#region MovementSpeed box */
+.movement-speed-label{
+    -fx-font-size: 30;
+}
+.movement-ft-label{
+}
+/*#endregion */
+
 /*#region Stamina box */
 .stamina-box{
     -fx-pref-width: double-container-width;

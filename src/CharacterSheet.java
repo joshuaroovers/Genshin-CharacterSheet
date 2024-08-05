@@ -88,6 +88,9 @@ public class CharacterSheet {
     }
     public Species getSpecies(){return species;}
 
+    public int getWalkingSpeed(){
+        return getSpecies().getWalkingSpeed();
+    }
     public Stamina getStamina() {
         return stamina;
     }

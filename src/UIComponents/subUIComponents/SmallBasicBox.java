@@ -2,6 +2,7 @@ package UIComponents.subUIComponents;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 
@@ -9,14 +10,14 @@ public class SmallBasicBox extends VBox {
     public enum labelPosition {TOP, BOTTOM}
 //    public enum contentPosition {TOP, CENTER, BOTTOM}
 
-    public SmallBasicBox(String labelText, String secondLabelText, HBox content){
+    public SmallBasicBox(String labelText, String secondLabelText, Pane content){
         this(null, labelText, secondLabelText, content);
     }
-    public SmallBasicBox(labelPosition labelPosition, String labelText, HBox content){
+    public SmallBasicBox(labelPosition labelPosition, String labelText, Pane content){
         this(labelPosition, labelText, null, content);
     }
 
-    public SmallBasicBox(labelPosition labelPosition, String labelText, String secondLabelText, HBox content) {
+    public SmallBasicBox(labelPosition labelPosition, String labelText, String secondLabelText, Pane content) {
         VBox mainBox = this;
         mainBox.getStyleClass().add("basic-container");
 

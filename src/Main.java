@@ -9,12 +9,12 @@ import UIComponents.util.ImageHelper;
 import UIComponents.util.ImageVariant;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -153,7 +153,7 @@ public class Main extends Application{
         thirdRowRight.getChildren().add(new MovementSpeedBox(character.getWalkingSpeed()));
         thirdRowRight.getChildren().add(new InitiativeBox(character.getInitiativeBonus()));
         thirdRowRight.getChildren().add(new StaminaBox(character.getStamina(), character.getVisionElement()));
-
+        thirdRowRight.getChildren().add(new ConditionsBox());
 
 
         //#region testing area
@@ -200,13 +200,107 @@ public class Main extends Application{
 //            elementImage2.getStyleClass().addAll("name-card-element-image", "element-image");
 //        }
 
+
+
+//        VBox root = new VBox();
+//        rightPane.getChildren().add(root);
+//        root.setStyle("-fx-pref-height: 100; -fx-min-height: 100");
+//        Button button = new Button("Hover over me");
+//
+//        Label tooltip = new Label("This is a tooltip!");
+//        tooltip.setStyle("-fx-background-color: yellow; -fx-padding: 10;");
+//
+//        tooltip.setVisible(false);
+//
+//        root.getChildren().addAll(button, tooltip);
+//
+//        button.setOnMouseEntered(e -> {
+//            System.out.println("show tooltip");
+//            tooltip.setVisible(true);
+//            tooltip.setTranslateX(button.getLayoutX());
+//            tooltip.setTranslateY(button.getLayoutY());
+//        });
+//
+//        button.setOnMouseExited(e -> {
+//            tooltip.setVisible(false);
+//        });
+//
+//
+//        Button button2 = new Button("Hover over me2");
+//        rightPane.getChildren().add(button2);
+//        Popup popup2 = new Popup();
+//        Label tooltip2 = new Label("This is a tooltip!");
+//        tooltip.setStyle("-fx-background-color: yellow; -fx-padding: 10;");
+//        popup2.getContent().add(tooltip2);
+//
+//        button2.setOnMouseEntered(e -> {
+//            popup2.show(button, e.getScreenX(), e.getScreenY());
+//        });
+//
+//        button2.setOnMouseExited(e -> {
+//            popup2.hide();
+//        });
+//
+//        VBox stackPaneTestWrapper = new VBox();
+//        rightPane.getChildren().add(stackPaneTestWrapper);
+//
+//        Label testLabel1 = new Label("Stackpane overflow/resizing test");
+//        stackPaneTestWrapper.getChildren().add(testLabel1);
+//
+//        StackPane stackPane = new StackPane();
+//        stackPaneTestWrapper.getChildren().add(stackPane);
+//        stackPane.getStyleClass().add("GREEN");
+//        stackPane.setStyle("-fx-pref-height: 100; -fx-max-height: 100; -fx-pref-width: 100; -fx-max-width: 100;");
+//
+//
+//
+//        HBox box1 = new HBox();
+//        stackPane.getChildren().add(box1);
+////        box1.setManaged(false);
+//        box1.getStyleClass().add("RED");
+//        box1.setStyle("-fx-pref-height: 200; -fx-max-height: 200; -fx-pref-width: 75; -fx-max-width: 75;");
+//
+//        HBox box2 = new HBox();
+//        stackPane.getChildren().add(box2);
+//        box2.getStyleClass().add("BLUE");
+//        box2.setStyle("-fx-pref-height: 50; -fx-max-height: 50; -fx-pref-width: 50; -fx-max-width: 50;");
+//
+//        Label testLabel2 = new Label("pls stay put ty");
+//        stackPaneTestWrapper.getChildren().add(testLabel2);
+//
+//        StackPane mainPane2 = new StackPane();
+//        Pane root2 = new Pane();
+//        rightPane.getChildren().add(root2);
+//
+//        Button button3 = new Button("Hover over me3");
+//        mainPane2.getChildren().add(button3);
+//
+//        Label tooltip3 = new Label("This is a tooltip!");
+//        tooltip3.setStyle("-fx-background-color: yellow; -fx-padding: 10;");
+//        tooltip3.setVisible(false);
+//
+//        root.getChildren().addAll(mainPane2, tooltip3);
+//
+//        button3.setOnMouseEntered(e -> {
+//            tooltip3.setVisible(true);
+//            tooltip3.setLayoutX(button3.localToScene(button3.getBoundsInLocal()).getMinX() + 10);
+//            tooltip3.setLayoutY(button3.localToScene(button3.getBoundsInLocal()).getMinY() - tooltip3.getHeight() - 10);
+//        });
+//
+//        button3.setOnMouseExited(e -> {
+//            tooltip3.setVisible(false);
+//        });
+
+
         //#endregion
+
+
 
 
         Scene scene = new Scene(mainPane, 12*100+11*boxSpacing, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.21");
+        stage.setTitle("Genshin CharacterSheet V0.22");
         stage.setScene(scene);
         stage.show();
     }

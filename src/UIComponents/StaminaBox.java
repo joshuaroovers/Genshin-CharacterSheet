@@ -37,7 +37,6 @@ public class StaminaBox extends VBox {
         this.gaugeEmptyColor = element.getColor().desaturate().desaturate().darker();
         VBox mainBox = this;
         mainBox.getStyleClass().addAll("basic-container", "stamina-box");
-        mainBox.setStyle("-fx-border-color: black");
 
         Label staminaBoxLabel = new Label("Stamina");
         mainBox.getChildren().add(staminaBoxLabel);

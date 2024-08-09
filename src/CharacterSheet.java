@@ -35,7 +35,7 @@ public class CharacterSheet {
         String[] randomLastName = {"Kamisato", "Shogun", "","","","","","","",""};
         this.name = randomFirstName[(int)(Math.random()*randomFirstName.length)] +" "+ randomLastName[(int)(Math.random()*randomLastName.length)];
         ArrayList<Element> randomElement = new ArrayList<>(Arrays.asList(new Anemo(), new Cryo(), new Dendro(), new Electro(), new Geo(), new Hydro(), new Pyro()));
-        int number = (int)(Math.random()*8);
+        int number = (int)(Math.random()*7);
         System.out.println(number);
         this.visionElement = randomElement.get(number);
 

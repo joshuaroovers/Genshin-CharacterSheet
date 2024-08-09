@@ -311,6 +311,14 @@
 /*#region Stamina box */
 .stamina-box{
     -fx-pref-width: double-container-width;
+    -fx-border-color: black
+}
+/*#endregion */
+
+/*#region Conditions box */
+.conditions-box{
+    -fx-pref-width: double-container-width;
+    -fx-border-color: black;
 }
 /*#endregion */
 

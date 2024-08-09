@@ -1,144 +1,107 @@
-import SheetComponents.*;
-import SheetComponents.Elements.*;
-import SheetComponents.Species.*;
-import SheetComponents.Weapons.*;
+import SheetComponents.PrimaryStat;
+import SheetComponents.SavingThrow;
+import SheetComponents.Skill;
+import UIComponents.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
+public class CharacterSheet extends BorderPane {
 
-public class CharacterSheet {
+    public CharacterSheet(Character character, int boxSpacing) {
+        BorderPane mainPane = this;
 
-    private String name;
+        HBox mainSheetWrapper = new HBox();
+        mainPane.setCenter(mainSheetWrapper);
+        mainSheetWrapper.setStyle("-fx-alignment: center; -fx-padding: "+boxSpacing+" 0 0 0;");
 
-    private Element visionElement;
-    private Weapon weapon;
-    private Species species;
+        VBox mainSheetPane = new VBox(boxSpacing);
+        mainSheetWrapper.getChildren().add(mainSheetPane);
+        mainSheetPane.setStyle("-fx-pref-width: " + (12*100+11*20)+";");
 
-    private Stamina stamina;
+//        HBox firstRowWrapper = new HBox();
+//        mainSheetPane.getChildren().add(firstRowWrapper);
 
-    public enum stat {STRENGTH,DEXTERITY,CONSTITUTION,INTELLIGENCE,WISDOM,CHARISMA}
+        BorderPane firstRow = new BorderPane();
+        mainPane.setTop(firstRow);
+        firstRow.setStyle("-fx-pref-width: " + 9999999);
 
-    private LinkedHashMap<stat, PrimaryStat> primaryStats;
+        firstRow.setLeft(new NameCard(character.getVisionElement(), character.getName(), character.getSpecies().getName(), character.getWeapon().getBaseName()));
 
-    private final int proficiencyBonus =  3;
-    private Inspiration inspiration;
+        //#region settings button
+        HBox tempWrapper = new HBox();
+        tempWrapper.getStyleClass().add("settings-button-container");
 
-    private LinkedHashMap<stat, SavingThrow> savingThrows;
+        HBox tempSettings = new HBox();
+        tempWrapper.getChildren().add(tempSettings);
+        tempSettings.getStyleClass().add("settings-button");
+        tempSettings.getStyleClass().add(character.getVisionElement().getName());
+        firstRow.setRight(tempWrapper);
+        //#endregion
 
-    private LinkedHashMap<String, Skill> skills;
 
-    private HitPoints hitPoints;
+        HBox secondRow = new HBox(boxSpacing);
+        mainSheetPane.getChildren().add(secondRow);
 
-    public CharacterSheet(LinkedHashMap<String,stat> defaultSkillList) {
-        String[] randomFirstName = {"Novor","Beetle","Kaveh","Luca","Marls","Ghislaine","Elkana","Seok", "Ard", "Joshua", "Ethari", "Xeyllosh"};
-        String[] randomLastName = {"Kamisato", "Shogun", "","","","","","","",""};
-        this.name = randomFirstName[(int)(Math.random()*randomFirstName.length)] +" "+ randomLastName[(int)(Math.random()*randomLastName.length)];
-        ArrayList<Element> randomElement = new ArrayList<>(Arrays.asList(new Anemo(), new Cryo(), new Dendro(), new Electro(), new Geo(), new Hydro(), new Pyro()));
-        int number = (int)(Math.random()*7);
-        System.out.println(number);
-        this.visionElement = randomElement.get(number);
-
-            Weapon[] randomWeapon = {new Sword(), new Claymore(), new Polearm(), new Bow(), new Catalyst()};
-        this.weapon = randomWeapon[(int)(Math.random()*5)];
-            Species[] randomSpecies = {new Human(), new Anthro(), new Adeptus(), new Yokai(), new Fontainian(), new Khaenriahn() };
-        this.species = randomSpecies[(int)(Math.random()*6)];
-
-        this.stamina = new Stamina();
-        stamina.adjustCurrentStamina( -(int)(Math.random()*100), 0);
-
-        this.primaryStats = new LinkedHashMap<>();
-        this.savingThrows = new LinkedHashMap<>();
-        this.skills = new LinkedHashMap<>();
-
-        this.inspiration = new Inspiration(false);
-
-        for (stat value : stat.values()) {
-            int randScore = (int)(Math.random()*5)+1 + (int)(Math.random()*5)+1 + (int)(Math.random()*5)+1 + (int)(Math.random()*5)+1;
-
-            primaryStats.put(value, new PrimaryStat(value.name(), randScore));
-
-            boolean saveProf = false;
-            if((Math.random() < 0.5)){
-                saveProf = true;
-                System.out.println("prof! "+value.name()+" saves");
-            }
-            savingThrows.put(value, new SavingThrow(getPrimaryStat(value),saveProf));
+        for (Character.stat key : character.getPrimaryStats().keySet()) {
+            PrimaryStat stat = character.getPrimaryStat(key);
+            secondRow.getChildren().add(new PrimaryStatBox(stat));
         }
 
-        for (String skillName : defaultSkillList.keySet()) {
+        secondRow.getChildren().add(new InspirationBox(character.getInspiration(), character.getVisionElement()));
+        secondRow.getChildren().add(new ArmorClassBox(character.getArmorClass()));
+        secondRow.getChildren().add(new HitPointsBox(character.getHitPoints()));
 
-            boolean randProf = false;
-            if(Math.random()*5 > 4){
-                System.out.println("prof! "+skillName);
-                randProf = true;
-            }
-            PrimaryStat primaryStat = primaryStats.get(defaultSkillList.get(skillName));
-            skills.put(skillName, new Skill(skillName, primaryStat,randProf));
+
+        HBox thirdRow = new HBox(boxSpacing);
+        mainSheetPane.getChildren().add(thirdRow);
+
+        VBox leftPane = new VBox(boxSpacing);
+        thirdRow.getChildren().add(leftPane);
+
+        //#region saves
+        HBox savesBox = new HBox(boxSpacing);
+        leftPane.getChildren().add(savesBox);
+        for (Character.stat key : character.getPrimaryStats().keySet()) {
+            SavingThrow save = character.getSavingThrow(key);
+            savesBox.getChildren().add(new SavingThrowBox(save, character.getProficiencyBonus()));
         }
+        //#endregion saves
 
-        int maxHP = (int)(Math.random()*50) + getPrimaryStat(stat.CONSTITUTION).getModifier()*5;
-        this.hitPoints = new HitPoints(maxHP);
-        this.hitPoints.setShieldHP((int)(Math.random()*50));
-//        this.hitPoints.setElementalShield((int)(Math.random()*50), Element.DENDRO);
-    }
+        //#region skills
+        HBox skills = new HBox(boxSpacing);
+        leftPane.getChildren().add(skills);
 
-    public String getName(){
-        return name;
-    }
-    public Element getVisionElement() {
-        return visionElement;
-    }
-    public Weapon getWeapon() {
-        return weapon;
-    }
-    public Species getSpecies(){return species;}
+        VBox skillsLeft = new VBox();
+        VBox skillsRight = new VBox();
 
-    public int getWalkingSpeed(){
-        return getSpecies().getWalkingSpeed();
-    }
-    public Stamina getStamina() {
-        return stamina;
-    }
+        skills.getChildren().addAll(skillsLeft,skillsRight);
 
-    public int getProficiencyBonus() {
-        return proficiencyBonus;
-    }
+        String[] skillNames = character.getSkills().keySet().toArray(new String[character.getSkills().keySet().size()]);
+        for (int i = 0; i < skillNames.length; i++) {
+            Skill currentSkill = character.getSkill(skillNames[i]);
+            SkillBox newSkillBox = new SkillBox(
+                    currentSkill,
+                    character.getProficiencyBonus()
+            );
 
-    public LinkedHashMap<stat, PrimaryStat> getPrimaryStats() {
-        return primaryStats;
-    }
-    public PrimaryStat getPrimaryStat(stat key){
-        return primaryStats.get(key);
-    }
+            if(i < skillNames.length/2){
+                skillsLeft.getChildren().add(newSkillBox);
+            }else{
+                skillsRight.getChildren().add(newSkillBox);
+            }
+        }
+        //#endregion skills
 
-    public Inspiration getInspiration(){
-        return inspiration;
-    }
+        VBox rightPane = new VBox(boxSpacing);
+        thirdRow.getChildren().add(rightPane);
 
-    public LinkedHashMap<String, Skill> getSkills() {
-        return skills;
-    }
-    public Skill getSkill(String key){
-        return skills.get(key);
-    }
+        HBox thirdRowRight = new HBox(boxSpacing);
+        rightPane.getChildren().add(thirdRowRight);
 
-    public LinkedHashMap<stat, SavingThrow> getSavingThrows() {
-        return savingThrows;
-    }
-    public SavingThrow getSavingThrow(stat stat){
-        return savingThrows.get(stat);
-    }
-
-    public HitPoints getHitPoints() {
-        return hitPoints;
-    }
-
-    public int getArmorClass(){
-        return 10 + getPrimaryStat(stat.DEXTERITY).getModifier();
-    }
-
-    public int getInitiativeBonus(){
-        return getPrimaryStat(stat.DEXTERITY).getModifier();
+        thirdRowRight.getChildren().add(new MovementSpeedBox(character.getWalkingSpeed()));
+        thirdRowRight.getChildren().add(new InitiativeBox(character.getInitiativeBonus()));
+        thirdRowRight.getChildren().add(new StaminaBox(character.getStamina(), character.getVisionElement()));
+        thirdRowRight.getChildren().add(new ConditionsBox());
     }
 }

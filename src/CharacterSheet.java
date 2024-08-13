@@ -5,10 +5,11 @@ import UIComponents.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class CharacterSheet extends BorderPane {
 
-    public CharacterSheet(Character character, int boxSpacing) {
+    public CharacterSheet(Character character, int boxSpacing, Stage stage) {
         BorderPane mainPane = this;
 
         HBox mainSheetWrapper = new HBox();
@@ -102,6 +103,6 @@ public class CharacterSheet extends BorderPane {
         thirdRowRight.getChildren().add(new MovementSpeedBox(character.getWalkingSpeed()));
         thirdRowRight.getChildren().add(new InitiativeBox(character.getInitiativeBonus()));
         thirdRowRight.getChildren().add(new StaminaBox(character.getStamina(), character.getVisionElement()));
-        thirdRowRight.getChildren().add(new ConditionsBox());
+        thirdRowRight.getChildren().add(new ConditionsBox(stage));
     }
 }

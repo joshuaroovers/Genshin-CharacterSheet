@@ -1,10 +1,13 @@
 package UIComponents;
 
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 public class ConditionsBox extends VBox {
 
@@ -12,7 +15,7 @@ public class ConditionsBox extends VBox {
 
     private final int elementBoxSize = 50;
 
-    public ConditionsBox() {
+    public ConditionsBox(Stage stage) {
         VBox mainBox = this;
         mainBox.getStyleClass().add("conditions-box");
         mainBox.setSpacing(5);
@@ -50,10 +53,34 @@ public class ConditionsBox extends VBox {
         Label elementsLabel = new Label("Element");
         reactionsToolTipWrapper.setTop(elementsLabel);
         elementsLabel.setStyle("-fx-min-width: 100;");
-
-        HBox reactionsToolTip = new HBox();
+        //#region tooltip
+        Label reactionsToolTip = new Label("i");
         reactionsToolTipWrapper.setCenter(reactionsToolTip);
-        reactionsToolTip.setStyle("-fx-border-color: black; -fx-max-width: 15; -fx-max-height: 15;");
+        reactionsToolTip.setStyle("-fx-border-color: black; -fx-max-width: 15; -fx-max-height: 15; -fx-text-alignment: center;");
+
+        Popup popup = new Popup();
+        VBox tooltip = new VBox();
+        tooltip.setStyle("-fx-border-color: black; -fx-pref-width: 500; -fx-pref-height: 500");
+        popup.getContent().add(tooltip);
+
+
+        reactionsToolTip.setOnMouseEntered(e -> {
+            final double miscXOffset = 9;
+            final double miscYOffset = 38;
+
+            double xOffset = - tooltip.getBoundsInLocal().getWidth() - 25;
+            double yOffset = (reactionsToolTip.getBoundsInLocal().getHeight()/2) - (tooltip.getBoundsInLocal().getHeight()/2);
+
+            double x = stage.getX()+reactionsToolTip.localToScene(reactionsToolTip.getBoundsInLocal()).getMinX() + miscXOffset +xOffset;
+            double y = stage.getY()+reactionsToolTip.localToScene(reactionsToolTip.getBoundsInLocal()).getMinY() + miscYOffset +yOffset;
+
+            popup.show(reactionsToolTip,  x, y);
+        });
+
+        reactionsToolTip.setOnMouseExited(e -> {
+            popup.hide();
+        });
+        //#endregion
 
         StackPane elementsStackPane = new StackPane();
         elementsRow.getChildren().add(elementsStackPane);

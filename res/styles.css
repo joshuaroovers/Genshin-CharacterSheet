@@ -339,6 +339,18 @@
     -fx-wrap-text: true;
     -fx-effect: dropshadow(gaussian, rgb(255, 255, 255), 10, 0.5, 0.0, 0.0);
 }
+.condition-element-tooltip-label{
+    -fx-font-size: 20;
+}
+.condition-element-tooltip-image{
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+}
+.condition-element-tooltip-description-label{
+    -fx-padding: 0 0 0 10;
+    -fx-wrap-text: true;
+    -fx-max-width: 500;
+}
 /* .condition-elemental-reaction-label .text {
     -fx-stroke: white;
     -fx-stroke-width: 1;

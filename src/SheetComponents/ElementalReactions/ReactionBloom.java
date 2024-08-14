@@ -13,5 +13,7 @@ public class ReactionBloom extends Reaction{
         this.element2 = new Hydro();
         this.color = element1.getColor();
         this.colorHex = element1.getColorHex();
+
+        this.description = "Creates a Dendro-Core within 5ft of the affected creature";
     }
 }

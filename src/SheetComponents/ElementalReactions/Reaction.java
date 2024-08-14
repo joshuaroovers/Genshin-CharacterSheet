@@ -13,6 +13,8 @@ public abstract class Reaction {
     Color color;
     String colorHex;
 
+    String description;
+
     public String getName(){
         String name = this.getClass().getSimpleName();
         if(name.length() > 8){
@@ -43,6 +45,10 @@ public abstract class Reaction {
 
     public String getColorHex() {
         return colorHex;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public boolean checkForReaction(Element elem1, Element elem2){

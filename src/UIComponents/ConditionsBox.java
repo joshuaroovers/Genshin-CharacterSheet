@@ -72,8 +72,63 @@ public class ConditionsBox extends VBox {
 
         Popup popup = new Popup();
         VBox tooltip = new VBox();
-        tooltip.setStyle("-fx-border-color: black; -fx-pref-width: 500; -fx-pref-height: 500");
+        tooltip.setStyle("-fx-border-color: black; -fx-background-color: white; -fx-padding: 10");
+        tooltip.getStyleClass().add("");
         popup.getContent().add(tooltip);
+        for (Reaction reaction : ElementalReactionHelper.getAllReactions()) {
+            //#region reaction info
+            VBox reactionWrapper = new VBox();
+            tooltip.getChildren().add(reactionWrapper);
+
+            HBox basicInfoWrapper = new HBox(10);
+            reactionWrapper.getChildren().add(basicInfoWrapper);
+
+            Label reactionNameLabel = new Label(reaction.getName());
+            basicInfoWrapper.getChildren().add(reactionNameLabel);
+            reactionNameLabel.getStyleClass().add("condition-element-tooltip-label");
+
+            HBox reactionElementsWrapper = new HBox();
+            basicInfoWrapper.getChildren().add(reactionElementsWrapper);
+
+            Pane element1Image = new Pane();
+            reactionElementsWrapper.getChildren().add(element1Image);
+            element1Image.getStyleClass().addAll("element-image","condition-element-tooltip-image");
+            element1Image.setStyle("-fx-background-image: url("+ ImageHelper.getElementURL(reaction.getElement1(), ImageVariant.FLAT)+");");
+
+            Label elementPlusLabel = new Label("+");
+            reactionElementsWrapper.getChildren().add(elementPlusLabel);
+            elementPlusLabel.getStyleClass().add("condition-element-tooltip-label");
+
+            if(reaction.hasOtherElements()){
+                ArrayList<Element> otherElements = reaction.getOtherElements();
+                int otherElementsCount = otherElements.size();
+
+                for (Element element : otherElements) {
+                    otherElementsCount--;
+                    Pane elementImage = new Pane();
+                    reactionElementsWrapper.getChildren().add(elementImage);
+                    elementImage.getStyleClass().addAll("element-image","condition-element-tooltip-image");
+                    elementImage.setStyle("-fx-background-image: url("+ ImageHelper.getElementURL(element, ImageVariant.FLAT)+");");
+
+                    if(otherElementsCount > 0){
+                        Label elementSlashLabel = new Label("/");
+                        reactionElementsWrapper.getChildren().add(elementSlashLabel);
+                        elementSlashLabel.getStyleClass().add("condition-element-tooltip-label");
+                    }
+                }
+            }
+            else{
+                Pane element2Image = new Pane();
+                reactionElementsWrapper.getChildren().add(element2Image);
+                element2Image.getStyleClass().addAll("element-image","condition-element-tooltip-image");
+                element2Image.setStyle("-fx-background-image: url("+ ImageHelper.getElementURL(reaction.getElement2(), ImageVariant.FLAT)+");");
+            }
+
+            Label reactionDescriptionLabel = new Label(reaction.getDescription());
+            reactionWrapper.getChildren().add(reactionDescriptionLabel);
+            reactionDescriptionLabel.getStyleClass().add("condition-element-tooltip-description-label");
+            //#endregion
+        }
 
 
         reactionsToolTip.setOnMouseEntered(e -> {

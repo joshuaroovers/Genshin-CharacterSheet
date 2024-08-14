@@ -14,6 +14,8 @@ public class ReactionSwirl extends Reaction{
         this.otherElements = new ArrayList<>(Arrays.asList(new Cryo(), new Electro(), new Hydro(), new Pyro()));
         this.color = element1.getColor();
         this.colorHex = element1.getColorHex();
+
+        this.description = "Causes an AOE of the non-Anemo element dealing damage of that type and applying the element";
     }
 
 

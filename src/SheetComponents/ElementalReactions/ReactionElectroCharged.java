@@ -13,6 +13,8 @@ public class ReactionElectroCharged extends Reaction{
         this.element2 = new Hydro();
         this.color = element1.getColor();
         this.colorHex = element1.getColorHex();
+
+        this.description = "Deals extra Electro damage and at the end of the next turn the affected creature and anyone affected by Hydro will take this damage again.";
     }
 
     @Override

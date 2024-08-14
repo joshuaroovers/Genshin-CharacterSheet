@@ -13,5 +13,7 @@ public class ReactionCatalyze extends Reaction {
         this.element2 = new Electro();
         this.color = element1.getColor();
         this.colorHex = element1.getColorHex();
+
+        this.description = "Applies the Quickened Condition";
     }
 }

@@ -13,5 +13,7 @@ public class ReactionOverload extends Reaction{
         String color = "#FF7F9C";
         this.color = Color.valueOf(color);
         this.colorHex = color;
+
+        this.description = "Causes an AOE dealing pyro damage and can knock weak enemies prone";
     }
 }

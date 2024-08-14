@@ -12,5 +12,7 @@ public class ReactionMelt extends Reaction{
         String color = "#FFCC68";
         this.color = Color.valueOf(color);
         this.colorHex = color;
+
+        this.description = "The triggering Elemental damage adds another die to count towards the total damage";
     }
 }

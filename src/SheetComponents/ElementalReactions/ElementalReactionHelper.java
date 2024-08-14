@@ -13,6 +13,10 @@ public class ElementalReactionHelper {
             new ReactionMelt(), new ReactionOverload(), new ReactionSuperConduct(),
             new ReactionSwirl(), new ReactionVaporize()));
 
+    public static ArrayList<Reaction> getAllReactions() {
+        return allReactions;
+    }
+
     public static Reaction getReaction(Element element1, Element element2){
         Reaction reaction = null;
         if(element1.getClass() != element2.getClass()){

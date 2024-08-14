@@ -15,6 +15,8 @@ public class ReactionCrystallize extends Reaction{
         this.otherElements.addAll(Arrays.asList(new Cryo(), new Electro(), new Hydro(), new Pyro()));
         this.color = element1.getColor();
         this.colorHex = element1.getColorHex();
+
+        this.description = "Creates an Elemental Shield of the non-Geo Element type of the reaction";
     }
 
 

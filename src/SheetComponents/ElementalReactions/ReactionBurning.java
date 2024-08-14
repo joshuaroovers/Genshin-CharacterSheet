@@ -14,5 +14,7 @@ public class ReactionBurning extends Reaction{
         this.element2 = new Dendro();
         this.color = element1.getColor();
         this.colorHex = element1.getColorHex();
+
+        this.description = "Applies the Burning condition";
     }
 }

@@ -13,5 +13,7 @@ public class ReactionFreeze extends Reaction{
         this.element2 = new Hydro();
         this.color = element1.getColor();
         this.colorHex = element1.getColorHex();
+
+        this.description = "Applies the Frozen Condition";
     }
 }

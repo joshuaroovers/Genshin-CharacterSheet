@@ -13,6 +13,8 @@ public class ReactionSuperConduct extends Reaction{
         String color = "#B4B2FF";
         this.color = Color.valueOf(color);
         this.colorHex = color;
+
+        this.description = "Applies the Super-Conductor Condition";
     }
     @Override
     public String getName() {

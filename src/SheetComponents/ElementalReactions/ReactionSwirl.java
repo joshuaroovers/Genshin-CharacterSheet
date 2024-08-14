@@ -10,7 +10,11 @@ public class ReactionSwirl extends Reaction{
     private final ArrayList<Element> elements = new ArrayList<>(Arrays.asList(new Cryo(), new Electro(), new Hydro(), new Pyro()));
 
     public ReactionSwirl() {
-        this.element1 = new Anemo();
+        Element element1 = new Anemo();
+        this.element1 = element1;
+
+        this.color = element1.getColor();
+        this.colorHex = element1.getColorHex();
     }
 
     public ArrayList<Element> getElements() {

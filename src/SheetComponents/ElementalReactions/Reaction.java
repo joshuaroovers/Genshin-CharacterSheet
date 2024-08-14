@@ -1,11 +1,14 @@
 package SheetComponents.ElementalReactions;
 
 import SheetComponents.Elements.Element;
+import javafx.scene.paint.Color;
 
 public abstract class Reaction {
 
     Element element1;
     Element element2;
+    Color color;
+    String colorHex;
 
     public String getName(){
         String name =  this.getClass().getSimpleName();
@@ -24,6 +27,14 @@ public abstract class Reaction {
         return element2;
     }
 
+    public Color getColor() {
+        return color;
+    }
+
+    public String getColorHex() {
+        return colorHex;
+    }
+
     public boolean checkForReaction(Element elem1, Element elem2){
         if(hasElement(elem1) && hasElement(elem2)){
             return true;
@@ -32,8 +43,8 @@ public abstract class Reaction {
         }
     }
 
-    public boolean hasElement(Element element){
-        if(element1 == element || element2 == element){
+    public boolean hasElement(Element element){ //TODO adapt to swirl and crystallize
+        if(element1.getName().equals(element.getName()) || element2.getName().equals(element.getName())){
             return true;
         }else{
             return false;

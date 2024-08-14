@@ -7,8 +7,12 @@ import SheetComponents.Elements.Hydro;
 public class ReactionElectroCharged extends Reaction{
 
     public ReactionElectroCharged() {
-        this.element1 = new Hydro();
-        this.element2 = new Electro();
+        Element element1 = new Electro();
+
+        this.element1 = element1;
+        this.element2 = new Hydro();
+        this.color = element1.getColor();
+        this.colorHex = element1.getColorHex();
     }
 
     @Override

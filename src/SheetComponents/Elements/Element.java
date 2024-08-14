@@ -10,7 +10,11 @@ import java.util.Arrays;
 public abstract class Element implements Comparable<Element> {
     private Color color;
     private String colorHex;
-    private static ArrayList<Element> allElements = new ArrayList<Element>(Arrays.asList(new Anemo(), new Cryo(), new Dendro(), new Electro(), new Geo(), new Hydro(), new Pyro()));
+    private static ArrayList<Element> allElements = new ArrayList<>(Arrays.asList(new Anemo(), new Cryo(), new Dendro(), new Electro(), new Geo(), new Hydro(), new Pyro()));
+
+    public Element(String colorHex) {
+        setColor(colorHex);
+    }
 
     public String getName(){
         return this.getClass().getSimpleName();
@@ -24,20 +28,22 @@ public abstract class Element implements Comparable<Element> {
     public Color getColor() {
         return color;
     }
+    abstract Color getStaticColor();
 
     public String getColorHex() {
         return colorHex;
     }
+    abstract String getStaticColorHex();
 
     @Override
     public int compareTo(Element o) {
         return this.getName().compareTo(o.getName());
     }
 
-    public Reaction getElementalReaction(Element secondElement){
+    public Reaction getElementalReaction(Element secondElement){ //TODO might be unnecessary
         return ElementalReactionHelper.getReaction(this, secondElement);
     }
-    public ArrayList<Reaction> getElementalReactions(){
+    public ArrayList<Reaction> getElementalReactions(){ //TODO might be unnecessary
         return ElementalReactionHelper.getReactions(this);
     }
 

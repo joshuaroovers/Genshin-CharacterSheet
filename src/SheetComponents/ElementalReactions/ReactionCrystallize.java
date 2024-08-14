@@ -12,7 +12,11 @@ public class ReactionCrystallize extends Reaction{
 
 
     public ReactionCrystallize() {
-        this.element1 = new Geo();
+        Element element1 = new Geo();
+        this.element1 = element1;
+
+        this.color = element1.getColor();
+        this.colorHex = element1.getColorHex();
     }
 
     public ArrayList<Element> getElements() {

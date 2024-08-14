@@ -4,7 +4,19 @@ import javafx.scene.paint.Color;
 
 public class Electro extends Element{
 
+    public static final String COLOR = "#CC80FF";
+
     public Electro() {
-        this.setColor("#CC80FF");
+        super(COLOR);
+    }
+
+    @Override
+    Color getStaticColor() {
+        return Color.valueOf(COLOR);
+    }
+
+    @Override
+    String getStaticColorHex() {
+        return COLOR;
     }
 }

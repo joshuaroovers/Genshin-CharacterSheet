@@ -8,7 +8,11 @@ public class ReactionBurning extends Reaction{
 
 
     public ReactionBurning() {
-        this.element1 = new Dendro();
-        this.element2 = new Pyro();
+        Element element1 = new Pyro();
+
+        this.element1 = element1;
+        this.element2 = new Dendro();
+        this.color = element1.getColor();
+        this.colorHex = element1.getColorHex();
     }
 }

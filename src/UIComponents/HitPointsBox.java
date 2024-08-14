@@ -300,7 +300,7 @@ public class HitPointsBox extends HBox {
         elemShieldHPInput.setStyle("-fx-text-alignment: center; -fx-padding: 0;");
 
         elemShieldTypeInput = new ComboBox<Element>();
-        elemShieldTypeInput.setStyle("-fx-min-width: 30; -fx-pref-width: 30; -fx-min-height: 30; -fx-pref-height: 30; -fx-padding: 0;");
+        elemShieldTypeInput.getStyleClass().addAll("hp-tracker-element","combo-box");
         elemShieldTypeInput.setVisibleRowCount(4);
         elemShieldTypeInput.getItems().addAll(new Pyro(), new Hydro(), new Cryo(), new Electro());
 

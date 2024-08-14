@@ -9,9 +9,9 @@ public class ElementalReactionHelper {
 
     private static ArrayList<Reaction> allReactions = new ArrayList<>(Arrays.asList( //TODO temporary removed crystallize and swirl cuz of a nullpointer with hasElement in Reaction
             new ReactionBloom(), new ReactionBurning(), new ReactionCatalyze(),
-            /*new ReactionCrystallize(),*/ new ReactionElectroCharged(), new ReactionFreeze(),
+            new ReactionCrystallize(), new ReactionElectroCharged(), new ReactionFreeze(),
             new ReactionMelt(), new ReactionOverload(), new ReactionSuperConduct(),
-            /*new ReactionSwirl(),*/ new ReactionVaporize()));
+            new ReactionSwirl(), new ReactionVaporize()));
 
     public static Reaction getReaction(Element element1, Element element2){
         Reaction reaction = null;
@@ -33,7 +33,6 @@ public class ElementalReactionHelper {
         for (Reaction reaction : allReactions) {
             System.out.println("checking reaction for: "+element.getName()+" for: "+reaction.getName()+" "+reaction.hasElement(element));
             if(reaction.hasElement(element)){
-                System.out.println("reaction found!: "+reaction.getName());
                 reactions.add(reaction);
             }
         }

@@ -16,6 +16,6 @@ public class ReactionSuperConduct extends Reaction{
     }
     @Override
     public String getName() {
-        return "Super-Conduct";
+        return "Super Conduct";
     }
 }

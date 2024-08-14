@@ -8,13 +8,17 @@ import SheetComponents.Elements.Geo;
 import UIComponents.util.ImageHelper;
 import UIComponents.util.ImageVariant;
 import javafx.beans.value.ChangeListener;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class ConditionsBox extends VBox {
@@ -22,6 +26,7 @@ public class ConditionsBox extends VBox {
     private final String conditionsLabel = "Conditions";
 
     private final int elementBoxSize = 50;
+    private final Button clearButton;
     private final StackPane elementSelector1Stack;
     private final ComboBox<Element> elementSelector1;
     private final HBox elementDisplay1;
@@ -48,21 +53,12 @@ public class ConditionsBox extends VBox {
         //#endregion
 
         //#region elements
-        StackPane elementsContainer = new StackPane();
+        HBox elementsContainer = new HBox(10);
         mainBox.getChildren().add(elementsContainer);
         elementsContainer.setStyle("-fx-border-color: black;");
 
-        VBox elementLabelWrapper = new VBox();
-        elementsContainer.getChildren().add(elementLabelWrapper);
-
-
-
-
-        HBox elementsRow = new HBox();
-        elementsContainer.getChildren().add(elementsRow);
-
         BorderPane reactionsToolTipWrapper = new BorderPane();
-        elementsRow.getChildren().add(reactionsToolTipWrapper);
+        elementsContainer.getChildren().add(reactionsToolTipWrapper);
         reactionsToolTipWrapper.setStyle("-fx-min-width: 65; -fx-max-width: 65; -fx-alignment: center"); //this should size the with to the label width BUT NO so hardcoded it is
 
         Label elementsLabel = new Label("Element");
@@ -72,7 +68,7 @@ public class ConditionsBox extends VBox {
         //#region tooltip
         Label reactionsToolTip = new Label("i");
         reactionsToolTipWrapper.setCenter(reactionsToolTip);
-        reactionsToolTip.setStyle("-fx-border-color: black; -fx-max-width: 15; -fx-max-height: 15; -fx-text-alignment: center;");
+        reactionsToolTip.setStyle("-fx-border-color: black; -fx-border-radius: 7; -fx-padding: 0 5 0 5; -fx-max-width: 15; -fx-max-height: 15; -fx-text-alignment: center;");
 
         Popup popup = new Popup();
         VBox tooltip = new VBox();
@@ -90,7 +86,7 @@ public class ConditionsBox extends VBox {
             double x = stage.getX()+reactionsToolTip.localToScene(reactionsToolTip.getBoundsInLocal()).getMinX() + miscXOffset +xOffset;
             double y = stage.getY()+reactionsToolTip.localToScene(reactionsToolTip.getBoundsInLocal()).getMinY() + miscYOffset +yOffset;
 
-            popup.show(reactionsToolTip,  x, y);
+            popup.show(reactionsToolTip,  x, y); //TODO misaligned on first view
         });
 
         reactionsToolTip.setOnMouseExited(e -> {
@@ -99,25 +95,21 @@ public class ConditionsBox extends VBox {
         //#endregion
 
         StackPane elementsStackPane = new StackPane();
-        elementsRow.getChildren().add(elementsStackPane);
+        elementsContainer.getChildren().add(elementsStackPane);
+        elementsStackPane.setStyle("-fx-alignment: center;");
 
         HBox elementWrapper = new HBox(5);
         elementsStackPane.getChildren().add(elementWrapper);
         elementWrapper.setStyle("-fx-alignment: center;");
 
-        HBox elementSelectorWrapper = new HBox(10);
-        elementWrapper.getChildren().add(elementSelectorWrapper);
-        elementSelectorWrapper.setStyle("-fx-pref-width: 9999; -fx-alignment: center; -fx-padding: 0 30 0 0;");
-
         //#region selector1
         elementSelector1Stack = new StackPane();
-        elementSelectorWrapper.getChildren().add(elementSelector1Stack);
+        elementWrapper.getChildren().add(elementSelector1Stack);
 
         elementDisplay1 = new HBox();
         elementSelector1Stack.getChildren().add(elementDisplay1);
         elementDisplay1.getStyleClass().addAll("condition-element", "element-image");
         elementDisplay1.managedProperty().bind(elementDisplay1.visibleProperty());
-//        elementDisplay1.setVisible(false);
 
         elementSelector1 = new ComboBox<>();
         elementSelector1Stack.getChildren().add(elementSelector1);
@@ -138,9 +130,12 @@ public class ConditionsBox extends VBox {
         });
 
         for (Element element : Element.getAll()) {
-            if(!(element.getName().equals(Geo.class.getSimpleName())) && !(element.getName().equals(Anemo.class.getSimpleName())) ){
-                elementSelector1.getItems().add(element);
+            ArrayList<Element> items = new ArrayList<>();
+            if(!(element.getClass().equals(Geo.class)) && !(element.getClass().equals(Anemo.class)) ){
+                items.add(element);
             }
+            Collections.sort(items);
+            elementSelector1.getItems().addAll(items);
         }
 
 
@@ -213,7 +208,7 @@ public class ConditionsBox extends VBox {
 
         //#region selector2
         elementSelector2Stack = new StackPane();
-        elementSelectorWrapper.getChildren().add(elementSelector2Stack);
+        elementWrapper.getChildren().add(elementSelector2Stack);
         elementSelector2Stack.managedProperty().bind(elementSelector2Stack.visibleProperty());
         elementSelector2Stack.setVisible(false);
 
@@ -305,20 +300,47 @@ public class ConditionsBox extends VBox {
         });
         //#endregion
 
-        reactionLabel = new Label("Overload");   //TODO when a reaction occurs also show an X button to clear it all
+        //#endregion
+
+        reactionLabel = new Label("Error");
         elementsStackPane.getChildren().add(reactionLabel);
         reactionLabel.getStyleClass().add("condition-elemental-reaction-label");
         reactionLabel.setVisible(false);
-        //#endregion
+
+
+        HBox clearButtonWrapper = new HBox();
+        elementsContainer.getChildren().add(clearButtonWrapper);
+        clearButtonWrapper.getStyleClass().addAll("condition-elements-clear-wrapper");
+
+        clearButton = new Button("X");
+        clearButtonWrapper.getChildren().add(clearButton);
+        clearButton.setStyle("-fx-border-color: black; -fx-padding: 0 5 0 5");
+        clearButton.managedProperty().bind(clearButton.visibleProperty());
+        clearButton.setVisible(false);
+
+        clearButton.setOnAction(e -> {
+            System.out.println("clear button pressed!");
+            clearElements();
+        });
+
+
     }
 
     private void clearElements(){
+        clearButton.setVisible(false);
+
         elementSelector1.valueProperty().set(null);
         elementDisplay1.setStyle("-fx-background-image: none;");
+        elementDisplay1.setDisable(false);
+
         elementSelector2Stack.setVisible(false);
         elementSelector2.valueProperty().set(null);
         elementDisplay2.setStyle("-fx-background-image: none;");
+        elementDisplay2.setDisable(false);
+
         reactionLabel.setVisible(false);
+        reactionLabel.setText("Error");
+        reactionLabel.setStyle("");
     }
 
 
@@ -326,9 +348,11 @@ public class ConditionsBox extends VBox {
         Element element = elementSelector1.getValue();
         if(element != null){
 
+            clearButton.setVisible(true);
+
             elementDisplay1.setVisible(true);
             elementDisplay1.setStyle("-fx-background-image: url("+ ImageHelper.getElementURL(element, ImageVariant.FLAT)+");");
-//            elementDisplay1.setDisable(true);
+            elementDisplay1.setDisable(true);
             elementSelector1.setVisible(false);
 
             elementSelector2Stack.setVisible(true);
@@ -337,15 +361,19 @@ public class ConditionsBox extends VBox {
 
             System.out.println("filling selector2"); //TODO currently gets triggered twice
             elementSelector2.getItems().clear();
+            ArrayList<Element> items = new ArrayList<>();
             for (Reaction reaction : ElementalReactionHelper.getReactions(element)) {
                 Element reactionElement;
-                if(reaction.getElement1().getName().equals(element.getName())){
+                if(reaction.getElement1().getClass().equals(element.getClass())){
                     reactionElement = reaction.getElement2();
                 }else{
                     reactionElement = reaction.getElement1();
                 }
-                elementSelector2.getItems().add(reactionElement);
+                items.add(reactionElement);
             }
+            Collections.sort(items);
+            elementSelector2.getItems().addAll(items);
+
         }
 
 
@@ -355,13 +383,16 @@ public class ConditionsBox extends VBox {
         Element element2 = elementSelector2.getValue();
 
         elementDisplay2.setVisible(true);
-        elementDisplay2.setStyle("-fx-background-image: url("+ ImageHelper.getElementURL(element2, ImageVariant.FLAT)+");");
+        elementDisplay2.setStyle("-fx-background-image: url("+ ImageHelper.getElementURL(element2, ImageVariant.FLAT)+");");            elementDisplay1.setDisable(true);
+        elementDisplay2.setDisable(true);
         elementSelector2.setVisible(false);
         reactionLabel.setVisible(true);
 
         Reaction reaction = ElementalReactionHelper.getReaction(element1, element2);
         reactionLabel.setText(reaction.getName());
-        System.out.println(reaction.getColorHex());
-        reactionLabel.setStyle("-fx-text-fill: "+reaction.getColorHex()+";");
+
+        Color bC = reaction.getColor().brighter().brighter().brighter().desaturate().desaturate();
+        reactionLabel.setStyle("-fx-text-fill: "+reaction.getColorHex()+"; -fx-effect: dropshadow(gaussian, rgb("+bC.getRed()*255+","+bC.getGreen()*255+","+bC.getBlue()*255+"), 10, 0.7, 0.0, 0.0);");
+
     }
 }

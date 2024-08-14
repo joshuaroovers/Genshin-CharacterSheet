@@ -17,6 +17,6 @@ public class ReactionElectroCharged extends Reaction{
 
     @Override
     public String getName() {
-        return "Electro-Charged";
+        return "Electro Charged";
     }
 }

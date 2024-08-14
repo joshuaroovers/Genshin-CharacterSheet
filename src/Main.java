@@ -106,7 +106,7 @@ public class Main extends Application{
         Scene scene = new Scene(tempMain, 12*100+11*boxSpacing, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.26");
+        stage.setTitle("Genshin CharacterSheet V0.27");
         stage.setScene(scene);
         stage.show();
     }

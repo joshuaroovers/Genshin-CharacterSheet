@@ -320,6 +320,10 @@
     -fx-pref-width: double-container-width;
     -fx-border-color: black;
 }
+.condition-selector .combo-box-popup .list-view, .condition-selector .combo-box-popup .list-cell {
+    -fx-pref-width: 120;
+}
+
 .condition-element-selector .combo-box-popup .list-view, .condition-element-selector .combo-box-popup .list-cell {
     -fx-pref-width: 50;
     -fx-min-width: 50;

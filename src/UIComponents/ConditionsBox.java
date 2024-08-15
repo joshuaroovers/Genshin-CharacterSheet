@@ -10,8 +10,6 @@ import UIComponents.util.ImageHelper;
 import UIComponents.util.ImageVariant;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -21,17 +19,17 @@ import javafx.util.Callback;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
 
 public class ConditionsBox extends VBox {
 
     private ArrayList<Condition> conditions = new ArrayList<>();
 
-    private final String conditionsLabel = "Conditions";
-    private final HBox conditionsContainer;
+    private final String conditionsLabelText = "Conditions";
+    private final FlowPane conditionsContainer;
     private ComboBox<Condition> conditionSelector;
     private final Label addConditionButton;
 
+    private final String elementsLabelText = "Element";
     private final Button clearButton;
     private final StackPane elementSelector1Stack;
     private final ComboBox<Element> elementSelector1;
@@ -44,17 +42,19 @@ public class ConditionsBox extends VBox {
     public ConditionsBox(Stage stage) {
         VBox mainBox = this;
         mainBox.getStyleClass().add("conditions-box");
-        mainBox.setSpacing(5);
+        mainBox.setSpacing(2);
 
-        Label mainLabel = new Label(conditionsLabel);
+        Label mainLabel = new Label(conditionsLabelText);
         mainBox.getChildren().add(mainLabel);
+        mainLabel.setStyle("-fx-padding: 0 0 0 5;");
 
         //#region conditions
         conditions.addAll(Condition.getAllConditions());
 
-        conditionsContainer = new HBox();
+        conditionsContainer = new FlowPane();
         mainBox.getChildren().add(conditionsContainer);
-        conditionsContainer.setStyle("-fx-border-color: black;");
+
+        conditionsContainer.setStyle("-fx-border-color: black; -fx-padding: 0 0 0 5;");
 
         //#regino conditionSelector
 
@@ -86,22 +86,33 @@ public class ConditionsBox extends VBox {
         //#endregion
 
         //#region elements
-        HBox elementsContainer = new HBox(10);
+        HBox elementsContainer = new HBox(5);
         mainBox.getChildren().add(elementsContainer);
-        elementsContainer.setStyle("-fx-border-color: black;");
+        elementsContainer.setStyle("-fx-border-color: black; -fx-padding: 0 0 0 5;");
 
-        BorderPane reactionsToolTipWrapper = new BorderPane();
-        elementsContainer.getChildren().add(reactionsToolTipWrapper);
-        reactionsToolTipWrapper.setStyle("-fx-min-width: 65; -fx-max-width: 65; -fx-alignment: center"); //this should size the with to the label width BUT NO so hardcoded it is
+        BorderPane conditionElementLeftWrapper = new BorderPane();
+        elementsContainer.getChildren().add(conditionElementLeftWrapper);
+        conditionElementLeftWrapper.setStyle("-fx-min-width: 70; -fx-max-width: 70; -fx-alignment: center;"); //this should size the with to the label width BUT NO so hardcoded it is
 
-        Label elementsLabel = new Label("Element");
-        reactionsToolTipWrapper.setTop(elementsLabel);
-        elementsLabel.setStyle("-fx-min-width: 100;");
+        Label elementsLabel = new Label(elementsLabelText);
+        conditionElementLeftWrapper.setTop(elementsLabel);
+        elementsLabel.setStyle("-fx-text-alignment: center; -fx-pref-width: 9999;");
 
         //#region tooltip
+        StackPane reactionsToolTipStack = new StackPane();
+        conditionElementLeftWrapper.setCenter(reactionsToolTipStack);
+
+        Pane reactionsToolTipBacking = new Pane();
+        reactionsToolTipStack.getChildren().add(reactionsToolTipBacking);
+        reactionsToolTipBacking.setStyle("-fx-border-color: black; -fx-border-radius: 10; -fx-max-width: 20; -fx-max-height: 20;");
+
+        HBox reactionsToolTipWrapper = new HBox();
+        reactionsToolTipStack.getChildren().add(reactionsToolTipWrapper);
+        reactionsToolTipWrapper.setStyle("-fx-alignment: center;");
+
         Label reactionsToolTip = new Label("i");
-        reactionsToolTipWrapper.setCenter(reactionsToolTip);
-        reactionsToolTip.setStyle("-fx-border-color: black; -fx-border-radius: 7; -fx-padding: 0 5 0 5; -fx-max-width: 15; -fx-max-height: 15; -fx-text-alignment: center;");
+        reactionsToolTipWrapper.getChildren().add(reactionsToolTip);
+        reactionsToolTip.setStyle("-fx-text-alignment: center;");
 
         Popup popup = new Popup();
         VBox tooltip = new VBox();
@@ -168,7 +179,7 @@ public class ConditionsBox extends VBox {
             final double miscXOffset = 9;
             final double miscYOffset = 38;
 
-            double xOffset = - tooltip.getBoundsInLocal().getWidth() - 25;
+            double xOffset = - tooltip.getBoundsInLocal().getWidth() - 30;
             double yOffset = (reactionsToolTip.getBoundsInLocal().getHeight()/2) - (tooltip.getBoundsInLocal().getHeight()/2);
 
             double x = stage.getX()+reactionsToolTip.localToScene(reactionsToolTip.getBoundsInLocal()).getMinX() + miscXOffset +xOffset;
@@ -454,6 +465,7 @@ public class ConditionsBox extends VBox {
         //TODO this feels so incredibly gross but it does work so.. (cuz it won't let me consistantly update the combobox items and the only way to do so is by throwing away the old one and making a new one)
         conditionSelector = new ComboBox<>();
         conditionsContainer.getChildren().add(conditionSelector);
+        conditionSelector.getStyleClass().add("condition-selector");
         conditionSelector.getItems().addAll(conditions);
         conditionSelector.managedProperty().bind(conditionSelector.visibleProperty());
         conditionSelector.setVisible(false);
@@ -462,7 +474,7 @@ public class ConditionsBox extends VBox {
             private final Label condition;
             {
                 setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-//                        setStyle("-fx-padding: 0;");
+                setStyle("-fx-padding: 2;");
                 condition = new Label();
             }
 
@@ -512,6 +524,15 @@ public class ConditionsBox extends VBox {
                 }
             }
         });
+        conditionSelector.focusedProperty().addListener(new ChangeListener<Boolean>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){
+                    conditionSelector.setVisible(false);
+                }
+            }
+        });
     }
     private void addCondition(Condition condition){
         conditions.remove(condition);
@@ -527,12 +548,23 @@ public class ConditionsBox extends VBox {
 
         Label newConditionLabel = new Label(condition.getName());
         newConditionLabelStack.getChildren().add(newConditionLabel);
+        newConditionLabel.setStyle("-fx-padding: 0 10 0 0;");
         Tooltip tooltip = new Tooltip(condition.getDescription());
         Tooltip.install(newConditionLabel, tooltip);
 
-        Label deleteConditionButton = new Label("X");
+        Label deleteConditionButton = new Label("x");
         newConditionLabelStack.getChildren().add(deleteConditionButton);
         deleteConditionButton.setStyle("-fx-text-fill: red;");
+        deleteConditionButton.managedProperty().bind(deleteConditionButton.visibleProperty());
+        deleteConditionButton.setVisible(false);
+
+        newConditionLabelStack.setOnMouseEntered(e ->{
+            deleteConditionButton.setVisible(true);
+        });
+
+        newConditionLabelStack.setOnMouseExited(e ->{
+            deleteConditionButton.setVisible(false);
+        });
 
         deleteConditionButton.setOnMouseClicked(e -> {
             conditionsContainer.getChildren().remove(newConditionLabelStack);

@@ -14,7 +14,7 @@ public class ReactionSuperConduct extends Reaction{
         this.color = Color.valueOf(color);
         this.colorHex = color;
 
-        this.description = "Applies the Super-Conductor Condition";
+        this.description = "Causes an AOE dealing Cryo damage and applying the Superconductor Condition";
     }
     @Override
     public String getName() {

@@ -10,7 +10,7 @@ public abstract class Reaction {
 
     private static ArrayList<Reaction> allReactions = new ArrayList<>(Arrays.asList(
             new ReactionBloom(), new ReactionBurning(), new ReactionCatalyze(),
-            new ReactionCrystallize(), new ReactionElectroCharged(), new ReactionFreeze(),
+            new ReactionCrystallize(), new ReactionElectroCharged(), new ReactionFrozen(),
             new ReactionMelt(), new ReactionOverload(), new ReactionSuperConduct(),
             new ReactionSwirl(), new ReactionVaporize()));
 

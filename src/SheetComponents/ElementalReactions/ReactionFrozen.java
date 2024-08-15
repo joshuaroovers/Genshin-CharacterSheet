@@ -4,9 +4,9 @@ import SheetComponents.Elements.Cryo;
 import SheetComponents.Elements.Element;
 import SheetComponents.Elements.Hydro;
 
-public class ReactionFreeze extends Reaction{
+public class ReactionFrozen extends Reaction{
 
-    public ReactionFreeze() {
+    public ReactionFrozen() {
         Element element1 = new Cryo();
 
         this.element1 = element1;

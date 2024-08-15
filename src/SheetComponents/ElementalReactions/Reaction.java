@@ -4,8 +4,19 @@ import SheetComponents.Elements.Element;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Reaction {
+
+    private static ArrayList<Reaction> allReactions = new ArrayList<>(Arrays.asList(
+            new ReactionBloom(), new ReactionBurning(), new ReactionCatalyze(),
+            new ReactionCrystallize(), new ReactionElectroCharged(), new ReactionFreeze(),
+            new ReactionMelt(), new ReactionOverload(), new ReactionSuperConduct(),
+            new ReactionSwirl(), new ReactionVaporize()));
+
+    public static ArrayList<Reaction> getAllReactions() {
+        return allReactions;
+    }
 
     Element element1;
     Element element2;

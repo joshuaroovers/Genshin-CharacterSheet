@@ -1,5 +1,6 @@
 package UIComponents;
 
+import SheetComponents.Conditions.Condition;
 import SheetComponents.ElementalReactions.ElementalReactionHelper;
 import SheetComponents.ElementalReactions.Reaction;
 import SheetComponents.Elements.Anemo;
@@ -8,6 +9,7 @@ import SheetComponents.Elements.Geo;
 import UIComponents.util.ImageHelper;
 import UIComponents.util.ImageVariant;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -23,9 +25,13 @@ import java.util.Objects;
 
 public class ConditionsBox extends VBox {
 
-    private final String conditionsLabel = "Conditions";
+    private ArrayList<Condition> conditions = new ArrayList<>();
 
-    private final int elementBoxSize = 50;
+    private final String conditionsLabel = "Conditions";
+    private final HBox conditionsContainer;
+    private ComboBox<Condition> conditionSelector;
+    private final Label addConditionButton;
+
     private final Button clearButton;
     private final StackPane elementSelector1Stack;
     private final ComboBox<Element> elementSelector1;
@@ -44,12 +50,39 @@ public class ConditionsBox extends VBox {
         mainBox.getChildren().add(mainLabel);
 
         //#region conditions
-        HBox conditionsContainer = new HBox();
+        conditions.addAll(Condition.getAllConditions());
+
+        conditionsContainer = new HBox();
         mainBox.getChildren().add(conditionsContainer);
         conditionsContainer.setStyle("-fx-border-color: black;");
-        //TODO make a floating ChoiceBox? using a stackpane (hopefully) and have it switch with a smaller display list (just like shield inputs)
-        Label placeHolderLabel = new Label("Burning, Frozen, Quickened");
-        conditionsContainer.getChildren().add(placeHolderLabel);
+
+        //#regino conditionSelector
+
+        createConditionsSelector();
+
+        //#endregion
+
+        addConditionButton = new Label("+");
+        conditionsContainer.getChildren().add(addConditionButton);
+
+        addConditionButton.setOnMouseClicked(e -> {
+            conditionSelector.setVisible(true);
+
+            conditionSelector.requestFocus();
+            conditionSelector.show();
+            conditionSelector.hide(); //without this it misplaces the dropdown when shown for the first time
+            conditionSelector.show();
+        });
+
+        conditionSelector.focusedProperty().addListener(new ChangeListener<Boolean>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){
+                    conditionSelector.setVisible(false);
+                }
+            }
+        });
         //#endregion
 
         //#region elements
@@ -75,7 +108,7 @@ public class ConditionsBox extends VBox {
         tooltip.setStyle("-fx-border-color: black; -fx-background-color: white; -fx-padding: 10");
         tooltip.getStyleClass().add("");
         popup.getContent().add(tooltip);
-        for (Reaction reaction : ElementalReactionHelper.getAllReactions()) {
+        for (Reaction reaction : Reaction.getAllReactions()) {
             //#region reaction info
             VBox reactionWrapper = new VBox();
             tooltip.getChildren().add(reactionWrapper);
@@ -183,6 +216,16 @@ public class ConditionsBox extends VBox {
             elementSelector1.hide(); //without this it misplaces the dropdown when shown for the first time
             elementSelector1.show();
         });
+        elementSelector1.focusedProperty().addListener(new ChangeListener<Boolean>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){
+                    elementSelector1.setVisible(false);
+                    elementDisplay1.setVisible(true);
+                }
+            }
+        });
 
         for (Element element : Element.getAll()) {
             ArrayList<Element> items = new ArrayList<>();
@@ -216,7 +259,6 @@ public class ConditionsBox extends VBox {
                     Tooltip tooltip = new Tooltip(item.toString());
                     Tooltip.install(element, tooltip);
                     setGraphic(element);
-                    selectedFirstElement();
                 }
             }
         });
@@ -257,6 +299,14 @@ public class ConditionsBox extends VBox {
                 };
             }
         });
+        elementSelector1.valueProperty().addListener(new ChangeListener<Element>() {
+            @Override
+            public void changed(ObservableValue<? extends Element> observable, Element oldValue, Element newValue) {
+                if(newValue != null){
+                    selectedFirstElement();
+                }
+            }
+        });
         //#endregion
 
         //#endregion
@@ -288,7 +338,16 @@ public class ConditionsBox extends VBox {
             elementSelector2.hide(); //without this it misplaces the dropdown when shown for the first time
             elementSelector2.show();
         });
+        elementSelector2.focusedProperty().addListener(new ChangeListener<Boolean>(){
 
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){
+                    elementSelector2.setVisible(false);
+                    elementDisplay2.setVisible(true);
+                }
+            }
+        });
 
         //#region selector2 combobox
         elementSelector2.setButtonCell(new ListCell<Element>(){
@@ -312,7 +371,6 @@ public class ConditionsBox extends VBox {
                     Tooltip tooltip = new Tooltip(item.toString());
                     Tooltip.install(element, tooltip);
                     setGraphic(element);
-                    selectedSecondElement(); //TODO gets called twice
                 }
             }
         });
@@ -353,6 +411,15 @@ public class ConditionsBox extends VBox {
                 };
             }
         });
+        elementSelector2.valueProperty().addListener(new ChangeListener<Element>() {
+            @Override
+            public void changed(ObservableValue<? extends Element> observable, Element oldValue, Element newValue) {
+                if(newValue != null){
+                    selectedSecondElement();
+                }
+            }
+        });
+
         //#endregion
 
         //#endregion
@@ -360,6 +427,7 @@ public class ConditionsBox extends VBox {
         reactionLabel = new Label("Error");
         elementsStackPane.getChildren().add(reactionLabel);
         reactionLabel.getStyleClass().add("condition-elemental-reaction-label");
+        reactionLabel.managedProperty().bind(reactionLabel.visibleProperty());
         reactionLabel.setVisible(false);
 
 
@@ -378,7 +446,114 @@ public class ConditionsBox extends VBox {
             clearElements();
         });
 
+        //#endregion
 
+    }
+
+    private void createConditionsSelector(){
+        //TODO this feels so incredibly gross but it does work so.. (cuz it won't let me consistantly update the combobox items and the only way to do so is by throwing away the old one and making a new one)
+        conditionSelector = new ComboBox<>();
+        conditionsContainer.getChildren().add(conditionSelector);
+        conditionSelector.getItems().addAll(conditions);
+        conditionSelector.managedProperty().bind(conditionSelector.visibleProperty());
+        conditionSelector.setVisible(false);
+
+        conditionSelector.setButtonCell(new ListCell<Condition>(){
+            private final Label condition;
+            {
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+//                        setStyle("-fx-padding: 0;");
+                condition = new Label();
+            }
+
+            @Override
+            protected void updateItem(Condition item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setGraphic(null);
+                } else {
+                    condition.setText(item.getName());
+                    Tooltip tooltip = new Tooltip(item.getDescription());
+                    Tooltip.install(condition, tooltip);
+                    setGraphic(condition);
+                }
+            }
+        });
+        conditionSelector.setCellFactory(new Callback<ListView<Condition>, ListCell<Condition>>() {
+            @Override
+            public ListCell<Condition> call(ListView<Condition> param) {
+                return new ListCell<Condition>() {
+                    private final Label condition;
+                    {
+                        setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+//                        setStyle("-fx-padding: 0;");
+                        condition = new Label();
+                    }
+                    @Override
+                    protected void updateItem(Condition item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setGraphic(null);
+                        } else {
+                            condition.setText(item.getName());
+                            Tooltip tooltip = new Tooltip(item.getDescription());
+                            Tooltip.install(condition, tooltip);
+                            setGraphic(condition);
+                        }
+                    }
+                };
+            }
+        });
+        conditionSelector.valueProperty().addListener(new ChangeListener<Condition>() {
+            @Override
+            public void changed(ObservableValue<? extends Condition> observable, Condition oldValue, Condition newValue) {
+                if(conditions.contains(newValue)){
+                    addCondition(newValue); //TODO gives an error?
+                }
+            }
+        });
+    }
+    private void addCondition(Condition condition){
+        conditions.remove(condition);
+
+        //TODO this feels so incredibly gross but it does work so..
+        conditionsContainer.getChildren().remove(conditionSelector);
+        createConditionsSelector();
+        //TODO
+
+        StackPane newConditionLabelStack = new StackPane();
+        conditionsContainer.getChildren().add(newConditionLabelStack);
+        newConditionLabelStack.setStyle("-fx-alignment: center-right");
+
+        Label newConditionLabel = new Label(condition.getName());
+        newConditionLabelStack.getChildren().add(newConditionLabel);
+        Tooltip tooltip = new Tooltip(condition.getDescription());
+        Tooltip.install(newConditionLabel, tooltip);
+
+        Label deleteConditionButton = new Label("X");
+        newConditionLabelStack.getChildren().add(deleteConditionButton);
+        deleteConditionButton.setStyle("-fx-text-fill: red;");
+
+        deleteConditionButton.setOnMouseClicked(e -> {
+            conditionsContainer.getChildren().remove(newConditionLabelStack);
+            removeCondition(condition);
+        });
+
+
+        conditionSelector.toFront();
+        addConditionButton.toFront();
+    }
+    private void removeCondition(Condition condition){
+        conditions.add(condition);
+        Collections.sort(conditions);
+
+        //TODO this feels so incredibly gross but it does work so..
+        conditionsContainer.getChildren().remove(conditionSelector);
+        createConditionsSelector();
+        //TODO
+
+        conditionSelector.toFront();
+        addConditionButton.toFront();
     }
 
     private void clearElements(){
@@ -397,8 +572,6 @@ public class ConditionsBox extends VBox {
         reactionLabel.setText("Error");
         reactionLabel.setStyle("");
     }
-
-
     private void selectedFirstElement(){
         Element element = elementSelector1.getValue();
         if(element != null){

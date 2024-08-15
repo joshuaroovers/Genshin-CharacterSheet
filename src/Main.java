@@ -2,6 +2,7 @@ import UIComponents.util.IOController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -100,13 +101,14 @@ public class Main extends Application{
 //        }
 
 
+
         //#endregion
 
 
         Scene scene = new Scene(tempMain, 12*100+11*boxSpacing, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.28");
+        stage.setTitle("Genshin CharacterSheet V0.29");
         stage.setScene(scene);
         stage.show();
     }

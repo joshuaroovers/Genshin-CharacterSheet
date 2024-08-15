@@ -305,7 +305,7 @@ public class HitPointsBox extends HBox {
         elemShieldTypeInput.getItems().addAll(new Pyro(), new Hydro(), new Cryo(), new Electro());
 
         //#region combobox nightmare things
-         elemShieldTypeInput.setButtonCell(new ListCell<Element>() {
+        elemShieldTypeInput.setButtonCell(new ListCell<Element>() {
                     private final StackPane shield = new StackPane();
                     {
                         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

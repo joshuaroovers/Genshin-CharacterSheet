@@ -1,0 +1,155 @@
+package SheetComponents;
+
+import SheetComponents.Actions.Attacks.ElementalBursts.ElementalBurst;
+import SheetComponents.Actions.Attacks.ElementalBursts.ElementalBurstDestructive;
+import SheetComponents.Actions.Attacks.ElementalSkills.ElementalSkill;
+import SheetComponents.Actions.Attacks.ElementalSkills.ElementalSkillSummonTaunt;
+import SheetComponents.Elements.*;
+import SheetComponents.Lineage.*;
+import SheetComponents.Weapons.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+
+public class Character {
+
+    private String name;
+
+    private Element visionElement;
+    private Weapon weapon;
+    private Lineage lineage;
+
+    private Stamina stamina;
+
+    private LinkedHashMap<Stat, PrimaryStat> primaryStats;
+
+    private final int proficiencyBonus =  3;
+    private Inspiration inspiration;
+
+    private LinkedHashMap<Stat, SavingThrow> savingThrows;
+
+    private LinkedHashMap<String, Skill> skills;
+
+    private HitPoints hitPoints;
+
+    private ElementalBurst elementalBurst;
+    private ElementalSkill elementalSkill;
+
+    public Character(LinkedHashMap<String, Stat> defaultSkillList) {
+            String[] randomFirstName = {"Novor","Beetle","Kaveh","Luca","Marls","Ghislaine","Elkana","Seok", "Ard", "Joshua", "Ethari", "Xeyllosh"};
+            String[] randomLastName = {"Kamisato", "Shogun", "","","","","","","",""};
+        this.name = randomFirstName[(int)(Math.random()*randomFirstName.length)] +" "+ randomLastName[(int)(Math.random()*randomLastName.length)];
+            ArrayList<Element> randomElement = new ArrayList<>(Arrays.asList(new Anemo(), new Cryo(), new Dendro(), new Electro(), new Geo(), new Hydro(), new Pyro()));
+        this.visionElement = randomElement.get((int)(Math.random()*7));
+
+            Weapon[] randomWeapon = {new Sword(), new Claymore(), new Polearm(), new Bow(getVisionElement()), new Catalyst(getVisionElement())};
+        this.weapon = randomWeapon[(int)(Math.random()*5)];
+            Lineage[] randomSpecies = {new Human(), new Anthro(), new Adeptus(), new Yokai(), new Fontainian(), new Khaenriahn() };
+        this.lineage = randomSpecies[(int)(Math.random()*6)];
+
+        this.stamina = new Stamina();
+        stamina.adjustCurrentStamina( -(int)(Math.random()*100), 0);
+
+        this.primaryStats = new LinkedHashMap<>();
+        this.savingThrows = new LinkedHashMap<>();
+        this.skills = new LinkedHashMap<>();
+
+        this.inspiration = new Inspiration(false);
+
+        for (Stat value : Stat.values()) {
+            int randScore = (int)(Math.random()*6)+1 + (int)(Math.random()*6)+1 + (int)(Math.random()*6)+1 + (int)(Math.random()*6)+1;
+
+            primaryStats.put(value, new PrimaryStat(value.name(), randScore));
+
+            boolean saveProf = false;
+            if((Math.random() < 0.5)){
+                saveProf = true;
+                System.out.println("prof! "+value.name()+" saves");
+            }
+            savingThrows.put(value, new SavingThrow(getPrimaryStat(value),saveProf));
+        }
+
+        for (String skillName : defaultSkillList.keySet()) {
+
+            boolean randProf = false;
+            if(Math.random()*5 > 4){
+                System.out.println("prof! "+skillName);
+                randProf = true;
+            }
+            PrimaryStat primaryStat = primaryStats.get(defaultSkillList.get(skillName));
+            skills.put(skillName, new Skill(skillName, primaryStat,randProf));
+        }
+
+        int maxHP = (int)(Math.random()*50) + getPrimaryStat(Stat.CONSTITUTION).getModifier()*5;
+        this.hitPoints = new HitPoints(maxHP);
+        this.hitPoints.setShieldHP((int)(Math.random()*50));
+
+        this.elementalBurst = new ElementalBurstDestructive(getVisionElement());
+        this.elementalSkill = new ElementalSkillSummonTaunt();
+    }
+
+    public String getName(){
+        return name;
+    }
+    public Element getVisionElement() {
+        return visionElement;
+    }
+    public Weapon getWeapon() {
+        return weapon;
+    }
+    public Lineage getLineage(){return lineage;}
+
+    public int getWalkingSpeed(){
+        return getLineage().getWalkingSpeed();
+    }
+    public Stamina getStamina() {
+        return stamina;
+    }
+
+    public int getProficiencyBonus() {
+        return proficiencyBonus;
+    }
+
+    public LinkedHashMap<Stat, PrimaryStat> getPrimaryStats() {
+        return primaryStats;
+    }
+    public PrimaryStat getPrimaryStat(Stat key){
+        return primaryStats.get(key);
+    }
+    public int getSaveDC(Stat key){return 8 + getProficiencyBonus() +getPrimaryStat(key).getModifier();}
+    public int getToHit(Stat stat) {
+        return getPrimaryStat(stat).getModifier() + getProficiencyBonus();
+    }
+
+    public Inspiration getInspiration(){
+        return inspiration;
+    }
+
+    public LinkedHashMap<String, Skill> getSkills() {
+        return skills;
+    }
+    public Skill getSkill(String key){
+        return skills.get(key);
+    }
+
+    public LinkedHashMap<Stat, SavingThrow> getSavingThrows() {
+        return savingThrows;
+    }
+    public SavingThrow getSavingThrow(Stat stat){
+        return getSavingThrows().get(stat);
+    }
+
+    public HitPoints getHitPoints() {
+        return hitPoints;
+    }
+
+    public int getArmorClass(){
+        return 10 + getPrimaryStat(Stat.DEXTERITY).getModifier();
+    }
+
+    public int getInitiativeBonus(){
+        return getPrimaryStat(Stat.DEXTERITY).getModifier();
+    }
+
+}

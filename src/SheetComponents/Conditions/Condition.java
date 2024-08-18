@@ -1,5 +1,6 @@
 package SheetComponents.Conditions;
 
+import SheetComponents.ElementalReactions.Reaction;
 import SheetComponents.Elements.Element;
 
 import java.util.ArrayList;
@@ -17,12 +18,8 @@ public abstract class Condition implements Comparable<Condition>{
     String description;
 
     public String getName(){
-        String name = this.getClass().getSimpleName();
-        if(name.length() > 9){
-            name = name.substring(9); //remove the 'Reaction' part of the name
-        }
-
-        return name;
+        int baseClassNameLength = Condition.class.getSimpleName().length();
+        return getClass().getSimpleName().substring(baseClassNameLength);
     }
 
     public String getDescription() {

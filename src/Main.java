@@ -1,12 +1,11 @@
-import UIComponents.util.IOController;
+import SheetComponents.Character;
+import SheetComponents.Stat;
+import UI.CharacterSheet;
+import UI.Util.IOController;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.util.LinkedHashMap;
@@ -29,26 +28,26 @@ public class Main extends Application{
 
         VBox tempMain = new VBox(10);
 
-        LinkedHashMap<String, Character.stat> defaultSkills = new LinkedHashMap<>();
+        LinkedHashMap<String, Stat> defaultSkills = new LinkedHashMap<>();
         //#region default skills list
-        defaultSkills.put("Acrobatics", Character.stat.DEXTERITY);
-        defaultSkills.put("Animal Handling", Character.stat.WISDOM);
-        defaultSkills.put("Arcana", Character.stat.INTELLIGENCE);
-        defaultSkills.put("Athletics", Character.stat.STRENGTH);
-        defaultSkills.put("Deception", Character.stat.CHARISMA);
-        defaultSkills.put("History", Character.stat.INTELLIGENCE);
-        defaultSkills.put("Insight", Character.stat.WISDOM);
-        defaultSkills.put("Intimidation", Character.stat.CHARISMA);
-        defaultSkills.put("Investigation", Character.stat.INTELLIGENCE);
-        defaultSkills.put("Medicine", Character.stat.WISDOM);
-        defaultSkills.put("Nature", Character.stat.INTELLIGENCE);
-        defaultSkills.put("Perception", Character.stat.WISDOM);
-        defaultSkills.put("Performance", Character.stat.CHARISMA);
-        defaultSkills.put("Persuasion", Character.stat.CHARISMA);
-        defaultSkills.put("Religion", Character.stat.INTELLIGENCE);
-        defaultSkills.put("Sleight of Hand", Character.stat.DEXTERITY);
-        defaultSkills.put("Stealth", Character.stat.DEXTERITY);
-        defaultSkills.put("Survival", Character.stat.WISDOM);
+        defaultSkills.put("Acrobatics", Stat.DEXTERITY);
+        defaultSkills.put("Animal Handling", Stat.WISDOM);
+        defaultSkills.put("Arcana", Stat.INTELLIGENCE);
+        defaultSkills.put("Athletics", Stat.STRENGTH);
+        defaultSkills.put("Deception", Stat.CHARISMA);
+        defaultSkills.put("History", Stat.INTELLIGENCE);
+        defaultSkills.put("Insight", Stat.WISDOM);
+        defaultSkills.put("Intimidation", Stat.CHARISMA);
+        defaultSkills.put("Investigation", Stat.INTELLIGENCE);
+        defaultSkills.put("Medicine", Stat.WISDOM);
+        defaultSkills.put("Nature", Stat.INTELLIGENCE);
+        defaultSkills.put("Perception", Stat.WISDOM);
+        defaultSkills.put("Performance", Stat.CHARISMA);
+        defaultSkills.put("Persuasion", Stat.CHARISMA);
+        defaultSkills.put("Religion", Stat.INTELLIGENCE);
+        defaultSkills.put("Sleight of Hand", Stat.DEXTERITY);
+        defaultSkills.put("Stealth", Stat.DEXTERITY);
+        defaultSkills.put("Survival", Stat.WISDOM);
         //#endregion
 
         Character character = new Character(defaultSkills);
@@ -108,7 +107,7 @@ public class Main extends Application{
         Scene scene = new Scene(tempMain, 12*100+11*boxSpacing, 800);
         scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin CharacterSheet V0.30");
+        stage.setTitle("Genshin UIComponents.CharacterSheet V0.31");
         stage.setScene(scene);
         stage.show();
     }

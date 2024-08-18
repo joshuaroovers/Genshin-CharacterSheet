@@ -1,8 +1,15 @@
 package SheetComponents.Weapons;
 
+import SheetComponents.Actions.Attacks.Attack;
+
 public abstract class Weapon {
 
-    public String getBaseName(){
-        return this.getClass().getSimpleName();
+    int basicAttackAmount;
+    String description;
+    Attack basicAttack;
+    Attack chargedAttack;
+
+    public String getName(){
+        return getClass().getSimpleName();
     }
 }

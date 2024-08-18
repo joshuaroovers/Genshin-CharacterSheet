@@ -27,12 +27,8 @@ public abstract class Reaction {
     String description;
 
     public String getName(){
-        String name = this.getClass().getSimpleName();
-        if(name.length() > 8){
-            name = name.substring(8); //remove the 'Reaction' part of the name
-        }
-
-        return name;
+        int baseClassNameLength = Reaction.class.getSimpleName().length();
+        return getClass().getSimpleName().substring(baseClassNameLength);
     }
 
     public Element getElement1() {

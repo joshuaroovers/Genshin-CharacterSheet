@@ -16,12 +16,12 @@ public abstract class ElementalBurst extends Attack {
 
 
     public ElementalBurst(String description, int range, Stat stat, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
-        super(description, range, stat, saveType, effect, appliesElement, notes);
+        super(null, description, range, stat, saveType, effect, appliesElement, notes);
         this.currentEnergy = 0;
     }
 
     public ElementalBurst(String description, int range, Stat stat, Effect effect, boolean appliesElement, Collection<String> notes) {
-        super(description, range, stat, effect, appliesElement, notes);
+        super(null, description, range, stat, effect, appliesElement, notes);
         this.currentEnergy = 0;
     }
 

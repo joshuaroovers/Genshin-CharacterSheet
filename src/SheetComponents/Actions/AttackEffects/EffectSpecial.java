@@ -12,7 +12,17 @@ public class EffectSpecial extends Effect{
     }
 
     @Override
-    String getEffect(Character character) {
+    public String getEffect(Character character) {
         return effect;
+    }
+
+    @Override
+    public String getUnitURL() {
+        return null;
+    }
+
+    @Override
+    public String getUnitString() {
+        return null;
     }
 }

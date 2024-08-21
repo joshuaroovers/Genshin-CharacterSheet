@@ -14,11 +14,11 @@ public abstract class ElementalSkill extends Attack {
     private String customName;
 
     public ElementalSkill(String description, int range, Stat stat, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
-        super(description, range, stat, saveType, effect, appliesElement, notes);
+        super(null, description, range, stat, saveType, effect, appliesElement, notes);
     }
 
     public ElementalSkill(String description, int range, Stat stat, Effect effect, boolean appliesElement, Collection<String> notes) {
-        super(description, range, stat, effect, appliesElement, notes);
+        super(null, description, range, stat, effect, appliesElement, notes);
     }
 
     public void setCustomName(String customName) {

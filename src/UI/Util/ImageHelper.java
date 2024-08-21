@@ -1,8 +1,11 @@
 package UI.Util;
 
 import SheetComponents.Elements.Element;
+import SheetComponents.Elements.Physical;
+import SheetComponents.Weapons.Weapon;
 
 public class ImageHelper {
+
     private static String elementImagePathBase = "images/Element_Icons";
     private static String pathElementFlat_Color = elementImagePathBase+"/Flat_Color/Element_Flat_Color_";
     private static String pathElementGilded = elementImagePathBase+"/Gilded/Element_Gilded_";
@@ -43,7 +46,16 @@ public class ImageHelper {
         return path;
     }
 
-    public static String getWeaponDamageURL(){
-        return weaponImagePathBase+"/Physical_DMG.png";
+    public static String getAttackUnitURL(Element element){
+        if(element.getName().equals(Physical.class.getSimpleName())){
+            return weaponImagePathBase+"/Physical_DMG.png";
+        }else{
+            return getElementURL(element, ImageElementVariant.FLAT);
+        }
     }
-}
+
+    public static String getWeaponURL(Weapon weapon){
+        return weaponImagePathBase + "/" + weapon.getName() +".png";
+    }
+
+    }

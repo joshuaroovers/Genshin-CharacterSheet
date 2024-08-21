@@ -8,13 +8,16 @@ import SheetComponents.Stat;
 
 public class Claymore extends Weapon{
 
+    private static final String BASIC_ATTACK_NAME = "Normal Attack";
     private static final String BASIC_ATTACK_DESC = "fire an arrow";
+    private static final String CHARGED_ATTACK_NAME = "Charged Attack";
     private static final String CHARGED_ATTACK_DESC = "fire an arrow infused with elemental energy";
 
     public Claymore() {
         this.basicAttackAmount = 2;
         this.description = "";
         this.basicAttack = new Attack(
+                BASIC_ATTACK_NAME,
                 BASIC_ATTACK_DESC,
                 5,
                 Stat.STRENGTH,
@@ -22,6 +25,7 @@ public class Claymore extends Weapon{
                 false,
                 null);
         this.chargedAttack = new Attack(
+                CHARGED_ATTACK_NAME,
                 CHARGED_ATTACK_DESC,
                 5,
                 Stat.STRENGTH,

@@ -419,6 +419,53 @@
 
 /*#endregion */
 
+/*#region attack box */
+.attack-category-label{
+    -fx-font-size: 11;
+    -fx-font-weight: bold;
+}
+.attack-box{
+    -fx-padding: 5;
+}
+
+.attack-type{
+    -fx-pref-width: 35;
+    -fx-min-width: 35;
+}
+.attack-type-image{
+    -fx-min-width: 30;
+    -fx-max-width: 30;
+    -fx-min-height: 30;
+}
+.attack-name{
+    -fx-pref-width: 200;
+    -fx-max-width: 200;
+}
+.attack-range{
+    -fx-pref-width: 65;
+    -fx-max-width: 65;
+}
+.attack-to-affect{
+    -fx-pref-width: 65;
+    -fx-max-width: 65;
+}
+.attack-to-hit-label{
+    -fx-font-size: 20;
+}
+.attack-effect{
+    -fx-pref-width: 100;
+    -fx-max-width: 100;
+}
+.attack-effect-image{
+    -fx-min-width: 25;
+    -fx-max-height: 25;
+}
+.attack-notes{
+    -fx-pref-width: 230;
+    -fx-max-width: 230;
+}
+/*#endregion */
+
 /*#region combobox */
 .combo-box .arrow-button {
     -fx-background-color: transparent;

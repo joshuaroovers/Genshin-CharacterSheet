@@ -10,7 +10,9 @@ import java.util.Arrays;
 
 public class Catalyst extends Weapon{
 
+    private static final String BASIC_ATTACK_NAME = "Normal Attack";
     private static final String BASIC_ATTACK_DESC = "attack with a burst of elemental energy";
+    private static final String CHARGED_ATTACK_NAME = "Charged Attack";
     private static final String CHARGED_ATTACK_DESC = "big effect wow";
 
     //would melee catalyst be strength or dex based?
@@ -18,6 +20,7 @@ public class Catalyst extends Weapon{
         this.basicAttackAmount = 2;
         this.description = "";
         this.basicAttack = new Attack(
+                BASIC_ATTACK_NAME,
                 BASIC_ATTACK_DESC,
                 60,
                 Stat.INTELLIGENCE,
@@ -25,6 +28,7 @@ public class Catalyst extends Weapon{
                 true,
                 null);
         this.chargedAttack = new Attack(
+                CHARGED_ATTACK_NAME,
                 CHARGED_ATTACK_DESC,
                 0,
                 Stat.INTELLIGENCE,

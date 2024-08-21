@@ -13,6 +13,7 @@ import java.util.Collection;
 
 public class Attack extends Action {
 
+    String name;
     int range;
     boolean isSave;
     Stat saveType;
@@ -22,7 +23,8 @@ public class Attack extends Action {
     ArrayList<String> notes;
 
 
-    private Attack(String description, int range, Stat stat, boolean isSave, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes){
+    private Attack(String name, String description, int range, Stat stat, boolean isSave, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes){
+        this.name = name;
         this.description = description;
         this.range = range;
         this.isSave = isSave;
@@ -36,11 +38,11 @@ public class Attack extends Action {
             this.notes.addAll(notes);
         }
     }
-    public Attack(String description, int range, Stat stat, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
-        this(description, range, stat, true, saveType, effect, appliesElement, notes);
+    public Attack(String name, String description, int range, Stat stat, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
+        this(name, description, range, stat, true, saveType, effect, appliesElement, notes);
     }
-    public Attack(String description, int range, Stat stat, Effect effect, boolean appliesElement, Collection<String> notes) {
-        this(description, range, stat, false, null, effect, appliesElement, notes);
+    public Attack(String name, String description, int range, Stat stat, Effect effect, boolean appliesElement, Collection<String> notes) {
+        this(name, description, range, stat, false, null, effect, appliesElement, notes);
     }
 
     public PrimaryStat getStat(Character character) {
@@ -57,17 +59,33 @@ public class Attack extends Action {
     public int getSaveDC(Character character){
         return character.getSaveDC(stat);
     };
+    public PrimaryStat getSaveType(Character character){
+        //TODO not ideal should really make Stat a class
+        return character.getPrimaryStat(saveType);
+    };
 
     public String getRange() {
         if(range == 0){
             return "self";
         }else{
-            return Integer.toString(range);
+            return Integer.toString(range)+"ft";
         }
+    }
+
+    public Effect getEffect() {
+        return effect;
     }
 
     @Override
     public String getName() {
-        return getClass().getSimpleName();
+        return name;
+    }
+
+    public ArrayList<String> getNotes() {
+        return notes;
+    }
+
+    public boolean appliesElement() {
+        return appliesElement;
     }
 }

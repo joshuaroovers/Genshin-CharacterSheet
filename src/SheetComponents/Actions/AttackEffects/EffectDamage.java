@@ -4,7 +4,6 @@ import SheetComponents.Actions.Attacks.Die;
 import SheetComponents.Character;
 import SheetComponents.Elements.Element;
 import SheetComponents.Stat;
-import UI.Util.ImageElementVariant;
 import UI.Util.ImageHelper;
 
 public class EffectDamage extends Effect{
@@ -23,18 +22,24 @@ public class EffectDamage extends Effect{
     }
 
     @Override
-    String getEffect(Character character) {
+    public String getEffect(Character character) {
         int bonus = character.getPrimaryStat(statBonus).getModifier();
         String bonusString = "";
         if(bonus > 0){
             bonusString = "+" + bonus;
         }else if(bonus < 0){
-            bonusString = "-" + bonus;
+            bonusString = ""+bonus;
         }
         return damageDieCount+ die.name()+bonusString;
     }
 
-    public String getUnitImage(){
-        return ImageHelper.getElementURL(damageType, ImageElementVariant.FLAT);
+    @Override
+    public String getUnitURL() {
+        return ImageHelper.getAttackUnitURL(damageType);
+    }
+
+    @Override
+    public String getUnitString() {
+        return damageType.getName();
     }
 }

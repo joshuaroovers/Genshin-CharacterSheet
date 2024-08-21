@@ -21,15 +21,25 @@ public class EffectHealing extends Effect{
     }
 
     @Override
-    String getEffect(Character character) {
+    public String getEffect(Character character) {
         int bonus = character.getPrimaryStat(statBonus).getModifier();
         String bonusString = "";
         if(bonus > 0){
             bonusString = "+" + bonus;
         }else if(bonus < 0){
-            bonusString = "-" + bonus;
+            bonusString = ""+bonus;
         }
         return dieCount + die.name()+bonusString;
+    }
+
+    @Override
+    public String getUnitURL() {
+        return null; //TODO
+    }
+
+    @Override
+    public String getUnitString() {
+        return null;
     }
 
     public String getUnitImage(){//TODO temp hydro needs to be healing image of some kind

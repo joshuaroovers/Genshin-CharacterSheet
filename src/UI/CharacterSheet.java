@@ -3,8 +3,10 @@ package UI;
 import SheetComponents.*;
 import SheetComponents.Character;
 import UI.Components.*;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -97,6 +99,7 @@ public class CharacterSheet extends BorderPane {
 
         VBox rightPane = new VBox(boxSpacing);
         thirdRow.getChildren().add(rightPane);
+        rightPane.setStyle("-fx-max-width: 700; -fx-pref-width: 700;");
 
         HBox thirdRowRight = new HBox(boxSpacing);
         rightPane.getChildren().add(thirdRowRight);
@@ -105,5 +108,45 @@ public class CharacterSheet extends BorderPane {
         thirdRowRight.getChildren().add(new InitiativeBox(character.getInitiativeBonus()));
         thirdRowRight.getChildren().add(new StaminaBox(character.getStamina(), character.getVisionElement()));
         thirdRowRight.getChildren().add(new ConditionsBox(stage));
+
+        VBox rightSubPane = new VBox(2);
+        rightPane.getChildren().add(rightSubPane);
+
+        //#region attacks labels
+        HBox attackLabelsContainer = new HBox();
+        rightSubPane.getChildren().add(attackLabelsContainer);
+        attackLabelsContainer.setStyle("-fx-padding: 5 0 0 5");
+
+        Pane attackTypeSpacer = new Pane();
+        attackTypeSpacer.getStyleClass().addAll("attack-type");
+
+        Label attackNameLabel = new Label("Name");
+        attackNameLabel.getStyleClass().addAll("attack-name", "attack-category-label");
+
+        Label attackRangeLabel = new Label("Range");
+        attackRangeLabel.getStyleClass().addAll("attack-range", "attack-category-label");
+
+        Label attackToAffectLabel = new Label("Hit/DC");
+        attackToAffectLabel.getStyleClass().addAll("attack-to-affect", "attack-category-label");
+
+        Label attackEffectLabel = new Label("Effect");
+        attackEffectLabel.getStyleClass().addAll("attack-effect", "attack-category-label");
+
+        Label attackNotesLabel = new Label("Notes");
+        attackNotesLabel.getStyleClass().addAll("attack-notes", "attack-category-label");
+
+        attackLabelsContainer.getChildren().addAll(
+                attackTypeSpacer,
+                attackNameLabel,
+                attackRangeLabel,
+                attackToAffectLabel,
+                attackEffectLabel,
+                attackNotesLabel
+                );
+        //#endregion
+
+        rightSubPane.getChildren().add(new AttackBox(character, character.getWeapon(), character.getWeapon().getBasicAttack()));
+        rightSubPane.getChildren().add(new AttackBox(character, character.getWeapon(), character.getWeapon().getChargedAttack()));
+
     }
 }

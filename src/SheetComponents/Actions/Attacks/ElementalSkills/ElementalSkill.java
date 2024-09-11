@@ -11,27 +11,40 @@ import java.util.Collection;
 
 public abstract class ElementalSkill extends Attack {
 
+    public static final String NAME_BASE = "Elemental Skill: \n";
     private String customName;
 
-    public ElementalSkill(String description, int range, Stat stat, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
-        super(null, description, range, stat, saveType, effect, appliesElement, notes);
+    public ElementalSkill(String name, String description, int range, Stat stat, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
+        super(name, description, range, stat, saveType, effect, appliesElement, notes);
     }
 
-    public ElementalSkill(String description, int range, Stat stat, Effect effect, boolean appliesElement, Collection<String> notes) {
-        super(null, description, range, stat, effect, appliesElement, notes);
+    public ElementalSkill(String name, String description, int range, Stat stat, Effect effect, boolean appliesElement, Collection<String> notes) {
+        super(name, description, range, stat, effect, appliesElement, notes);
     }
 
     public void setCustomName(String customName) {
-        this.customName = customName;
+        if(customName.isEmpty()){
+            this.customName = null;
+        }else{
+            this.customName = customName;
+        }
+    }
+
+    public String getCustomName() {
+        if(customName == null){
+            return super.getName();
+        }else{
+            return customName;
+        }
     }
 
     @Override
     public String getName() {
-        if(!customName.isEmpty()){
-            return customName;
+
+        if(customName != null){
+            return NAME_BASE+customName;
         }else{
-            int baseClassNameLength = ElementalBurst.class.getSimpleName().length();
-            return getClass().getSimpleName().substring(baseClassNameLength);
+            return NAME_BASE+super.getName();
         }
     }
 }

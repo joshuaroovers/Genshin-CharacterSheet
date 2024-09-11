@@ -109,13 +109,14 @@ public class CharacterSheet extends BorderPane {
         thirdRowRight.getChildren().add(new StaminaBox(character.getStamina(), character.getVisionElement()));
         thirdRowRight.getChildren().add(new ConditionsBox(stage));
 
-        VBox rightSubPane = new VBox(2);
+        VBox rightSubPane = new VBox(1);
         rightPane.getChildren().add(rightSubPane);
 
         //#region attacks labels
         HBox attackLabelsContainer = new HBox();
         rightSubPane.getChildren().add(attackLabelsContainer);
-        attackLabelsContainer.setStyle("-fx-padding: 5 0 0 5");
+        attackLabelsContainer.setStyle("-fx-padding: 0 6 0 6;");
+        //                              ^^padding is like this to match attackbox padding+border
 
         Pane attackTypeSpacer = new Pane();
         attackTypeSpacer.getStyleClass().addAll("attack-type");
@@ -145,6 +146,8 @@ public class CharacterSheet extends BorderPane {
                 );
         //#endregion
 
+        rightSubPane.getChildren().add(new ElementalAttackBox(character, character.getVisionElement(), character.getElementalBurst()));
+        rightSubPane.getChildren().add(new ElementalAttackBox(character, character.getVisionElement(), character.getElementalSkill()));
         rightSubPane.getChildren().add(new AttackBox(character, character.getWeapon(), character.getWeapon().getBasicAttack()));
         rightSubPane.getChildren().add(new AttackBox(character, character.getWeapon(), character.getWeapon().getChargedAttack()));
 

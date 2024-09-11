@@ -10,18 +10,19 @@ import java.util.Collection;
 
 public abstract class ElementalBurst extends Attack {
 
+    public static final String NAME_BASE = "Elemental Burst: \n";
     private String customName;
     private final int requiredEnergy = 3;
     int currentEnergy;
 
 
-    public ElementalBurst(String description, int range, Stat stat, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
-        super(null, description, range, stat, saveType, effect, appliesElement, notes);
+    public ElementalBurst(String name, String description, int range, Stat stat, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
+        super(name, description, range, stat, saveType, effect, appliesElement, notes);
         this.currentEnergy = 0;
     }
 
-    public ElementalBurst(String description, int range, Stat stat, Effect effect, boolean appliesElement, Collection<String> notes) {
-        super(null, description, range, stat, effect, appliesElement, notes);
+    public ElementalBurst(String name, String description, int range, Stat stat, Effect effect, boolean appliesElement, Collection<String> notes) {
+        super(name, description, range, stat, effect, appliesElement, notes);
         this.currentEnergy = 0;
     }
 
@@ -33,16 +34,28 @@ public abstract class ElementalBurst extends Attack {
     private void decreaseEnergy(){if(currentEnergy-1 >= 0){currentEnergy--;}}
 
     public void setCustomName(String customName) {
-        this.customName = customName;
+        if(customName == null || customName.isEmpty()){
+            this.customName = null;
+        }else{
+            this.customName = customName;
+        }
+    }
+
+    public String getCustomName() {
+        if(customName == null){
+            return super.getName();
+        }else{
+            return customName;
+        }
     }
 
     @Override
     public String getName() {
-        if(!customName.isEmpty()){
-            return customName;
+
+        if(customName != null){
+            return NAME_BASE+customName;
         }else{
-            int baseClassNameLength = ElementalBurst.class.getSimpleName().length();
-            return getClass().getSimpleName().substring(baseClassNameLength);
+            return NAME_BASE+super.getName();
         }
     }
 }

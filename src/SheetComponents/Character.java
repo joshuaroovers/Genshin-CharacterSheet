@@ -43,8 +43,11 @@ public class Character {
             ArrayList<Element> randomElement = new ArrayList<>(Arrays.asList(new Anemo(), new Cryo(), new Dendro(), new Electro(), new Geo(), new Hydro(), new Pyro()));
         this.visionElement = randomElement.get((int)(Math.random()*7));
 
+        this.elementalSkill = new ElementalSkillSummonTaunt();
+        this.elementalBurst = new ElementalBurstDestructive(getVisionElement());
+
             Weapon[] randomWeapon = {new Sword(), new Claymore(), new Polearm(), new Bow(getVisionElement()), new Catalyst(getVisionElement())};
-        this.weapon = randomWeapon[(int)(Math.random()*5)];
+        this.weapon = new Bow(getVisionElement());//randomWeapon[(int)(Math.random()*5)];
             Lineage[] randomSpecies = {new Human(), new Anthro(), new Adeptus(), new Yokai(), new Fontainian(), new Khaenriahn() };
         this.lineage = randomSpecies[(int)(Math.random()*6)];
 
@@ -98,6 +101,15 @@ public class Character {
     public Weapon getWeapon() {
         return weapon;
     }
+
+    public ElementalBurst getElementalBurst() {
+        return elementalBurst;
+    }
+
+    public ElementalSkill getElementalSkill() {
+        return elementalSkill;
+    }
+
     public Lineage getLineage(){return lineage;}
 
     public int getWalkingSpeed(){

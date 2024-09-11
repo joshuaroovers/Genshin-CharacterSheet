@@ -13,7 +13,7 @@ import java.util.Collection;
 
 public class Attack extends Action {
 
-    String name;
+    protected String name;
     int range;
     boolean isSave;
     Stat saveType;

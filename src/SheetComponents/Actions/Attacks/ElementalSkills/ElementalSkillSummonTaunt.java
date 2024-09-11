@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ElementalSkillSummonTaunt extends ElementalSkill{
 
+    private final static String NAME = "Summon Taunt";
     private final static int damageDieCount = 1;
     private final static Die DIE = Die.D10;
 
@@ -24,14 +25,14 @@ public class ElementalSkillSummonTaunt extends ElementalSkill{
     private final static int RANGE = 15;
     //TODO what stat to base the save on?? base it on class?   Maybe make it different per skill/burst
     private final static Stat SAVE_SCALE = Stat.CONSTITUTION;
-    private final static boolean APPLIES_ELEMENT = true;
+    private final static boolean APPLIES_ELEMENT = false;
     private final static Stat SAVE_TYPE = Stat.WISDOM;
     private final static List<String> NOTES = Arrays.asList("+1 Energy");
 
 
 
     public ElementalSkillSummonTaunt() {
-        super(DESCRIPTION, RANGE, SAVE_SCALE, SAVE_TYPE, new EffectSpecial("Summoning"), APPLIES_ELEMENT, NOTES);
+        super(NAME, DESCRIPTION, RANGE, SAVE_SCALE, SAVE_TYPE, new EffectSpecial("Summoning"), APPLIES_ELEMENT, NOTES);
     }
 
 }

@@ -23,13 +23,17 @@ public class EffectDamage extends Effect{
 
     @Override
     public String getEffect(Character character) {
-        int bonus = character.getPrimaryStat(statBonus).getModifier();
+
         String bonusString = "";
-        if(bonus > 0){
-            bonusString = "+" + bonus;
-        }else if(bonus < 0){
-            bonusString = ""+bonus;
+        if(statBonus != null){
+            int bonus = character.getPrimaryStat(statBonus).getModifier();
+            if(bonus > 0){
+                bonusString = "+" + bonus;
+            }else if(bonus < 0){
+                bonusString = ""+bonus;
+            }
         }
+
         return damageDieCount+ die.name()+bonusString;
     }
 

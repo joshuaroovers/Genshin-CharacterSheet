@@ -4,6 +4,7 @@ import UI.CharacterSheet;
 import UI.Util.IOController;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -11,8 +12,6 @@ import javafx.stage.Stage;
 import java.util.LinkedHashMap;
 
 public class Main extends Application{
-
-    private VBox testScrollPane;
 
     public static void main(String[] args) {
         launch(args);
@@ -26,6 +25,8 @@ public class Main extends Application{
         IOController.init();
         Font.loadFont(getClass().getResourceAsStream("/genshin-font.ttf"),12);
 
+        Scene scene = new Scene(new Pane(), 12*100+11*boxSpacing, 800);
+        scene.getStylesheets().add("styles.css");
         VBox tempMain = new VBox(10);
 
         LinkedHashMap<String, Stat> defaultSkills = new LinkedHashMap<>();
@@ -54,6 +55,7 @@ public class Main extends Application{
 
         BorderPane mainPane = new CharacterSheet(character, boxSpacing, stage);
         tempMain.getChildren().add(mainPane);
+        scene.setRoot(tempMain);
 
         //#region testing area
 
@@ -104,10 +106,17 @@ public class Main extends Application{
         //#endregion
 
 
-        Scene scene = new Scene(tempMain, 12*100+11*boxSpacing, 800);
-        scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("Genshin UIComponents.CharacterSheet V0.33");
+        Button buttonTest = new Button("new char");
+        tempMain.getChildren().add(buttonTest);
+        buttonTest.setOnAction(e ->{
+            VBox smallTest = new VBox(10);
+            BorderPane newCharTest = new CharacterSheet(new Character(defaultSkills), boxSpacing, stage);
+            smallTest.getChildren().addAll(newCharTest, buttonTest);
+            scene.setRoot(smallTest);
+        });
+
+        stage.setTitle("Genshin CharacterSheet V0.34");
         stage.setScene(scene);
         stage.show();
     }

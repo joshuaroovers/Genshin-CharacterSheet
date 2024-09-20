@@ -1,7 +1,7 @@
 package SheetComponents.Actions.Attacks.ElementalBursts;
 
 import SheetComponents.Actions.AttackEffects.EffectDamage;
-import SheetComponents.Actions.Attacks.Die;
+import SheetComponents.Actions.Attacks.Dice;
 import SheetComponents.Elements.Element;
 import SheetComponents.Stat;
 
@@ -20,6 +20,6 @@ public class ElementalBurstDestructive extends ElementalBurst{
     private final static List<String> NOTES = Arrays.asList("30ft Cube","");
 
     public ElementalBurstDestructive(Element damageType) {
-        super(NAME, DESCRIPTION, RANGE, SAVE_SCALE, SAVE_TYPE, new EffectDamage(Die.D6, 5, null, damageType), APPLIES_ELEMENT, NOTES);
+        super(NAME, DESCRIPTION, RANGE, SAVE_SCALE, SAVE_TYPE, new EffectDamage(Dice.D6, 5, null, damageType), APPLIES_ELEMENT, NOTES);
     }
 }

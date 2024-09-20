@@ -1,5 +1,8 @@
 package SheetComponents;
 
+import SheetComponents.Actions.AttackEffects.EffectDamage;
+import SheetComponents.Actions.Attacks.Attack;
+import SheetComponents.Actions.Attacks.Dice;
 import SheetComponents.Actions.Attacks.ElementalBursts.ElementalBurst;
 import SheetComponents.Actions.Attacks.ElementalBursts.ElementalBurstDestructive;
 import SheetComponents.Actions.Attacks.ElementalSkills.ElementalSkill;
@@ -47,7 +50,7 @@ public class Character {
         this.elementalBurst = new ElementalBurstDestructive(getVisionElement());
 
             Weapon[] randomWeapon = {new Sword(), new Claymore(), new Polearm(), new Bow(getVisionElement()), new Catalyst(getVisionElement())};
-        this.weapon = new Bow(getVisionElement());//randomWeapon[(int)(Math.random()*5)];
+        this.weapon = randomWeapon[(int)(Math.random()*5)];
             Lineage[] randomSpecies = {new Human(), new Anthro(), new Adeptus(), new Yokai(), new Fontainian(), new Khaenriahn() };
         this.lineage = randomSpecies[(int)(Math.random()*6)];
 

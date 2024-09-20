@@ -475,6 +475,18 @@
 }
 /*#endregion */
 
+/*#region actions*/
+.action-type-label{
+    -fx-font-weight: bold;
+    -fx-pref-width: 99999;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: black;
+}
+.action-description{
+    -fx-font-size: 14;
+}
+/*#endregion*/
+
 /*#region Energy Counter box */
 .energy-counter-pip{
     -fx-min-width: 10;
@@ -523,3 +535,7 @@
     -fx-max-height: 0;
 }
 /*#endregion */
+.button:focused, .text-field:focused, .combo-box:focused, .scroll-pane:focused {
+    -fx-focus-color: lightgray;
+    -fx-faint-focus-color: transparent;
+}

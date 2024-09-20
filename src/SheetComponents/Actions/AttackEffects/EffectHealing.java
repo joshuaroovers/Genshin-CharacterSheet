@@ -1,6 +1,6 @@
 package SheetComponents.Actions.AttackEffects;
 
-import SheetComponents.Actions.Attacks.Die;
+import SheetComponents.Actions.Attacks.Dice;
 import SheetComponents.Character;
 import SheetComponents.Elements.Hydro;
 import SheetComponents.Stat;
@@ -9,13 +9,13 @@ import UI.Util.ImageHelper;
 
 public class EffectHealing extends Effect{
 
-    private Die die;
+    private Dice dice;
     private int dieCount;
     private Stat statBonus;
 
-    public EffectHealing(Die die, int dieCount, Stat statBonus) {
+    public EffectHealing(Dice dice, int dieCount, Stat statBonus) {
         this.hasUnit = true;
-        this.die = die;
+        this.dice = dice;
         this.dieCount = dieCount;
         this.statBonus = statBonus;
     }
@@ -29,7 +29,7 @@ public class EffectHealing extends Effect{
         }else if(bonus < 0){
             bonusString = ""+bonus;
         }
-        return dieCount + die.name()+bonusString;
+        return dieCount + dice.name()+bonusString;
     }
 
     @Override

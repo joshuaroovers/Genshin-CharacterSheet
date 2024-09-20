@@ -4,12 +4,9 @@ import SheetComponents.Actions.Attacks.Attack;
 import SheetComponents.Actions.Attacks.ElementalBursts.ElementalBurst;
 import SheetComponents.Actions.Attacks.ElementalSkills.ElementalSkill;
 import SheetComponents.Character;
-import SheetComponents.Weapons.Weapon;
-import UI.Util.ImageHelper;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 
@@ -22,6 +19,7 @@ public class AttackBoxBase extends HBox {
     private TextArea nameInputBox;
     //components width add up to 690 (230 per section) (700 is absolute with minus 5*2 for padding)
 
+    //TODO these could've probably been overloading constructors.... or like a private base constructor
     public AttackBoxBase(Character character, String attackTypeImageURL, Attack attack) {
         HBox mainBox = this;
         mainBox.getStyleClass().add("attack-box");
@@ -95,7 +93,7 @@ public class AttackBoxBase extends HBox {
         if(attack.getEffect().hasUnit()){
             Pane effectUnitImage = new Pane();
             effectContainer.getChildren().add(effectUnitImage);
-            effectUnitImage.setStyle("-fx-background-image: url("+ attack.getEffect().getUnitURL()+");");//TODO more images
+            effectUnitImage.setStyle("-fx-background-image: url("+ attack.getEffect().getUnitURL()+");");
             effectUnitImage.getStyleClass().addAll("attack-effect-image", "element-image");
         }
 
@@ -235,7 +233,7 @@ public class AttackBoxBase extends HBox {
         if(elementalBurst.getEffect().hasUnit()){
             Pane effectUnitImage = new Pane();
             effectContainer.getChildren().add(effectUnitImage);
-            effectUnitImage.setStyle("-fx-background-image: url("+ elementalBurst.getEffect().getUnitURL()+");");//TODO more images
+            effectUnitImage.setStyle("-fx-background-image: url("+ elementalBurst.getEffect().getUnitURL()+");");
             effectUnitImage.getStyleClass().addAll("attack-effect-image", "element-image");
         }
 
@@ -368,7 +366,7 @@ public class AttackBoxBase extends HBox {
         if(elementalSkill.getEffect().hasUnit()){
             Pane effectUnitImage = new Pane();
             effectContainer.getChildren().add(effectUnitImage);
-            effectUnitImage.setStyle("-fx-background-image: url("+ elementalSkill.getEffect().getUnitURL()+");");//TODO more images
+            effectUnitImage.setStyle("-fx-background-image: url("+ elementalSkill.getEffect().getUnitURL()+");");
             effectUnitImage.getStyleClass().addAll("attack-effect-image", "element-image");
         }
 

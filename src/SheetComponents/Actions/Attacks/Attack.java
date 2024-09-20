@@ -68,7 +68,7 @@ public class Attack extends Action {
         if(range == 0){
             return "self";
         }else{
-            return Integer.toString(range)+"ft";
+            return range+"ft";
         }
     }
 

@@ -1,6 +1,6 @@
 package SheetComponents.Actions.AttackEffects;
 
-import SheetComponents.Actions.Attacks.Die;
+import SheetComponents.Actions.Attacks.Dice;
 import SheetComponents.Character;
 import SheetComponents.Elements.Element;
 import SheetComponents.Stat;
@@ -8,14 +8,14 @@ import UI.Util.ImageHelper;
 
 public class EffectDamage extends Effect{
 
-    private Die die;
+    private Dice dice;
     private int damageDieCount;
     private Stat statBonus;
     private Element damageType;
 
-    public EffectDamage(Die die, int damageDieCount, Stat statBonus, Element damageType) {
+    public EffectDamage(Dice dice, int damageDieCount, Stat statBonus, Element damageType) {
         this.hasUnit = true;
-        this.die = die;
+        this.dice = dice;
         this.damageDieCount = damageDieCount;
         this.statBonus = statBonus;
         this.damageType = damageType;
@@ -33,8 +33,11 @@ public class EffectDamage extends Effect{
                 bonusString = ""+bonus;
             }
         }
-
-        return damageDieCount+ die.name()+bonusString;
+        if(dice == Dice.D1){
+            return ""+(damageDieCount+character.getPrimaryStat(statBonus).getModifier());
+        }else{
+            return damageDieCount+ dice.name()+bonusString;
+        }
     }
 
     @Override

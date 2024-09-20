@@ -1,14 +1,16 @@
 package UI;
 
-import SheetComponents.*;
+import SheetComponents.Actions.Action;
 import SheetComponents.Character;
+import SheetComponents.*;
 import UI.Components.*;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class CharacterSheet extends BorderPane {
 
@@ -28,7 +30,7 @@ public class CharacterSheet extends BorderPane {
 
         BorderPane firstRow = new BorderPane();
         mainPane.setTop(firstRow);
-        firstRow.setStyle("-fx-pref-width: " + 9999999);
+//        firstRow.setStyle("-fx-pref-width: " + 9999999);
 
         firstRow.setLeft(new NameCard(character.getVisionElement(), character.getName(), character.getLineage(), character.getWeapon()));
 
@@ -109,12 +111,18 @@ public class CharacterSheet extends BorderPane {
         thirdRowRight.getChildren().add(new StaminaBox(character.getStamina(), character.getVisionElement()));
         thirdRowRight.getChildren().add(new ConditionsBox(stage));
 
+        ScrollPane actionsWrapper = new ScrollPane();
+        rightPane.getChildren().add(actionsWrapper);
+        actionsWrapper.hbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
+        actionsWrapper.fitToWidthProperty().set(true);
+
         VBox rightSubPane = new VBox(1);
-        rightPane.getChildren().add(rightSubPane);
+        actionsWrapper.setContent(rightSubPane);
 
         //#region attacks labels
         HBox attackLabelsContainer = new HBox();
         rightSubPane.getChildren().add(attackLabelsContainer);
+
         attackLabelsContainer.setStyle("-fx-padding: 0 6 0 6;");
         //                              ^^padding is like this to match attackbox padding+border
 
@@ -148,8 +156,74 @@ public class CharacterSheet extends BorderPane {
 
         rightSubPane.getChildren().add(new ElementalAttackBox(character, character.getVisionElement(), character.getElementalBurst()));
         rightSubPane.getChildren().add(new ElementalAttackBox(character, character.getVisionElement(), character.getElementalSkill()));
+        rightSubPane.getChildren().add(new AttackBox(character, character.getWeapon(), character.getWeapon().getUnarmedStrike()));
         rightSubPane.getChildren().add(new AttackBox(character, character.getWeapon(), character.getWeapon().getBasicAttack()));
         rightSubPane.getChildren().add(new AttackBox(character, character.getWeapon(), character.getWeapon().getChargedAttack()));
+
+        FlowPane standardActionsFlowPane = new FlowPane(5,5);
+        rightSubPane.getChildren().add(standardActionsFlowPane);
+
+        ArrayList<Action> standardActions = Action.getStandardActions(character.getVisionElement());
+//        for (int i = 0; i < standardActions.size(); i++) {
+//            Action currentAction = standardActions.get(i);
+//            String actionName = currentAction.getName();
+//            String actionDescription = currentAction.getDescription();
+//            if(i < standardActions.size()-1){
+//                actionName = actionName+",";
+//            }
+//            Label actionLabel = new Label(actionName);
+//            standardActionsFlowPane.getChildren().add(actionLabel);
+//
+//            //TODO change out with Popup because of short show time
+//            Tooltip actionTooltip = new Tooltip(actionDescription);
+//            Tooltip.install(actionLabel, actionTooltip);
+//        }
+
+        VBox basicActionsWrapper = new VBox(5);
+        rightSubPane.getChildren().add(basicActionsWrapper);
+        basicActionsWrapper.setStyle("-fx-padding: 5;");
+
+        VBox basicActionsBox = new VBox(5);
+        basicActionsWrapper.getChildren().add(basicActionsBox);
+
+        Label basicActionsLabel = new Label("Actions:");
+        basicActionsBox.getChildren().add(basicActionsLabel);
+        basicActionsLabel.getStyleClass().add("action-type-label");
+
+        VBox basicBonusActionsBox = new VBox(5);
+        basicActionsWrapper.getChildren().add(basicBonusActionsBox);
+
+        Label basicBonusActionsLabel = new Label("Bonus Actions:");
+        basicBonusActionsBox.getChildren().add(basicBonusActionsLabel);
+        basicBonusActionsLabel.getStyleClass().add("action-type-label");
+
+        VBox basicReactionsBox = new VBox(5);
+        basicActionsWrapper.getChildren().add(basicReactionsBox);
+
+        Label basicReactionsLabel = new Label("Reactions:");
+        basicReactionsBox.getChildren().add(basicReactionsLabel);
+        basicReactionsLabel.getStyleClass().add("action-type-label");
+
+        for (Action standardAction : standardActions) {
+            VBox actionWrapper = new VBox(2);
+            Label actionNameLabel = new Label(standardAction.getName());
+            Label actionDescription = new Label(standardAction.getDescription());
+            actionDescription.getStyleClass().add("action-description");
+            actionWrapper.getChildren().addAll(actionNameLabel, actionDescription);
+            actionDescription.setWrapText(true);
+
+            switch (standardAction.getType()){
+                case ACTION:
+                    basicActionsBox.getChildren().add(actionWrapper);
+                    break;
+                case BONUS:
+                    basicBonusActionsBox.getChildren().add(actionWrapper);
+                    break;
+                case REACTION:
+                    basicReactionsBox.getChildren().add(actionWrapper);
+                    break;
+            }
+        }
 
     }
 }

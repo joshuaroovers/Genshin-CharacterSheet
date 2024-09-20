@@ -26,7 +26,7 @@ public class SmallBasicBox extends VBox {
         Label label2 = new Label(secondLabelText);
         label2.getStyleClass().addAll("basic-box-label");
 
-        content.getStyleClass().addAll("basic-container");
+        content.getStyleClass().addAll("basic-container-width");
 
         if(labelPosition != null && secondLabelText == null){
             if(labelPosition == SmallBasicBox.labelPosition.TOP){

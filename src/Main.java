@@ -116,7 +116,7 @@ public class Main extends Application{
             scene.setRoot(smallTest);
         });
 
-        stage.setTitle("Genshin CharacterSheet V0.34");
+        stage.setTitle("Genshin CharacterSheet V0.35");
         stage.setScene(scene);
         stage.show();
     }

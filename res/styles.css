@@ -204,7 +204,7 @@
 
 }
 .settings-button{
-    -fx-border-width: 99;
+    -fx-border-width: 5; /*setting this high really knocks down the performance...*/
     -fx-pref-width: 30;
     -fx-max-height: 30;
     -fx-pref-height: 30;

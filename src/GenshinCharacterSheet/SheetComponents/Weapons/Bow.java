@@ -4,8 +4,8 @@ import GenshinCharacterSheet.SheetComponents.Actions.AttackEffects.EffectDamage;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Attack;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Dice;
 import GenshinCharacterSheet.SheetComponents.Elements.Element;
-import GenshinCharacterSheet.SheetComponents.Elements.Physical;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.Elements.Elements;
+import GenshinCharacterSheet.SheetComponents.PrimaryStats;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,12 +19,12 @@ public class Bow extends Weapon{
     private static final String BASIC_ATTACK_DESC = "fire an arrow";
     private static final String CHARGED_ATTACK_NAME = "Charged Attack: \nAimed Shot";
     private static final String CHARGED_ATTACK_DESC = "fire an arrow infused with elemental energy";
-    private static final ArrayList<Stat> SAVE_PROFICIENCIES;
+    private static final ArrayList<PrimaryStats> SAVE_PROFICIENCIES;
 
     static {
         SAVE_PROFICIENCIES = new ArrayList<>();
-        SAVE_PROFICIENCIES.add(Stat.DEXTERITY);
-        SAVE_PROFICIENCIES.add(Stat.WISDOM);
+        SAVE_PROFICIENCIES.add(PrimaryStats.DEXTERITY);
+        SAVE_PROFICIENCIES.add(PrimaryStats.WISDOM);
     }
 
     public Bow(Element visionElement) {
@@ -35,16 +35,16 @@ public class Bow extends Weapon{
                     BASIC_ATTACK_NAME,
                     BASIC_ATTACK_DESC,
                     60,
-                    Stat.DEXTERITY,
-                    new EffectDamage(Dice.D6, 1, Stat.DEXTERITY, new Physical()),
+                    PrimaryStats.DEXTERITY,
+                    new EffectDamage(Dice.D6, 1, PrimaryStats.DEXTERITY, Elements.PHYSICAL),
                     false,
                     Arrays.asList(BASIC_ATTACK_AMOUNT_NOTE)),
             new Attack(
                     CHARGED_ATTACK_NAME,
                     CHARGED_ATTACK_DESC,
                     120,
-                    Stat.DEXTERITY,
-                    new EffectDamage(Dice.D6, 2, Stat.DEXTERITY, visionElement),
+                    PrimaryStats.DEXTERITY,
+                    new EffectDamage(Dice.D6, 2, PrimaryStats.DEXTERITY, visionElement),
                     true,
                     null),
             SAVE_PROFICIENCIES

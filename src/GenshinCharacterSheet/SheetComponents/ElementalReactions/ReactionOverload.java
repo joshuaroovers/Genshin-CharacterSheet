@@ -1,14 +1,13 @@
 package GenshinCharacterSheet.SheetComponents.ElementalReactions;
 
-import GenshinCharacterSheet.SheetComponents.Elements.Electro;
-import GenshinCharacterSheet.SheetComponents.Elements.Pyro;
+import GenshinCharacterSheet.SheetComponents.Elements.Elements;
 import javafx.scene.paint.Color;
 
 public class ReactionOverload extends Reaction{
 
     public ReactionOverload() {
-        this.element1 = new Pyro();
-        this.element2 = new Electro();
+        this.element1 = Elements.PYRO;
+        this.element2 = Elements.ELECTRO;
 
         String color = "#FF7F9C";
         this.color = Color.valueOf(color);

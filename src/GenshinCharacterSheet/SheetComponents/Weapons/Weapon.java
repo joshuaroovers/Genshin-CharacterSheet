@@ -3,8 +3,8 @@ package GenshinCharacterSheet.SheetComponents.Weapons;
 import GenshinCharacterSheet.SheetComponents.Actions.AttackEffects.EffectDamage;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Attack;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Dice;
-import GenshinCharacterSheet.SheetComponents.Elements.Physical;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.Elements.Elements;
+import GenshinCharacterSheet.SheetComponents.PrimaryStats;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,10 +16,10 @@ public abstract class Weapon {
     Attack unarmedStrike;
     Attack basicAttack;
     Attack chargedAttack;
-    ArrayList<Stat> saveProficiencies;
+    ArrayList<PrimaryStats> saveProficiencies;
     //TODO hitdice
 
-    public Weapon(int unarmedStrikeAmount, int basicAttackAmount, String description, Attack basicAttack, Attack chargedAttack, ArrayList<Stat> saveProficiencies) {
+    public Weapon(int unarmedStrikeAmount, int basicAttackAmount, String description, Attack basicAttack, Attack chargedAttack, ArrayList<PrimaryStats> saveProficiencies) {
         this.saveProficiencies = saveProficiencies;
         this.basicAttackAmount = basicAttackAmount;
         this.description = description;
@@ -27,15 +27,15 @@ public abstract class Weapon {
                 "Unarmed Strike",
                 "",
                 5,
-                Stat.STRENGTH,
-                new EffectDamage(Dice.D1, 1, Stat.STRENGTH, new Physical()),
+                PrimaryStats.STRENGTH,
+                new EffectDamage(Dice.D1, 1, PrimaryStats.STRENGTH, Elements.PHYSICAL),
                 false,
                 Arrays.asList(unarmedStrikeAmount+" Attacks"));
         this.basicAttack = basicAttack;
         this.chargedAttack = chargedAttack;
     }
 
-    public Weapon(int basicAttackAmount, String description,Attack basicAttack, Attack chargedAttack, ArrayList<Stat> saveProficiencies) {
+    public Weapon(int basicAttackAmount, String description,Attack basicAttack, Attack chargedAttack, ArrayList<PrimaryStats> saveProficiencies) {
         this(basicAttackAmount, basicAttackAmount, description, basicAttack, chargedAttack, saveProficiencies);
     }
 
@@ -63,7 +63,7 @@ public abstract class Weapon {
         return unarmedStrike;
     }
 
-    public ArrayList<Stat> getSaveProficiencies() {
+    public ArrayList<PrimaryStats> getSaveProficiencies() {
         return saveProficiencies;
     }
 }

@@ -9,9 +9,9 @@ public class ReactionSwirl extends Reaction{
 
 
     public ReactionSwirl() {
-        Element element1 = new Anemo();
+        Element element1 = Elements.ANEMO;
         this.element1 = element1;
-        this.otherElements = new ArrayList<>(Arrays.asList(new Cryo(), new Electro(), new Hydro(), new Pyro()));
+        this.otherElements = new ArrayList<>(Arrays.asList(Elements.CRYO, Elements.ELECTRO, Elements.HYDRO, Elements.PYRO));
         this.color = element1.getColor();
         this.colorHex = element1.getColorHex();
 

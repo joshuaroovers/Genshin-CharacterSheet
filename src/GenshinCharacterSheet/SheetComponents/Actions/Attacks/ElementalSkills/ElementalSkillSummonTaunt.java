@@ -2,7 +2,7 @@ package GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalSkills;
 
 import GenshinCharacterSheet.SheetComponents.Actions.AttackEffects.EffectSpecial;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Dice;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.PrimaryStats;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,9 +23,9 @@ public class ElementalSkillSummonTaunt extends ElementalSkill{
             "At the start of your next turn if it hasn't yet the creation explodes.";
     private final static int RANGE = 15;
     //TODO what stat to base the save on?? base it on class?   Maybe make it different per skill/burst
-    private final static Stat SAVE_SCALE = Stat.CONSTITUTION;
+    private final static PrimaryStats SAVE_SCALE = PrimaryStats.CONSTITUTION;
     private final static boolean APPLIES_ELEMENT = false;
-    private final static Stat SAVE_TYPE = Stat.WISDOM;
+    private final static PrimaryStats SAVE_TYPE = PrimaryStats.WISDOM;
     private final static List<String> NOTES = Arrays.asList("+1 Energy");
 
 

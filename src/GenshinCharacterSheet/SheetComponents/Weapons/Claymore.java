@@ -3,8 +3,8 @@ package GenshinCharacterSheet.SheetComponents.Weapons;
 import GenshinCharacterSheet.SheetComponents.Actions.AttackEffects.EffectDamage;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Attack;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Dice;
-import GenshinCharacterSheet.SheetComponents.Elements.Physical;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.Elements.Elements;
+import GenshinCharacterSheet.SheetComponents.PrimaryStats;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,12 +18,12 @@ public class Claymore extends Weapon{
     private static final String BASIC_ATTACK_DESC = "fire an arrow";
     private static final String CHARGED_ATTACK_NAME = "Charged Attack";
     private static final String CHARGED_ATTACK_DESC = "fire an arrow infused with elemental energy";
-    private static final ArrayList<Stat> SAVE_PROFICIENCIES;
+    private static final ArrayList<PrimaryStats> SAVE_PROFICIENCIES;
 
     static {
         SAVE_PROFICIENCIES = new ArrayList<>();
-        SAVE_PROFICIENCIES.add(Stat.STRENGTH);
-        SAVE_PROFICIENCIES.add(Stat.CONSTITUTION);
+        SAVE_PROFICIENCIES.add(PrimaryStats.STRENGTH);
+        SAVE_PROFICIENCIES.add(PrimaryStats.CONSTITUTION);
     }
 
     public Claymore() {
@@ -34,17 +34,17 @@ public class Claymore extends Weapon{
                     BASIC_ATTACK_NAME,
                     BASIC_ATTACK_DESC,
                     5,
-                    Stat.STRENGTH,
-                    new EffectDamage(Dice.D12, 1, Stat.STRENGTH, new Physical()),
+                    PrimaryStats.STRENGTH,
+                    new EffectDamage(Dice.D12, 1, PrimaryStats.STRENGTH, Elements.PHYSICAL),
                     false,
                     Arrays.asList(BASIC_ATTACK_AMOUNT_NOTE)),
             new Attack(
                     CHARGED_ATTACK_NAME,
                     CHARGED_ATTACK_DESC,
                     5,
-                    Stat.STRENGTH,
-                    Stat.DEXTERITY,
-                    new EffectDamage(Dice.D8, 1, Stat.STRENGTH, new Physical()),
+                    PrimaryStats.STRENGTH,
+                    PrimaryStats.DEXTERITY,
+                    new EffectDamage(Dice.D8, 1, PrimaryStats.STRENGTH, Elements.PHYSICAL),
                     false,
                     null),
             SAVE_PROFICIENCIES

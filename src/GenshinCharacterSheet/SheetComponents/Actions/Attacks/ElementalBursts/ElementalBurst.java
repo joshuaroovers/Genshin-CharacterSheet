@@ -2,7 +2,7 @@ package GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalBursts;
 
 import GenshinCharacterSheet.SheetComponents.Actions.AttackEffects.Effect;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Attack;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.PrimaryStats;
 
 import java.util.Collection;
 
@@ -14,12 +14,12 @@ public abstract class ElementalBurst extends Attack {
     int currentEnergy;
 
 
-    public ElementalBurst(String name, String description, int range, Stat stat, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
+    public ElementalBurst(String name, String description, int range, PrimaryStats stat, PrimaryStats saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
         super(name, description, range, stat, saveType, effect, appliesElement, notes);
         this.currentEnergy = 0;
     }
 
-    public ElementalBurst(String name, String description, int range, Stat stat, Effect effect, boolean appliesElement, Collection<String> notes) {
+    public ElementalBurst(String name, String description, int range, PrimaryStats stat, Effect effect, boolean appliesElement, Collection<String> notes) {
         super(name, description, range, stat, effect, appliesElement, notes);
         this.currentEnergy = 0;
     }

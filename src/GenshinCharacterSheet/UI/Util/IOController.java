@@ -8,6 +8,9 @@ public class IOController {
     private static final String fileType = ".genshinCS";
 
 
+    /**
+     * intializes the storage folder
+     */
     public static void init(){
         new File(baseFolderName).mkdir();
     }
@@ -66,5 +69,6 @@ public class IOController {
         }
         return recoveredObject;
     }
+
 
 }

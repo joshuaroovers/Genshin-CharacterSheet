@@ -3,8 +3,8 @@ package GenshinCharacterSheet.SheetComponents.Weapons;
 import GenshinCharacterSheet.SheetComponents.Actions.AttackEffects.EffectDamage;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Attack;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Dice;
-import GenshinCharacterSheet.SheetComponents.Elements.Physical;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.Elements.Elements;
+import GenshinCharacterSheet.SheetComponents.PrimaryStats;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,12 +18,12 @@ public class Polearm extends Weapon{
     private static final String BASIC_ATTACK_DESC = "fire an arrow";
     private static final String CHARGED_ATTACK_NAME = "Charged Attack";
     private static final String CHARGED_ATTACK_DESC = "fire an arrow infused with elemental energy";
-    private static final ArrayList<Stat> SAVE_PROFICIENCIES;
+    private static final ArrayList<PrimaryStats> SAVE_PROFICIENCIES;
 
     static {
         SAVE_PROFICIENCIES = new ArrayList<>();
-        SAVE_PROFICIENCIES.add(Stat.DEXTERITY);
-        SAVE_PROFICIENCIES.add(Stat.CONSTITUTION);
+        SAVE_PROFICIENCIES.add(PrimaryStats.DEXTERITY);
+        SAVE_PROFICIENCIES.add(PrimaryStats.CONSTITUTION);
     }
 
     public Polearm() {
@@ -34,17 +34,17 @@ public class Polearm extends Weapon{
                     BASIC_ATTACK_NAME,
                     BASIC_ATTACK_DESC,
                     10,
-                    Stat.DEXTERITY,
-                    new EffectDamage(Dice.D8, 1, Stat.DEXTERITY, new Physical()),
+                    PrimaryStats.DEXTERITY,
+                    new EffectDamage(Dice.D8, 1, PrimaryStats.DEXTERITY, Elements.PHYSICAL),
                     false,
                     Arrays.asList(BASIC_ATTACK_AMOUNT_NOTE)),
             new Attack(
                     CHARGED_ATTACK_NAME,
                     CHARGED_ATTACK_DESC,
                     0,
-                    Stat.DEXTERITY,
-                    Stat.DEXTERITY,
-                    new EffectDamage(Dice.D8, 1, Stat.DEXTERITY, new Physical()),
+                    PrimaryStats.DEXTERITY,
+                    PrimaryStats.DEXTERITY,
+                    new EffectDamage(Dice.D8, 1, PrimaryStats.DEXTERITY, Elements.PHYSICAL),
                     false,
                     Arrays.asList("20ft Line")),
             SAVE_PROFICIENCIES

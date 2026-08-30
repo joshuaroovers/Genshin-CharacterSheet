@@ -5,6 +5,7 @@ import GenshinCharacterSheet.SheetComponents.ElementalReactions.ElementalReactio
 import GenshinCharacterSheet.SheetComponents.ElementalReactions.Reaction;
 import GenshinCharacterSheet.SheetComponents.Elements.Anemo;
 import GenshinCharacterSheet.SheetComponents.Elements.Element;
+import GenshinCharacterSheet.SheetComponents.Elements.Elements;
 import GenshinCharacterSheet.SheetComponents.Elements.Geo;
 import GenshinCharacterSheet.UI.Util.ImageHelper;
 import GenshinCharacterSheet.UI.Util.ImageElementVariant;
@@ -238,7 +239,7 @@ public class ConditionsBox extends VBox {
             }
         });
 
-        for (Element element : Element.getAll()) {
+        for (Element element : Elements.ALL) {
             ArrayList<Element> items = new ArrayList<>();
             if(!(element.getClass().equals(Geo.class)) && !(element.getClass().equals(Anemo.class)) ){
                 items.add(element);

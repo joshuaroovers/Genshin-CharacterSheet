@@ -1,7 +1,8 @@
 package GenshinCharacterSheet;
 
 import GenshinCharacterSheet.SheetComponents.Character;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.CharacterFactory;
+import GenshinCharacterSheet.SheetComponents.Skills;
 import GenshinCharacterSheet.UI.CharacterBuilder;
 import GenshinCharacterSheet.UI.CharacterSheet;
 import GenshinCharacterSheet.UI.Util.IOController;
@@ -12,37 +13,10 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.util.LinkedHashMap;
-
 public class Main extends Application{
 
     private static Scene scene;
     private static Stage mainStage;
-
-    public static LinkedHashMap<String, Stat> defaultSkills;
-    static {
-        defaultSkills = new LinkedHashMap<>();
-        //#region default skills list
-        defaultSkills.put("Acrobatics", Stat.DEXTERITY);
-        defaultSkills.put("Animal Handling", Stat.WISDOM);
-        defaultSkills.put("Arcana", Stat.INTELLIGENCE);
-        defaultSkills.put("Athletics", Stat.STRENGTH);
-        defaultSkills.put("Deception", Stat.CHARISMA);
-        defaultSkills.put("History", Stat.INTELLIGENCE);
-        defaultSkills.put("Insight", Stat.WISDOM);
-        defaultSkills.put("Intimidation", Stat.CHARISMA);
-        defaultSkills.put("Investigation", Stat.INTELLIGENCE);
-        defaultSkills.put("Medicine", Stat.WISDOM);
-        defaultSkills.put("Nature", Stat.INTELLIGENCE);
-        defaultSkills.put("Perception", Stat.WISDOM);
-        defaultSkills.put("Performance", Stat.CHARISMA);
-        defaultSkills.put("Persuasion", Stat.CHARISMA);
-        defaultSkills.put("Religion", Stat.INTELLIGENCE);
-        defaultSkills.put("Sleight of Hand", Stat.DEXTERITY);
-        defaultSkills.put("Stealth", Stat.DEXTERITY);
-        defaultSkills.put("Survival", Stat.WISDOM);
-        //#endregion
-    }
 
     public static void main(String[] args) {
         launch(args);
@@ -60,15 +34,15 @@ public class Main extends Application{
         scene.getStylesheets().add("styles.css");
         VBox tempMain = new VBox(10);
 
-//        Character character = new Character(defaultSkills);
-//
-//        BorderPane mainPane = new CharacterSheet(character, boxSpacing, stage);
-//        tempMain.getChildren().add(mainPane);
+        Character character = CharacterFactory.random();
 
-//        scene.setRoot(tempMain);
+        BorderPane mainPane = new CharacterSheet(character, boxSpacing, stage);
+        tempMain.getChildren().add(mainPane);
 
-        CharacterBuilder characterBuilder = new CharacterBuilder(defaultSkills);
-        scene.setRoot(characterBuilder);
+        scene.setRoot(tempMain);
+
+//        CharacterBuilder characterBuilder = new CharacterBuilder(Skills.defaultSkills);
+//        scene.setRoot(characterBuilder);
 
 
 
@@ -81,14 +55,14 @@ public class Main extends Application{
 //            scene.setRoot(smallTest);
 //        });
 
-        stage.setTitle("Genshin CharacterSheet V0.36");
+        stage.setTitle("Genshin CharacterSheet V0.37");
         stage.setScene(scene);
         stage.show();
     }
 
 
     public static void setBuilderScene(){
-        setScene(new CharacterBuilder(defaultSkills));
+        setScene(new CharacterBuilder(Skills.defaultSkills));
     }
 
     public static void setCharacterScene(Character character){

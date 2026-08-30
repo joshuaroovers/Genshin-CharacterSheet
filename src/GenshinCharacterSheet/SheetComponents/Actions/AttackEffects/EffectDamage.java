@@ -3,17 +3,17 @@ package GenshinCharacterSheet.SheetComponents.Actions.AttackEffects;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Dice;
 import GenshinCharacterSheet.SheetComponents.Character;
 import GenshinCharacterSheet.SheetComponents.Elements.Element;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.PrimaryStats;
 import GenshinCharacterSheet.UI.Util.ImageHelper;
 
 public class EffectDamage extends Effect{
 
     private Dice dice;
     private int damageDieCount;
-    private Stat statBonus;
+    private PrimaryStats statBonus;
     private Element damageType;
 
-    public EffectDamage(Dice dice, int damageDieCount, Stat statBonus, Element damageType) {
+    public EffectDamage(Dice dice, int damageDieCount, PrimaryStats statBonus, Element damageType) {
         this.hasUnit = true;
         this.dice = dice;
         this.damageDieCount = damageDieCount;

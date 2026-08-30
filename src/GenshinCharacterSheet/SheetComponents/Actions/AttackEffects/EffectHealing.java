@@ -2,8 +2,8 @@ package GenshinCharacterSheet.SheetComponents.Actions.AttackEffects;
 
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Dice;
 import GenshinCharacterSheet.SheetComponents.Character;
-import GenshinCharacterSheet.SheetComponents.Elements.Hydro;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.Elements.Elements;
+import GenshinCharacterSheet.SheetComponents.PrimaryStats;
 import GenshinCharacterSheet.UI.Util.ImageElementVariant;
 import GenshinCharacterSheet.UI.Util.ImageHelper;
 
@@ -11,9 +11,9 @@ public class EffectHealing extends Effect{
 
     private Dice dice;
     private int dieCount;
-    private Stat statBonus;
+    private PrimaryStats statBonus;
 
-    public EffectHealing(Dice dice, int dieCount, Stat statBonus) {
+    public EffectHealing(Dice dice, int dieCount, PrimaryStats statBonus) {
         this.hasUnit = true;
         this.dice = dice;
         this.dieCount = dieCount;
@@ -42,7 +42,7 @@ public class EffectHealing extends Effect{
         return null;
     }
 
-    public String getUnitImage(){//TODO temp hydro needs to be healing image of some kind
-        return ImageHelper.getElementURL(new Hydro(), ImageElementVariant.FLAT);
+    public String getUnitImage(){//TODO temp hydro, needs to be healing image of some kind
+        return ImageHelper.getElementURL(Elements.HYDRO, ImageElementVariant.FLAT);
     }
 }

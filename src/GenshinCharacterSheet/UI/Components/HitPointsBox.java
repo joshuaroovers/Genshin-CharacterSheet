@@ -302,7 +302,7 @@ public class HitPointsBox extends HBox {
         elemShieldTypeInput = new ComboBox<Element>();
         elemShieldTypeInput.getStyleClass().addAll("hp-tracker-element","combo-box");
         elemShieldTypeInput.setVisibleRowCount(4);
-        elemShieldTypeInput.getItems().addAll(new Pyro(), new Hydro(), new Cryo(), new Electro());
+        elemShieldTypeInput.getItems().addAll(Elements.PYRO, Elements.HYDRO, Elements.CRYO, Elements.ELECTRO);
 
         //#region combobox nightmare things
         elemShieldTypeInput.setButtonCell(new ListCell<Element>() {
@@ -321,7 +321,7 @@ public class HitPointsBox extends HBox {
                         } else {
                             shield.getChildren().clear();
 
-                            for (Element element : Element.getAll()) {
+                            for (Element element : Elements.ALL) {
                                 shield.getStyleClass().remove(element.getName()+"-border");
                             }
 
@@ -464,7 +464,7 @@ public class HitPointsBox extends HBox {
             elemShieldDisplayHP.setText(Integer.toString(hitPoints.getElementalShield().getHP()));
             elemShieldDisplayTypeContainer.setVisible(true);
             elemShieldDisplayType.setStyle("-fx-background-image: url("+ImageHelper.getElementURL(hitPoints.getElementalShield().getElement(), ImageElementVariant.FLAT)+");");
-            for (Element element : Element.getAll()) {
+            for (Element element : Elements.ALL) {
                 elemShieldDisplayTypeContainer.getStyleClass().remove(element.getName()+"-border");
                 altElemDmgButton.getStyleClass().remove(element.getName()+"-font");
             }

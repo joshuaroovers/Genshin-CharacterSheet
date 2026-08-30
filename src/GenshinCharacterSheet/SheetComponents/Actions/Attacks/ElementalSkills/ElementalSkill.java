@@ -2,7 +2,7 @@ package GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalSkills;
 
 import GenshinCharacterSheet.SheetComponents.Actions.AttackEffects.Effect;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Attack;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.PrimaryStats;
 
 import java.util.Collection;
 
@@ -11,11 +11,11 @@ public abstract class ElementalSkill extends Attack {
     public static final String NAME_BASE = "Elemental Skill: \n";
     private String customName;
 
-    public ElementalSkill(String name, String description, int range, Stat stat, Stat saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
+    public ElementalSkill(String name, String description, int range, PrimaryStats stat, PrimaryStats saveType, Effect effect, boolean appliesElement, Collection<String> notes) {
         super(name, description, range, stat, saveType, effect, appliesElement, notes);
     }
 
-    public ElementalSkill(String name, String description, int range, Stat stat, Effect effect, boolean appliesElement, Collection<String> notes) {
+    public ElementalSkill(String name, String description, int range, PrimaryStats stat, Effect effect, boolean appliesElement, Collection<String> notes) {
         super(name, description, range, stat, effect, appliesElement, notes);
     }
 

@@ -7,8 +7,11 @@ import GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalSkills.Ele
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalSkills.ElementalSkillSummonTaunt;
 import GenshinCharacterSheet.SheetComponents.Character;
 import GenshinCharacterSheet.SheetComponents.Elements.Element;
+import GenshinCharacterSheet.SheetComponents.Elements.Elements;
+import GenshinCharacterSheet.SheetComponents.HitPoints;
 import GenshinCharacterSheet.SheetComponents.Lineage.Lineage;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.PrimaryStats;
+import GenshinCharacterSheet.SheetComponents.Stamina;
 import GenshinCharacterSheet.SheetComponents.Weapons.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -52,7 +55,7 @@ public class CharacterBuilder extends VBox {
     private final TextField chaInput;
 
 
-    public CharacterBuilder(LinkedHashMap<String, Stat> defaultSkills) {
+    public CharacterBuilder(LinkedHashMap<String, PrimaryStats> defaultSkills) {
         VBox mainBox = this;
         mainBox.setSpacing(10d);
 
@@ -95,7 +98,7 @@ public class CharacterBuilder extends VBox {
 
         visionInput = new ComboBox<>();
         gridPane.add(visionInput, inputColumn, currentRow);
-        visionInput.getItems().addAll(Element.getAll());
+        visionInput.getItems().addAll(Elements.ALL);
         //#endregion
 
         //#region weapon
@@ -135,7 +138,7 @@ public class CharacterBuilder extends VBox {
         wisInput = new TextField();
         chaInput = new TextField();
 
-        for (Stat value : Stat.values()) {
+        for (PrimaryStats value : PrimaryStats.values()) {
             currentRow++;
 
             Label statLabel = new Label(value.name());
@@ -179,8 +182,8 @@ public class CharacterBuilder extends VBox {
 
     //TODO validate input field methods
 
-    private int getStatValue(Stat stat){
-        switch (stat){
+    private int getStatValue(PrimaryStats primaryStats){
+        switch (primaryStats){
             case STRENGTH:
                 return Integer.parseInt(strInput.getText());
             case DEXTERITY:
@@ -218,15 +221,16 @@ public class CharacterBuilder extends VBox {
 
     public Character getNewCharacter(){
         Element visionElement = visionInput.getValue();
-        HashMap<Stat, Integer> primaryStatValues = new HashMap<>();
-        for (Stat value : Stat.values()) {
+        HashMap<PrimaryStats, Integer> primaryStatValues = new HashMap<>();
+        for (PrimaryStats value : PrimaryStats.values()) {
             primaryStatValues.put(value, getStatValue(value));
         }
         return new Character(
                 nameInput.getText(),
                 visionInput.getValue(),
                 getNewWeapon(visionElement),
-                lineageInput.getValue(), primaryStatValues,
+                lineageInput.getValue(),
+                primaryStatValues,
                 null,
                 getElementalBurst(visionElement),
                 getElementalSkill(visionElement)

@@ -1,16 +1,15 @@
 package GenshinCharacterSheet.SheetComponents.ElementalReactions;
 
-import GenshinCharacterSheet.SheetComponents.Elements.Electro;
 import GenshinCharacterSheet.SheetComponents.Elements.Element;
-import GenshinCharacterSheet.SheetComponents.Elements.Hydro;
+import GenshinCharacterSheet.SheetComponents.Elements.Elements;
 
 public class ReactionElectroCharged extends Reaction{
 
     public ReactionElectroCharged() {
-        Element element1 = new Electro();
+        Element element1 = Elements.ELECTRO;
 
         this.element1 = element1;
-        this.element2 = new Hydro();
+        this.element2 = Elements.HYDRO;
         this.color = element1.getColor();
         this.colorHex = element1.getColorHex();
 

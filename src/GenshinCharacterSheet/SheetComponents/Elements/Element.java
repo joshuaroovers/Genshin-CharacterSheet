@@ -10,7 +10,6 @@ import java.util.Arrays;
 public abstract class Element implements Comparable<Element> {
     private Color color;
     private String colorHex;
-    private static ArrayList<Element> allElements = new ArrayList<>(Arrays.asList(new Anemo(), new Cryo(), new Dendro(), new Electro(), new Geo(), new Hydro(), new Pyro()));
 
     public Element(String colorHex) {
         setColor(colorHex);
@@ -45,10 +44,6 @@ public abstract class Element implements Comparable<Element> {
     }
     public ArrayList<Reaction> getElementalReactions(){ //TODO might be unnecessary
         return ElementalReactionHelper.getReactions(this);
-    }
-
-    public static ArrayList<Element> getAll(){
-        return allElements;
     }
 
     @Override

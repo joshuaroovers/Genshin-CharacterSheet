@@ -4,7 +4,7 @@ import GenshinCharacterSheet.SheetComponents.Actions.AttackEffects.EffectDamage;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Attack;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.Dice;
 import GenshinCharacterSheet.SheetComponents.Elements.Element;
-import GenshinCharacterSheet.SheetComponents.Stat;
+import GenshinCharacterSheet.SheetComponents.PrimaryStats;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,12 +18,12 @@ public class Catalyst extends Weapon{
     private static final String BASIC_ATTACK_DESC = "attack with a burst of elemental energy";
     private static final String CHARGED_ATTACK_NAME = "Charged Attack";
     private static final String CHARGED_ATTACK_DESC = "big effect wow";
-    private static final ArrayList<Stat> SAVE_PROFICIENCIES;
+    private static final ArrayList<PrimaryStats> SAVE_PROFICIENCIES;
 
     static {
         SAVE_PROFICIENCIES = new ArrayList<>();
-        SAVE_PROFICIENCIES.add(Stat.INTELLIGENCE);
-        SAVE_PROFICIENCIES.add(Stat.WISDOM);
+        SAVE_PROFICIENCIES.add(PrimaryStats.INTELLIGENCE);
+        SAVE_PROFICIENCIES.add(PrimaryStats.WISDOM);
     }
 
     //would melee catalyst be strength or dex based? (also make it an option)
@@ -37,7 +37,7 @@ public class Catalyst extends Weapon{
                     BASIC_ATTACK_NAME,
                     BASIC_ATTACK_DESC,
                     60,
-                    Stat.INTELLIGENCE,
+                    PrimaryStats.INTELLIGENCE,
                     new EffectDamage(Dice.D10, 1, null, visionElement),
                     true,
                     Arrays.asList(BASIC_ATTACK_AMOUNT_NOTE)),
@@ -45,8 +45,8 @@ public class Catalyst extends Weapon{
                     CHARGED_ATTACK_NAME,
                     CHARGED_ATTACK_DESC,
                     0,
-                    Stat.INTELLIGENCE,
-                    Stat.DEXTERITY,
+                    PrimaryStats.INTELLIGENCE,
+                    PrimaryStats.DEXTERITY,
                     new EffectDamage(Dice.D6, 2, null, visionElement),
                     true,
                     Arrays.asList("15ft cone")),

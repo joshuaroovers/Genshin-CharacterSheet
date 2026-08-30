@@ -1,5 +1,6 @@
 package GenshinCharacterSheet.UI;
 
+import GenshinCharacterSheet.Main;
 import GenshinCharacterSheet.SheetComponents.Actions.Action;
 import GenshinCharacterSheet.SheetComponents.Character;
 import GenshinCharacterSheet.SheetComponents.*;
@@ -47,6 +48,11 @@ public class CharacterSheet extends BorderPane {
         StackPane settingsStackPane = new StackPane();
         settingsWrapper.getChildren().add(settingsStackPane);
 
+        settingsStackPane.setOnMouseClicked(e ->{
+            Main.setBuilderScene(); //TODO temporary result should show settings menu
+        });
+
+
         HBox settingsInside = new HBox();
         settingsStackPane.getChildren().add(settingsInside);
         settingsInside.getStyleClass().addAll("settings-button", "settings-button-inside");
@@ -64,7 +70,7 @@ public class CharacterSheet extends BorderPane {
         leftPane.getChildren().add(leftRow2);
         leftRow2.getStyleClass().add("basic-row");
         //#region leftRow2
-        for (Stat key : character.getPrimaryStats().keySet()) {
+        for (PrimaryStats key : character.getPrimaryStats().keySet()) {
             PrimaryStat stat = character.getPrimaryStat(key);
             leftRow2.getChildren().add(new PrimaryStatBox(stat));
         }
@@ -74,7 +80,7 @@ public class CharacterSheet extends BorderPane {
         leftPane.getChildren().add(leftRow3);
         //#region leftRow3
         //#region saves
-        for (Stat key : character.getPrimaryStats().keySet()) {
+        for (PrimaryStats key : character.getPrimaryStats().keySet()) {
             SavingThrow save = character.getSavingThrow(key);
             leftRow3.getChildren().add(new SavingThrowBox(save, character.getProficiencyBonus()));
         }

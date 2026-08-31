@@ -10,6 +10,7 @@ import GenshinCharacterSheet.SheetComponents.Character;
 import GenshinCharacterSheet.SheetComponents.Elements.Element;
 import GenshinCharacterSheet.SheetComponents.Elements.Elements;
 import GenshinCharacterSheet.SheetComponents.Lineage.Lineage;
+import GenshinCharacterSheet.SheetComponents.Lineage.Lineages;
 import GenshinCharacterSheet.SheetComponents.Weapons.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -87,7 +88,7 @@ public class CharacterBuilder extends VBox {
 
         lineageInput = new ComboBox<>();
         gridPane.add(lineageInput, inputColumn, currentRow);
-        lineageInput.getItems().addAll(Lineage.getAllLineages());
+        lineageInput.getItems().addAll(Lineages.ALL);
         //#endregion
 
         //#region element

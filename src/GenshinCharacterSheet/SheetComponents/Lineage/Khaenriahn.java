@@ -1,6 +1,6 @@
 package GenshinCharacterSheet.SheetComponents.Lineage;
 
-public class Khaenriahn extends Human{
+public class Khaenriahn extends Lineage{
 
     @Override
     public String getName() {

@@ -1,6 +1,7 @@
 package GenshinCharacterSheet.UI.Components;
 
 import GenshinCharacterSheet.SheetComponents.Conditions.Condition;
+import GenshinCharacterSheet.SheetComponents.Conditions.Conditions;
 import GenshinCharacterSheet.SheetComponents.ElementalReactions.ElementalReactionHelper;
 import GenshinCharacterSheet.SheetComponents.ElementalReactions.Reaction;
 import GenshinCharacterSheet.SheetComponents.Elements.Anemo;
@@ -50,7 +51,7 @@ public class ConditionsBox extends VBox {
         mainLabel.setStyle("-fx-padding: 0 0 0 5;");
 
         //#region conditions
-        conditions.addAll(Condition.getAllConditions());
+        conditions.addAll(Conditions.ALL);
 
         conditionsContainer = new FlowPane();
         mainBox.getChildren().add(conditionsContainer);

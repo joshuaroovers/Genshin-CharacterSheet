@@ -58,7 +58,12 @@ public class Character {
 
         for (Skill skill : Skills.ALL) {
 
-            skills.add(new SkillProficiency(skill, proficientSkills.contains(skill)));
+            if(proficientSkills == null){
+                skills.add(new SkillProficiency(skill, false));
+            }
+            else{
+                skills.add(new SkillProficiency(skill, proficientSkills.contains(skill)));
+            }
         }
         int maxHP = 50 + getPrimaryStat(PrimaryStats.CONSTITUTION).getModifier()*5;
         this.hitPoints = new HitPoints(maxHP);

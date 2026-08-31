@@ -1,15 +1,12 @@
 package GenshinCharacterSheet.SheetComponents;
 
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalBursts.ElementalBurst;
-import GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalBursts.ElementalBurstDestructive;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalSkills.ElementalSkill;
-import GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalSkills.ElementalSkillSummonTaunt;
 import GenshinCharacterSheet.SheetComponents.Elements.*;
 import GenshinCharacterSheet.SheetComponents.Lineage.*;
 import GenshinCharacterSheet.SheetComponents.Weapons.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -30,14 +27,14 @@ public class Character {
 
     private LinkedHashMap<PrimaryStats, SavingThrow> savingThrows;
 
-    private LinkedHashMap<String, Skill> skills;
+    private ArrayList<SkillProficiency> skills;
 
     private HitPoints hitPoints;
 
     private ElementalBurst elementalBurst;
     private ElementalSkill elementalSkill;
 
-    public Character(String name, Element visionElement, Weapon weapon, Lineage lineage, HashMap<PrimaryStats, Integer> primaryStatValues, ArrayList<String> proficientSkills, ElementalBurst elementalBurst, ElementalSkill elementalSkill) {
+    public Character(String name, Element visionElement, Weapon weapon, Lineage lineage, HashMap<PrimaryStats, Integer> primaryStatValues, ArrayList<Skill> proficientSkills, ElementalBurst elementalBurst, ElementalSkill elementalSkill) {
         this.name = name;
         this.visionElement = visionElement;
         this.weapon = weapon;
@@ -48,7 +45,7 @@ public class Character {
 
         this.primaryStats = new LinkedHashMap<>();
         this.savingThrows = new LinkedHashMap<>();
-        this.skills = new LinkedHashMap<>();
+        this.skills = new ArrayList<>();
 
         this.inspiration = new Inspiration(false);
 
@@ -59,10 +56,9 @@ public class Character {
             savingThrows.put(value, new SavingThrow(getPrimaryStat(value), weaponSaveProfs.contains(value)));
         }
 
-        for (String skillName : Skills.defaultSkills.keySet()) {
+        for (Skill skill : Skills.ALL) {
 
-            PrimaryStat primaryStat = primaryStats.get(Skills.defaultSkills.get(skillName));
-            skills.put(skillName, new Skill(skillName, primaryStat, proficientSkills.contains(skillName)));
+            skills.add(new SkillProficiency(skill, proficientSkills.contains(skill)));
         }
         int maxHP = 50 + getPrimaryStat(PrimaryStats.CONSTITUTION).getModifier()*5;
         this.hitPoints = new HitPoints(maxHP);
@@ -114,12 +110,12 @@ public class Character {
         return inspiration;
     }
 
-    public LinkedHashMap<String, Skill> getSkills() {
+    public ArrayList<SkillProficiency> getSkills() {
         return skills;
     }
-    public Skill getSkill(String key){
-        return skills.get(key);
-    }
+//    public SkillProficiency getSkill(SkillProficiency skill){
+//        return skills.;
+//    }
 
     public LinkedHashMap<PrimaryStats, SavingThrow> getSavingThrows() {
         return savingThrows;

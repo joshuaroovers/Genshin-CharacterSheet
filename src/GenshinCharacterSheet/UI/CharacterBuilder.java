@@ -1,6 +1,7 @@
 package GenshinCharacterSheet.UI;
 
 import GenshinCharacterSheet.Main;
+import GenshinCharacterSheet.SheetComponents.*;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalBursts.ElementalBurst;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalBursts.ElementalBurstDestructive;
 import GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalSkills.ElementalSkill;
@@ -8,10 +9,7 @@ import GenshinCharacterSheet.SheetComponents.Actions.Attacks.ElementalSkills.Ele
 import GenshinCharacterSheet.SheetComponents.Character;
 import GenshinCharacterSheet.SheetComponents.Elements.Element;
 import GenshinCharacterSheet.SheetComponents.Elements.Elements;
-import GenshinCharacterSheet.SheetComponents.HitPoints;
 import GenshinCharacterSheet.SheetComponents.Lineage.Lineage;
-import GenshinCharacterSheet.SheetComponents.PrimaryStats;
-import GenshinCharacterSheet.SheetComponents.Stamina;
 import GenshinCharacterSheet.SheetComponents.Weapons.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -20,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -55,7 +54,7 @@ public class CharacterBuilder extends VBox {
     private final TextField chaInput;
 
 
-    public CharacterBuilder(LinkedHashMap<String, PrimaryStats> defaultSkills) {
+    public CharacterBuilder() {
         VBox mainBox = this;
         mainBox.setSpacing(10d);
 

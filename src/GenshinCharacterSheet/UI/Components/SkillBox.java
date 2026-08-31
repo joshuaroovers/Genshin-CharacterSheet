@@ -1,6 +1,7 @@
 package GenshinCharacterSheet.UI.Components;
 
-import GenshinCharacterSheet.SheetComponents.Skill;
+import GenshinCharacterSheet.SheetComponents.PrimaryStat;
+import GenshinCharacterSheet.SheetComponents.SkillProficiency;
 import GenshinCharacterSheet.UI.Components.SubComponents.ModifierBox;
 import GenshinCharacterSheet.UI.Components.SubComponents.ProficiencyTickBox;
 import javafx.scene.control.Label;
@@ -9,7 +10,7 @@ import javafx.scene.layout.VBox;
 
 public class SkillBox extends VBox {
 
-    public SkillBox(Skill skill, int proficiencyBonus){
+    public SkillBox(SkillProficiency skill, int proficiencyBonus, PrimaryStat primaryStat){
         VBox mainBox = this;
 
         HBox secondBox = new HBox();
@@ -27,7 +28,7 @@ public class SkillBox extends VBox {
         primaryStatAbbrev.getStyleClass().addAll("skill-stat-box");
         secondBox.getChildren().add(primaryStatAbbrev);
 
-        Label modLabel = new Label(skill.getStat().getNameAbbreviation());
+        Label modLabel = new Label(primaryStat.getNameAbbreviation());
         primaryStatAbbrev.getChildren().add(modLabel);
         //#endregion primaryStatAbbreviation
 
@@ -41,7 +42,7 @@ public class SkillBox extends VBox {
         //#endregion name
 
         //#region bonus
-        ModifierBox bonusBox = new ModifierBox(skill.getStat().getModifier(), skill.isProficient(), proficiencyBonus);
+        ModifierBox bonusBox = new ModifierBox(primaryStat.getModifier(), skill.isProficient(), proficiencyBonus);
         bonusBox.getStyleClass().addAll("skill-bonus-box");
         secondBox.getChildren().add(bonusBox);
         //#endregion bonus

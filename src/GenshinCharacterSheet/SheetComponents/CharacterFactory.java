@@ -34,7 +34,7 @@ public class CharacterFactory {
         stamina.adjustCurrentStamina( -(int)(Math.random()*100), 0);
 
         LinkedHashMap<PrimaryStats, Integer> primaryStatValues = new LinkedHashMap<>();
-        ArrayList<String> skills = new ArrayList<>();
+        ArrayList<Skill> skills = new ArrayList<>();
 
         for (PrimaryStats value : PrimaryStats.values()) {
             int randScore = (int)(Math.random()*6)+1 + (int)(Math.random()*6)+1 + (int)(Math.random()*6)+1 + (int)(Math.random()*6)+1;
@@ -43,11 +43,11 @@ public class CharacterFactory {
         }
 
 
-        for (String skillName : Skills.defaultSkills.keySet()) {
+        for (Skill skill : Skills.ALL) {
 
             if(Math.random()*5 > 4){
-                System.out.println("random prof in: " +skillName);
-                skills.add(skillName);
+                System.out.println("random prof in: " +skill.getName());
+                skills.add(skill);
             }
 
         }

@@ -96,15 +96,16 @@ public class CharacterSheet extends BorderPane {
 
         leftRow4.getChildren().addAll(skillsLeft,skillsRight);
 
-        String[] skillNames = character.getSkills().keySet().toArray(new String[character.getSkills().keySet().size()]);
-        for (int i = 0; i < skillNames.length; i++) {
-            Skill currentSkill = character.getSkill(skillNames[i]);
+        ArrayList<SkillProficiency> skills = character.getSkills();
+        for (int i = 0; i < skills.size(); i++) {
+            SkillProficiency currentSkill = skills.get(i);
             SkillBox newSkillBox = new SkillBox(
                     currentSkill,
-                    character.getProficiencyBonus()
+                    character.getProficiencyBonus(),
+                    character.getPrimaryStat(currentSkill.getStat())
             );
 
-            if(i < skillNames.length/2){
+            if(i < skills.size()/2){
                 skillsLeft.getChildren().add(newSkillBox);
             }else{
                 skillsRight.getChildren().add(newSkillBox);

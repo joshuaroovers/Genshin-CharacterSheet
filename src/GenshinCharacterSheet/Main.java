@@ -55,14 +55,14 @@ public class Main extends Application{
 //            scene.setRoot(smallTest);
 //        });
 
-        stage.setTitle("Genshin CharacterSheet V0.37");
+        stage.setTitle("Genshin CharacterSheet V0.38");
         stage.setScene(scene);
         stage.show();
     }
 
 
     public static void setBuilderScene(){
-        setScene(new CharacterBuilder(Skills.defaultSkills));
+        setScene(new CharacterBuilder());
     }
 
     public static void setCharacterScene(Character character){

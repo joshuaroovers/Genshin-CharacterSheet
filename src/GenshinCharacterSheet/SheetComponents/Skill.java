@@ -2,24 +2,17 @@ package GenshinCharacterSheet.SheetComponents;
 
 public class Skill {
     private String name;
-    private boolean proficient;
-    private PrimaryStat stat;
+    private PrimaryStats stat;
 
-    public Skill(String name, PrimaryStat primaryStat, boolean prof) {
+    public Skill(String name, PrimaryStats stat) {
         this.name = name;
-        this.stat = primaryStat;
-        this.proficient = prof;
+        this.stat = stat;
     }
 
     public String getName() {
         return name;
     }
-
-    public boolean isProficient() {
-        return proficient;
-    }
-
-    public PrimaryStat getStat() {
+    public PrimaryStats getStat() {
         return stat;
     }
 }

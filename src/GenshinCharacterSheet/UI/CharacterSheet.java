@@ -2,6 +2,7 @@ package GenshinCharacterSheet.UI;
 
 import GenshinCharacterSheet.Main;
 import GenshinCharacterSheet.SheetComponents.Actions.Action;
+import GenshinCharacterSheet.SheetComponents.Actions.Actions;
 import GenshinCharacterSheet.SheetComponents.Character;
 import GenshinCharacterSheet.SheetComponents.*;
 import GenshinCharacterSheet.UI.Components.*;
@@ -199,7 +200,7 @@ public class CharacterSheet extends BorderPane {
         FlowPane standardActionsFlowPane = new FlowPane(5,5);
         actionsContainer.getChildren().add(standardActionsFlowPane);
 
-        ArrayList<Action> standardActions = Action.getStandardActions(character.getVisionElement());
+        ArrayList<Action> standardActions = Actions.getStandardActions(character.getVisionElement());
 //        for (int i = 0; i < standardActions.size(); i++) {
 //            Action currentAction = standardActions.get(i);
 //            String actionName = currentAction.getName();
